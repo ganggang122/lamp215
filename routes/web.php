@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//后台 栏目 路由
+Route::resource('admin/cates','Admin\CatesController');
+
+//前台 首页 路由
+Route::resource('home/index','Home\IndexController');
