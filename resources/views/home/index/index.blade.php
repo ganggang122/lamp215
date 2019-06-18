@@ -1,69 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<title>首页</title>
-
-		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-
-		<link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
-
-		<link href="/h/css/hmstyle.css" rel="stylesheet" type="text/css"/>
-		<link href="/h/css/skin.css" rel="stylesheet" type="text/css" />
-		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
-	</head>
-
-	<body>
-		<div class="hmtop">
-			<!--顶部导航条 -->
-			<div class="am-container header">
-				<ul class="message-l">
-					<div class="topMessage">
-						<div class="menu-hd">
-							<a href="#" target="_top" class="h">亲，请登录</a>
-							<a href="#" target="_top">免费注册</a>
-						</div>
-					</div>
-				</ul>
-				<ul class="message-r">
-					<div class="topMessage home">
-						<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
-					</div>
-					<div class="topMessage my-shangcheng">
-						<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-					</div>
-					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-					</div>
-					<div class="topMessage favorite">
-						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
-				</ul>
-				</div>
-
-				<!--悬浮搜索框-->
-
-				<div class="nav white">
-					<div class="logo"><img src="/h/images/logo.png" /></div>
-					<div class="logoBig">
-						<li><img src="/h/images/logobig.png" /></li>
-					</div>
-
-					<div class="search-bar pr">
-						<a name="index_none_header_sysc" href="#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-						</form>
-					</div>
-				</div>
-
-				<div class="clear"></div>
+@include('home.public.header')
+	<div class="clear"></div>
 			</div>
 			<div class="banner">
                       <!--轮播 -->
@@ -73,7 +9,6 @@
 								<li class="banner2"><a><img src="/h/images/ad2.jpg" /></a></li>
 								<li class="banner3"><a><img src="/h/images/ad3.jpg" /></a></li>
 								<li class="banner4"><a><img src="/h/images/ad4.jpg" /></a></li>
-
 							</ul>
 						</div>
 						<div class="clear"></div>	
@@ -115,9 +50,9 @@
 																<div class="sort-side">
 																	@foreach($v->sub as $kk=>$vv)
 																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">{{$vv->cname}}</span></dt>
+																		<dt><span title="{{$vv->cname}}">{{$vv->cname}}</span></dt>
 																		@foreach($vv->sub as $kkk=>$vvv)
-																		<dd><a title="蒸蛋糕" href="#"><span>{{$vvv->cname}}</span></a></dd>
+																		<dd><a title="{{$vvv->cname}}" href="/home/list/index"><span>{{$vvv->cname}}</span></a></dd>
 																		@endforeach
 																	</dl>
 																	
@@ -174,7 +109,7 @@
 							</a>
 						</div>
 						<div class="am-u-sm-3">
-							<a href="#"><img src="/h/images/mansmall.jpg" />
+							<a href="/home/personal"><img src="/h/images/mansmall.jpg" />
 								<div class="title">个人中心</div>
 							</a>
 						</div>
@@ -203,6 +138,19 @@
 							    </a></li>
 							    
 						<div class="mod-vip">
+							@if(session('home_usersinfo'))
+							<div class="m-baseinfo">
+								<a href="/home/personal">
+									<img src="/h/images/getAvatar.do.jpg">
+								</a>
+								<em>
+									Hi,<span class="s-name" title="{{session('home_usersinfo')->email }}">{{ session('home_usersinfo')->email }}</span>
+									<a href="/home/logout">退出</a>			
+									&nbsp;&nbsp;&nbsp;
+								    						
+								</em>
+							</div>
+							@else
 							<div class="m-baseinfo">
 								<a href="person/index.html">
 									<img src="/h/images/getAvatar.do.jpg">
@@ -213,9 +161,10 @@
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="login.html">登录</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
+								<a class="am-btn-warning btn" href="/home/login/index">登录</a>
+								<a class="am-btn-warning btn" href="/home/register">注册</a>
 							</div>
+							@endif
 							<div class="member-login">
 								<a href="#"><strong>0</strong>待收货</a>
 								<a href="#"><strong>0</strong>待发货</a>
