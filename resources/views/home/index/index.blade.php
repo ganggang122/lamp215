@@ -5,11 +5,12 @@
                       <!--轮播 -->
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0" >
 							<ul class="am-slides">
+
 								@foreach($banners as $k=>$v)
 									<li class="banner1"><a href="javascript:;"><img src="/uploads/{{$v->url}}" style="width:100%;height:100%" /></a></li>
 									
 								@endforeach
-					
+
 							</ul>
 						</div>
 						<div class="clear"></div>	
