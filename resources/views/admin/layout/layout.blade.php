@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -131,6 +130,15 @@
                         <ul>
                             <li><a href="/admin/banners/create">添加轮播图</a></li>
                             <li><a href="/admin/banners">轮播图列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
+                        <ul>
+                            <li><a href="/admin/links/create">添加链接</a></li>
+                            <li><a href="/admin/links">链接列表</a></li>
                         </ul>
                     </li>
                 </ul>
