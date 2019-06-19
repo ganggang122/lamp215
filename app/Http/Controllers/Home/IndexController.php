@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cate; 
-
+use App\Models\Banner; 
 class IndexController extends Controller
 {
 
@@ -25,7 +25,8 @@ class IndexController extends Controller
     public function index()
     {
         $data = self::getCatesData(0);
-        return view('home.index.index',['data'=>$data]);
+          $banners = Banner::where('status',1)->get();
+        return view('home.index.index',['data'=>$data,'banners'=>$banners]);
     }
 
     /**

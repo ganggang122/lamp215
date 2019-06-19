@@ -27,6 +27,14 @@ Route::get('home/personal' , 'Home\PersonalController@index');
 //前台商品列表页面
 Route::get('home/list/index' , 'Home\ListController@index');
 
+//前台地址列表
+Route::get('home/address/index' , 'Home\AddressController@index');
+//前台添加地址
+Route::post('home/address/create' , 'Home\AddressController@create');
+//前台默认地址修改
+Route::get('home/address/update/{id}' , 'Home\AddressController@update');
+
+
 
 //  前台注册  邮箱  手机号
 Route::get('home/register','Home\ResgisterController@index');
@@ -38,4 +46,11 @@ Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@c
 
 //后台 栏目 路由
 Route::resource('admin/cates','Admin\CatesController');
+//后台 轮播图 路由
+
+
+Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
+Route::resource('admin/banners','Admin\BannersController');
+//前台 首页 路由
+Route::resource('home/index','Home\IndexController');
 
