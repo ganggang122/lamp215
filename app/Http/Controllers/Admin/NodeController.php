@@ -4,19 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cate;
 use DB;
-class CatesController extends Controller
+class NodeController extends Controller
 {
-    public static function getCates()
-    {
-        $cates = Cate::select('*',DB::raw("concat(path,',',id) as paths"))->orderBy('paths','asc')->get();
-        foreach ($cates as $key => $value) {
-            $n = substr_count($value->path,',');
-            $cates[$key]->cname = str_repeat('|-----',$n).$value->cname;
-        }
-        return $cates;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +14,10 @@ class CatesController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.cates.index',['cates'=>self::getCates()]);
+        //获取数据
+        $nodes = DB::table('node')->get();
+        //权限 首页 列表
+        return view('admin.node.index',['nodes'=>$nodes]);
     }
 
     /**
@@ -33,10 +25,10 @@ class CatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $id = $request->input('id',0);
-        return view('admin.cates.create',['id'=>$id,'cates'=>self::getCates()]);
+        //权限 添加 页面
+        return view('admin.node.create');
     }
 
     /**
@@ -47,31 +39,28 @@ class CatesController extends Controller
      */
     public function store(Request $request)
     {
-        //验证数据
+        //编写表单验证
         $this->validate($request, [
+            'desc' =>  'required|unique:node',
             'cname' => 'required',
+            'aname' => 'required',
         ],[
-            'cname.required' => '栏目必填',
+
+            'desc.required' => '权限名称未填写',
+            'desc.unique' =>   '该权限名已存在',
+            'cname.required' => '控制器未填写',
+            'aname.required' => '方法名未填写',
         ]);
-        //获取pid
-        $pid = $request->input('pid',0);
-        if ($pid==0) {
-            $path = 0;
+        //接收数据
+        $data = $request->except('_token');
+        $cname = $request->input('cname');
+        $data['cname'] = $cname.'Controller';
+        //存入数据库
+        $res = DB::table('node')->insert($data);
+        if ($res) {
+            return redirect('admin/node')->with('success','添加成功');
         } else {
-            $cates_path = Cate::find($pid);
-            $path = $cates_path->path.','.$cates_path->id;
-        }
-        //压入数据
-        $cates = new Cate;
-        $cates->cname = $request->input('cname','');
-        $cates->path= $path;
-        $cates->path= $path;
-        $cates->pid= $pid;
-        $res = $cates->save();
-         if ($res) {
-            return redirect('admin/cates')->with('success','添加成功');
-        } else {
-            return back()->with('error','添加失败');
+            return back()->with('error',"添加失败");
         }
     }
 
