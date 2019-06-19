@@ -48,7 +48,7 @@ class LinksController extends Controller
         //获取数据
         $lname = $request->input('lname','');
         $url = $request->input('url','');
-        压入数据
+        //压入数据
         $link = new Link;
         $link->lname = $lname;
         $link->url = $url;

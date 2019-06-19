@@ -11,7 +11,7 @@
     </div>
 @endif
 <div class="mws-panel grid_8">
-	<div class="mws-panel-header">
+	<div class="mws-panel-header"  style="height:50px;">
     	<span><i class="icon-pencil"></i>添加权限</span>
     </div>
     <div class="mws-panel-body no-padding">

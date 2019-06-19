@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cate; 
-<<<<<<< HEAD
-use App\Models\Banner; 
-use App\MOdels\Link;
-=======
 
->>>>>>> origin/lx
+use App\Models\Banners; 
+use App\Models\Link;
+
+
+
 class IndexController extends Controller
 {
     public static function getLinksData()
@@ -36,12 +36,11 @@ class IndexController extends Controller
     {
         $links = self::getLinksData();
         $data = self::getCatesData(0);
-<<<<<<< HEAD
-        $banners = Banner::where('status',1)->get();
+       $banners = Banners::where('status',1)->get();
         return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
-=======
+
         return view('home.index.index',['data'=>$data]);
->>>>>>> origin/lx
+
     }
 
     /**

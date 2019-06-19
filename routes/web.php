@@ -29,6 +29,7 @@ Route::get('home/list/index' , 'Home\ListController@index');
 
 
 
+
 //前台地址列表
 Route::get('home/address/index' , 'Home\AddressController@index');
 //前台添加地址
@@ -47,7 +48,9 @@ Route::post('home/register/insert','Home\ResgisterController@insert');
 Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@changeStatus');
 
 
-
+//后台 栏目 路由
+Route::resource('admin/cates','Admin\CatesController');
+//后台 轮播图 路由
 
 Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
 Route::resource('admin/banners','Admin\BannersController');
