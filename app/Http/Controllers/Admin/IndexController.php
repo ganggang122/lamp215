@@ -1,47 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cate; 
-<<<<<<< HEAD
-use App\Models\Banner; 
-use App\MOdels\Link;
-=======
 
->>>>>>> origin/lx
 class IndexController extends Controller
 {
-    public static function getLinksData()
-    {
-        $links = Link::all();
-        return $links;
-    }
-
-    public static function getCatesData($pid = 0)
-    {
-        $data = Cate::where('pid',$pid)->get();
-        foreach ($data as $key => $value) {
-           $value->sub = self::getCatesData($value->id);
-        }
-        return $data;
-    }
     /**
-     * Display a listing of the resource.
-     *
+     * 后台 首页.
+     *sss
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $links = self::getLinksData();
-        $data = self::getCatesData(0);
-<<<<<<< HEAD
-        $banners = Banner::where('status',1)->get();
-        return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
-=======
-        return view('home.index.index',['data'=>$data]);
->>>>>>> origin/lx
+        return view('admin.index.index');
     }
 
     /**
