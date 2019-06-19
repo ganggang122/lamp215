@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cate; 
-
-class IndexController extends Controller
+use DB;
+class NodeController extends Controller
 {
-
-    public static function getCatesData($pid = 0)
-    {
-        $data = Cate::where('pid',$pid)->get();
-        foreach ($data as $key => $value) {
-           $value->sub = self::getCatesData($value->id);
-        }
-        return $data;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +14,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $data = self::getCatesData(0);
-        return view('home.index.index',['data'=>$data]);
+        //获取数据
+        $nodes = DB::table('node')->get();
+        //权限 首页 列表
+        return view('admin.node.index',['nodes'=>$nodes]);
     }
 
     /**
@@ -35,7 +27,8 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        //权限 添加 页面
+        return view('admin.node.create');
     }
 
     /**
@@ -46,7 +39,29 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //编写表单验证
+        $this->validate($request, [
+            'desc' =>  'required|unique:node',
+            'cname' => 'required',
+            'aname' => 'required',
+        ],[
+
+            'desc.required' => '权限名称未填写',
+            'desc.unique' =>   '该权限名已存在',
+            'cname.required' => '控制器未填写',
+            'aname.required' => '方法名未填写',
+        ]);
+        //接收数据
+        $data = $request->except('_token');
+        $cname = $request->input('cname');
+        $data['cname'] = $cname.'Controller';
+        //存入数据库
+        $res = DB::table('node')->insert($data);
+        if ($res) {
+            return redirect('admin/node')->with('success','添加成功');
+        } else {
+            return back()->with('error',"添加失败");
+        }
     }
 
     /**

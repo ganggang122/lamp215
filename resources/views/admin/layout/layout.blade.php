@@ -9,7 +9,7 @@
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
@@ -33,9 +33,7 @@
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 
-<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<title>后台</title>
+<title>MWS Admin - Grids and Panels</title>
 @section('css')
 
 @show
@@ -68,12 +66,12 @@
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, John Doe
+                        Hello, {{ 0?session('admin_user_info')->uname  :2 }}
                     </div>
                     <ul>
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Change Password</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                        <li><a href="/admin/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -126,14 +124,34 @@
                     </li>
                 </ul>
                 <ul>
-                    <li>
-                        <a href="#"><i class="icon-align-justify"></i> 轮播图管理</a>
+                    <li class="active">
+                        <a href="#"><i class="icon-add-contact"></i>管理员</a>
                         <ul>
-                            <li><a href="/admin/banners/create">添加轮播图</a></li>
-                            <li><a href="/admin/banners">轮播图列表</a></li>
+                            <li><a href="/admin/adminuser">管理员列表</a></li>
+                            <li><a href="/admin/adminuser/create">添加管理员</a></li>
                         </ul>
                     </li>
                 </ul>
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="icon-add-contact"></i>岗位管理</a>
+                        <ul>
+                            <li><a href="/admin/role">岗位列表</a></li>
+                            <li><a href="/admin/role/create">添加岗位</a></li>
+                        </ul>
+                    </li>
+                </ul>                
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="icon-tags"></i>权限管理</a>
+                        <ul>
+                            <li><a href="/admin/node">权限列表</a></li>
+                            <li><a href="/admin/node/create">添加权限</a></li>
+                        </ul>
+                    </li>
+                </ul>
+ 
+
             </div>
         </div>
         

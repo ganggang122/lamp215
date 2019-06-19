@@ -1,31 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cate; 
 
 class IndexController extends Controller
 {
-
-    public static function getCatesData($pid = 0)
-    {
-        $data = Cate::where('pid',$pid)->get();
-        foreach ($data as $key => $value) {
-           $value->sub = self::getCatesData($value->id);
-        }
-        return $data;
-    }
     /**
-     * Display a listing of the resource.
-     *
+     * 后台 首页.
+     *sss
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data = self::getCatesData(0);
-        return view('home.index.index',['data'=>$data]);
+        return view('admin.index.index');
     }
 
     /**

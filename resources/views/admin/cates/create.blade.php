@@ -12,7 +12,7 @@
 </div>
 @endif
 <div class="mws-panel grid_8">
-    	<div class="mws-panel-header" style="height:50px">
+    	<div class="mws-panel-header">
         	<span>栏目添加</span>
         </div>
         <div class="mws-panel-body no-padding">

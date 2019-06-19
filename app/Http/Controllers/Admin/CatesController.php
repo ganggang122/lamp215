@@ -49,10 +49,9 @@ class CatesController extends Controller
     {
         //验证数据
         $this->validate($request, [
-            'cname' => 'required|unique:cates',
+            'cname' => 'required',
         ],[
             'cname.required' => '栏目必填',
-            'cname.unique' => '栏目已存在',
         ]);
         //获取pid
         $pid = $request->input('pid',0);
