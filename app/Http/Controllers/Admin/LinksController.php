@@ -1,28 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Cate; 
-use App\Models\Banner; 
-use App\MOdels\Link;
-class IndexController extends Controller
+use App\Models\Link;
+class LinksController extends Controller
 {
-    public static function getLinksData()
-    {
-        $links = Link::all();
-        return $links;
-    }
-
-    public static function getCatesData($pid = 0)
-    {
-        $data = Cate::where('pid',$pid)->get();
-        foreach ($data as $key => $value) {
-           $value->sub = self::getCatesData($value->id);
-        }
-        return $data;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -30,10 +14,8 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $links = self::getLinksData();
-        $data = self::getCatesData(0);
-        $banners = Banner::where('status',1)->get();
-        return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
+        $links = Link::all();
+        return view('admin.links.index',['links'=>$links]);
     }
 
     /**
@@ -43,7 +25,7 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.links.create');
     }
 
     /**
@@ -54,7 +36,29 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //验证表单
+        $this->validate($request, [
+            'lname' => 'required',
+            'url' => 'required',
+        ],[
+            'lname.required'=>'链接名称必填',
+            'url.required' => '链接地址必填',
+            'url.regex' => '链接格式错误',
+        ]);
+        //获取数据
+        $lname = $request->input('lname','');
+        $url = $request->input('url','');
+        压入数据
+        $link = new Link;
+        $link->lname = $lname;
+        $link->url = $url;
+        $res = $link->save();
+        //判断
+        if ($res) {
+            return redirect('admin/links')->with('success','添加成功');
+        } else {
+            return back()->with('error','添加失败');
+        }
     }
 
     /**
@@ -92,13 +96,18 @@ class IndexController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除链接
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $res = Link::destroy($id);
+         if ($res) {
+            return redirect('admin/links')->with('success','删除成功');
+        } else {
+            return back()->with('error','删除失败');
+        }
     }
 }
