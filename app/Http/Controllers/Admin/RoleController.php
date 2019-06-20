@@ -12,6 +12,18 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected static function getControllerName()
+    {
+        //控制器cname对应的中文名称
+        $cnames['UserController'] = '用户管理';
+        $cnames['CateController'] = '栏目管理';
+        $cnames['AdminuserController'] = '管理员管理';
+        $cnames['RoleController'] = '岗位管理';
+        $cnames['NodeController'] = '权限管理';
+        return  $cnames;
+    } 
+
     public function index()
     {
         //获取职位信息
@@ -48,11 +60,7 @@ class RoleController extends Controller
             $nodes_data[$v->cname][] = $v; 
         }
         //控制器cname对应的中文名称
-        $cnames['UserController'] = '用户管理';
-        $cnames['CateController'] = '栏目管理';
-        $cnames['AdminuserController'] = '管理员管理';
-        $cnames['RoleController'] = '岗位管理';
-        $cnames['NodeController'] = '权限管理';
+        $cnames = self::getControllerName();
         //后台 岗位&部门 添加页
         return view('admin.role.create',['nodes'=>$nodes_data,'cnames'=>$cnames]);
     }
@@ -92,7 +100,7 @@ class RoleController extends Controller
             return redirect('admin/role')->with('success','添加成功');
         } else {
             DB::rollBack();
-            return back('admin/role')->with('error','添加成功');            
+            return back('admin/role')->with('error','添加失败');            
         }
     }
 
@@ -115,7 +123,34 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        //获取职位信息  
+        $role = DB::table('role')->where('id',$id)->first();
+        //获取职位对应的权限
+        $user_node = DB::table('role_node')->select('nid')->where('rid',$id)->get();
+        $user_nodes= [];
+        foreach($user_node as $v){
+             $user_nodes[] = $v->nid;
+        }
+        //获取所有权限
+        $nodes = DB::table('node')->get();
+        $nodes_data =[];
+        //使控制器名为 数组 temp 的下标 值为控制器对应的方法名
+        foreach($nodes as $k=>$v){
+            $nodes_data[$v->cname][] = $v; 
+        }
+        //遍历控制器 信息 如果控制器内的id与用户所拥有的权限 nid 相等 就插入一个flag 用于页面复选框 checked
+        foreach($nodes_data as $k=>$v){
+            foreach($v as $kk=>$vv){
+                if(  in_array($vv->id,$user_nodes ) ){
+                    $v[$kk]->flag = true;
+                } else {
+                    $v[$kk]->flag = false;
+                }
+            }
+        }
+        //控制器cname对应的中文名称
+        $cnames = self::getControllerName();
+        return view('admin.role.edit',['role'=>$role,'nodes_data'=>$nodes_data,'cnames'=>$cnames]);
     }
 
     /**
@@ -127,7 +162,44 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //接收 职位名称 
+        $rname = $request->input('rname');
+        //接收 权限数据
+        $nid = $request->input('nid');
+        //判断职位名是否为空 
+        if( empty($rname) ) {
+            return back()->with('error','职位名不能为空');
+        }
+        //判断 权限是否为空
+        if( empty($nid) ) {
+            return back()->with('error','权限未选择');
+        }
+        //开启事务
+        DB::beginTransaction();
+        //先查询-职位名称在表中是否存在 若存在就说明-未改变-就不更新 
+        //若直接更新会报错 因为该表就两个字段  id rname
+        $res = DB::table('role')->where('rname',$rname)->first();
+        if( !$res ){
+            //存储职位名称到 role表
+            $res1 = DB::table('role')->where('id',$id)->update(['rname'=>$rname]);            
+        } else {
+            $res1 = true;
+        }
+
+        //先清除旧权限 再 插入新权限
+        $res2 = DB::table('role_node')->where('rid',$id)->delete();
+        foreach($nid as $v){
+            $res3 = DB::table('role_node')->insert(['rid'=>$id,'nid'=>$v]);
+        }    
+        if ($res1 && $res2 && $res3) {
+            //提交事务
+            DB::commit();
+            return redirect('admin/role')->with('success','修改成功');
+        } else {
+            DB::rollBack();
+            return back('admin/role')->with('error','修改成功');
+        }
+
     }
 
     /**

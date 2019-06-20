@@ -104,7 +104,14 @@ class AdminuserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //获取要修改的用户数据
+        $user = DB::table('admin_user')->where('id',$id)->first();
+        //获取用户的职位id 即  rid
+        //$rid = DB::select('select rid from role,aduser_role as adro where adro.uid = '.$user->id.' and adro.rid = role.id ');
+        $rid = DB::table('aduser_role')->select('rid')->where('uid',$user->id)->first();
+        //获取职位信息
+        $role_data = DB::table('role')->get();
+        return view('admin.adminuser.edit',['user'=>$user,'rid'=>$rid,'role_data'=>$role_data]);
     }
 
     /**
@@ -116,7 +123,54 @@ class AdminuserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //判断是否有头像上传
+        if ($request->hasFile('profile')) {
+            $profile = $request->file('profile')->store(date('Ymd')); 
+        }else {
+            $profile = $request->input('old_profile');
+        }
+        //接收用户名
+        $uname = $request->input('uname');
+        //判断用户名是否为空 为空则返回
+        if (empty($uname)) {
+            return back()->with('error','用户名不能为空');
+        }
+        //接收 密码 
+        $upass = $request->input('upass');
+        //准备数据
+        $data['uname'] = $uname;
+        $data['profile'] = $profile;
+        //判断 密码是否为空 为空密码则不更新 
+        if ( !empty($upass) ) {
+            //接收确认密码
+            $repass = $request->input('repass');
+            if ($upass != $repass ) {
+                return back()->with('error','两次密码不一致');                
+            }
+            $upass = Hash::make($upass);
+            $data['upass'] = $upass;
+        }
+        //开启事务
+        DB::beginTransaction();
+        $res1 = DB::table('admin_user')->where('id',$id)->update($data);
+        $rid = $request->input('rid');
+        //判断rid是否变化 若未变则不更新
+        $judge = DB::table('aduser_role')->where('uid',$id)->first();
+        if ( $judge->rid != $rid ) {
+            $res2 = DB::table('aduser_role')->where('uid',$id)->update(['rid'=>$rid]);            
+        } else {
+            $res2 = true;
+        }
+        if ($res1 && $res2) {
+            //提交事务
+            DB::commit();
+            return redirect('admin/adminuser')->with('success','修改成功');
+        } else {
+            //事务回滚
+            DB::rollBack();
+            return back()->with('error','修改失败');                            
+        }
+
     }
 
     /**
@@ -127,6 +181,20 @@ class AdminuserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //开启事务
+        DB::beginTransaction();
+        //删除admin_user表内的用户信息
+        $res1 = DB::table('admin_user')->where('id',$id)->delete();
+        //删除aduser_role表内的信息
+        $res2 = DB::table('aduser_role')->where('uid',$id)->delete();
+        if ($res1 && $res2) {
+            //提交事务
+            DB::commit();
+            return redirect('admin/adminuser')->with('success','删除成功');            
+        } else {
+            //事务回滚
+            DB::rollBack();
+            return back()->with('error','修改失败');             
+        }
     }
 }
