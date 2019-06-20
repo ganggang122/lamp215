@@ -44,6 +44,10 @@ Route::get('home/address/edit/{id}' , 'Home\AddressController@edit');
 Route::post('home/address/show/{id}' , 'Home\AddressController@show');
 //前台地址删除
 Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
+//前台用户个人信息
+Route::get('home/information/index' , 'Home\InformationController@index');
+//前台用户添加个人信息
+Route::post('home/information/create' , 'Home\InformationController@create');
 
 
 
@@ -70,10 +74,6 @@ Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
 Route::resource('admin/address','Admin\AddressController');
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
-
-
-
-
 
 
 

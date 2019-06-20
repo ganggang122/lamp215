@@ -11,13 +11,17 @@ class AddressController extends Controller
 {
     //用户前台列表
     public  function  index()
-    {   
-    	 $users_address = Address::get();
+    {    
+    	if(!session('home_usersinfo')){
+    		return redirect('home/login/index');
+    	}
+         $uid = session('home_usersinfo')->id;
+    	 $users_address = Address::where('uid' ,$uid)->get();
 
     	  return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
 
     	return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
-
+   
     }
 
     //接收提交过来的地址信息
@@ -76,10 +80,14 @@ class AddressController extends Controller
     }
 
     public  function  edit($id)
-    {
-    	 $users_address = Address::get();
-    	 $users_addre = Address::find($id);
-         return view('home.address.edit' , ['users_address' =>$users_address,'users_addre'=>$users_addre,'links'=>IndexController::getLinksData()]);
+    {    
+        if(!session('home_usersinfo')){
+    		return redirect('home/login/index');
+    	} 
+    	$uid = session('home_usersinfo')->id;
+    	$users_address = Address::where('uid',$uid)->get();
+    	$users_addre = Address::find($id);
+        return view('home.address.edit' , ['users_address' =>$users_address,'users_addre'=>$users_addre,'links'=>IndexController::getLinksData()]);
     }
 
     public  function  show(Request $request,$id)

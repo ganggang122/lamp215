@@ -144,10 +144,18 @@
 							@if(session('home_usersinfo'))
 							<div class="m-baseinfo">
 								<a href="/home/personal">
+									@if(session('home_usersinfo')->home->profile)
+									<img src="/uploads/{{ session('home_usersinfo')->home->profile }}">
+									@else
 									<img src="/h/images/getAvatar.do.jpg">
+									@endif
 								</a>
 								<em>
-									Hi,<span class="s-name" title="{{session('home_usersinfo')->email }}">{{ session('home_usersinfo')->email }}</span>
+									Hi,<span class="s-name" title="{{session('home_usersinfo')->home->nickname }}">@if(!empty( session('home_usersinfo')->home->nickname ))
+									{{ session('home_usersinfo')->home->nickname }}
+									@else
+								    {{ str_random(5) }}
+								    @endif</span>
 									<a href="/home/logout">退出</a>			
 									&nbsp;&nbsp;&nbsp;
 								    						

@@ -13,4 +13,9 @@ class Users extends Model
     {
         return $this->hasOne('App\Models\UserInfo','uid');
     }
+    //一对一
+    public  function  home()
+    {
+    	return $this->hasOne('App\Models\Homeusers','uid');
+    }
 }

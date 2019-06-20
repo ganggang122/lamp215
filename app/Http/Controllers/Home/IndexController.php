@@ -34,12 +34,12 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $links = self::getLinksData();
-        $data = self::getCatesData(0);
-       $banners = Banners::where('status',1)->get();
-        return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
+         $links = self::getLinksData();
+         $data = self::getCatesData(0);
+         $banners = Banners::where('status',1)->get();
+         return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
 
-        return view('home.index.index',['data'=>$data]);
+        
 
     }
 

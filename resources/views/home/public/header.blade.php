@@ -30,11 +30,18 @@
 					<div class="topMessage">
 						@if(session('home_usersinfo'))
 						<div class="menu-hd">
+							
 							<a href="javascript:;" target="_top" class="h">
-								用户名&nbsp;{{ session('home_usersinfo')->email }}{{ session('home_usersinfo')->phone }}{{ session('home_usersinfo')->uname }}</a>
+								用户名&nbsp;
+								@if(!empty( session('home_usersinfo')->home->nickname ))
+								{{ session('home_usersinfo')->home->nickname }}
+								@else
+							    {{ str_random(5) }}
+							    @endif
+							   </a>
 								&nbsp;&nbsp;&nbsp;
 								<a href="/home/logout">退出</a>
-						</div>
+						  </div>
 					    @else
 					    <div class="menu-hd">
 							<a href="/home/login/index" target="_top" class="h">亲，请登录</a>
