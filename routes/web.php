@@ -30,13 +30,19 @@ Route::get('home/list/index' , 'Home\ListController@index');
 
 
 
+
 //前台地址列表
 Route::get('home/address/index' , 'Home\AddressController@index');
 //前台添加地址
 Route::post('home/address/create' , 'Home\AddressController@create');
 //前台默认地址修改
 Route::get('home/address/update/{id}' , 'Home\AddressController@update');
-
+//前台地址修改
+Route::get('home/address/edit/{id}' , 'Home\AddressController@edit');
+//前台地址执行修改
+Route::post('home/address/show/{id}' , 'Home\AddressController@show');
+//前台地址删除
+Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
 
 
 

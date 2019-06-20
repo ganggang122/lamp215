@@ -24,8 +24,7 @@
 				<div class="mt-logo">
 					<!--顶部导航条 -->
 					<div class="am-container header">
-						<ul class="message-l">
-							
+						
 						@if(session('home_usersinfo'))
 						<div class="menu-hd">
 							<a href="javascript:;" target="_top" class="h">
@@ -127,7 +126,7 @@
 								<div class="new-addr-btn">
 									<a href="/home/address/edit/{{ $v->id }}"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="/home/address/destory/{{ $v->id }}><i class="am-icon-trash"></i>删除</a>
+									<a href="javascript:void(0);" onClick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
 								</div>
 							</li>
 							@endif
@@ -146,7 +145,7 @@
 								<div class="new-addr-btn">
 									<a href="/home/address/edit/{{ $v->id }}"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="/home/address/destory/{{ $v->id }}><i class="am-icon-trash"></i>删除</a>
+									<a href="javascript:void(0);" onClick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
 								</div>
 								@endif
 							@endforeach
@@ -168,7 +167,7 @@
 
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
 									<script type="text/javascript" src="/area.js"></script>
-										@if (count($errors) > 0)
+									@if (count($errors) > 0)
 								    <div class="alert alert-danger">
 								        <ul>
 								            @foreach ($errors->all() as $error)
@@ -176,21 +175,22 @@
 								            @endforeach
 								        </ul>
 								    </div>
-								@endif	
-									<form class="am-form am-form-horizontal"  action="/home/address/create"  method="post">
+								   @endif	
+								    
+									<form class="am-form am-form-horizontal"  action="/home/address/show/{{$users_addre->id}}"  method="post">
 										{{ csrf_field()  }}
-
+                                       
 										<div class="am-form-group">
 											<label for="user-name" class="am-form-label">收货人</label>
 											<div class="am-form-content">
-												<input type="text" name="uname"  id="user-name" placeholder="收货人">
+												<input type="text"  name="uname"  id="user-name" value="{{ $users_addre->uname }}" placeholder="收货人">
 											</div>
 										</div>
 
 										<div class="am-form-group">
 											<label for="user-phone" class="am-form-label">手机号码</label>
 											<div class="am-form-content">
-												<input id="user-phone"  name="phone" placeholder="手机号必填" type="text">
+												<input id="user-phone"  name="phone" placeholder="手机号必填" type="text" value="{{ $users_addre->phone }}">
 											</div>
 										</div>
 										<div class="am-form-group">
@@ -205,10 +205,11 @@
 										<div class="am-form-group">
 											<label for="user-intro" class="am-form-label">详细地址</label>
 											<div class="am-form-content">
-												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"  name="address"></textarea>
+												<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"  name="address">{{ $users_addre->address }}</textarea>
 												<small>100字以内写出你的详细地址...</small>
 											</div>
 										</div>
+										
 
 										<div class="am-form-group">
 											<div class="am-u-sm-9 am-u-sm-push-3">
@@ -228,7 +229,7 @@
 		    <script language="javascript">
 			setup();
 		    </script>
-				    <script type="text/javascript">
+					<script type="text/javascript">
 						$(document).ready(function() {							
 							$(".new-option-r").click(function() {
 								$(this).parent('.user-addresslist').addClass("defaultAddr").siblings().removeClass("defaultAddr");
