@@ -9,7 +9,7 @@
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
@@ -33,7 +33,7 @@
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 
-<title>MWS Admin - Grids and Panels</title>
+<title>xin-shop</title>
 @section('css')
 
 @show
@@ -120,6 +120,15 @@
                         <ul>
                             <li><a href="/admin/cates/create">添加栏目</a></li>
                             <li><a href="/admin/cates">栏目列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-dribbble"></i>品牌管理</a>
+                        <ul>
+                            <li><a href="/admin/brands/create">添加品牌</a></li>
+                            <li><a href="/admin/brands">品牌列表</a></li>
                         </ul>
                     </li>
                 </ul>
