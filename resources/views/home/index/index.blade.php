@@ -11,10 +11,6 @@
 									<li class="banner1"><a href="javascript:;"><img src="/uploads/{{$v->url}}" style="width:100%;height:100%" /></a></li>
 									
 								@endforeach
-					<li class="banner1"><a href="introduction.html"><img src="/h/images/ad1.jpg" /></a></li>
-								<li class="banner2"><a><img src="/h/images/ad2.jpg" /></a></li>
-								<li class="banner3"><a><img src="/h/images/ad3.jpg" /></a></li>
-								<li class="banner4"><a><img src="/h/images/ad4.jpg" /></a></li>
 
 							</ul>
 						</div>

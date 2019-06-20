@@ -170,7 +170,6 @@
                         </ul>
                     </li>
                 </ul>
-<<<<<<< HEAD
                 <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
@@ -180,10 +179,15 @@
                         </ul>
                     </li>
                 </ul>
-=======
- 
-
->>>>>>> origin/lx
+                 <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 收货地址管理</a>
+                        <ul>
+                            <li><a href="/admin/address/create">添加收货地址</a></li>
+                            <li><a href="/admin/address">收货地址列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         
