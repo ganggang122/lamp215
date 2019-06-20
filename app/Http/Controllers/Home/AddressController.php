@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\Home\IndexController;
 use App\Models\Address;
 
 class AddressController extends Controller
@@ -13,7 +13,7 @@ class AddressController extends Controller
     public  function  index()
     {   
     	 $users_address = Address::get();
-    	return  view('home.address.index' , ['users_address' =>$users_address]);
+    	return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
     }
 
     //接收提交过来的地址信息

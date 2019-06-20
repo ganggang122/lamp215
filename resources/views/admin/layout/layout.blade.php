@@ -8,6 +8,7 @@
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
@@ -31,6 +32,8 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
+<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <title>MWS Admin - Grids and Panels</title>
 @section('css')
@@ -122,6 +125,24 @@
                         </ul>
                     </li>
                 </ul>
+                   <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 轮播图管理</a>
+                        <ul>
+                            <li><a href="/admin/banners/create">添加轮播图</a></li>
+                            <li><a href="/admin/banners">轮播图列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
+                        <ul>
+                            <li><a href="/admin/links/create">添加链接</a></li>
+                            <li><a href="/admin/links">链接列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
                 <ul>
                     <li class="active">
                         <a href="#"><i class="icon-add-contact"></i>管理员</a>
@@ -149,7 +170,6 @@
                         </ul>
                     </li>
                 </ul>
-<<<<<<< HEAD
                 <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
@@ -159,10 +179,15 @@
                         </ul>
                     </li>
                 </ul>
-=======
- 
-
->>>>>>> origin/lx
+                 <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 收货地址管理</a>
+                        <ul>
+                            <li><a href="/admin/address/create">添加收货地址</a></li>
+                            <li><a href="/admin/address">收货地址列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         

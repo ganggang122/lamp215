@@ -32,6 +32,7 @@ Route::get('home/list/index' , 'Home\ListController@index');
 
 
 
+
 //前台地址列表
 Route::get('home/address/index' , 'Home\AddressController@index');
 //前台添加地址
@@ -56,17 +57,13 @@ Route::resource('admin/cates','Admin\CatesController');
 //后台 轮播图 路由
 
 
-
-
-
-
-
-
-
 Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
 Route::resource('admin/banners','Admin\BannersController');
 //后台 链接 路由
 Route::resource('admin/links','Admin\LinksController');
+//后台 收货地址
+Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
+Route::resource('admin/address','Admin\AddressController');
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
 

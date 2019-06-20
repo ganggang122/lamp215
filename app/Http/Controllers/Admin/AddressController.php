@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Link;
-class LinksController extends Controller
+use App\Models\Users;
+use App\Models\Address;
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,18 @@ class LinksController extends Controller
      */
     public function index()
     {
-        $links = Link::all();
-        return view('admin.links.index',['links'=>$links]);
+        $address = Address::all();
+       
+        return view('admin.adderss.index',['address'=>$address]);
     }
+    public function getAddress(Request $request)
+    {
 
+        $id = $request->input('id',0);
+        $address = Address::find($id);
+        $address_data = $address->address;
+        echo $address_data;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +34,7 @@ class LinksController extends Controller
      */
     public function create()
     {
-        return view('admin.links.create');
+        return view('admin.adderss.create');
     }
 
     /**
@@ -36,29 +45,7 @@ class LinksController extends Controller
      */
     public function store(Request $request)
     {
-        //验证表单
-        $this->validate($request, [
-            'lname' => 'required',
-            'url' => 'required',
-        ],[
-            'lname.required'=>'链接名称必填',
-            'url.required' => '链接地址必填',
-            'url.regex' => '链接格式错误',
-        ]);
-        //获取数据
-        $lname = $request->input('lname','');
-        $url = $request->input('url','');
-        //压入数据
-        $link = new Link;
-        $link->lname = $lname;
-        $link->url = $url;
-        $res = $link->save();
-        //判断
-        if ($res) {
-            return redirect('admin/links')->with('success','添加成功');
-        } else {
-            return back()->with('error','添加失败');
-        }
+        //
     }
 
     /**
@@ -69,7 +56,6 @@ class LinksController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -96,16 +82,16 @@ class LinksController extends Controller
     }
 
     /**
-     * 删除链接
+     * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $res = Link::destroy($id);
-         if ($res) {
-            return redirect('admin/links')->with('success','删除成功');
+        $res = Address::destroy($id);
+        if ($res) {
+            return redirect('admin/address')->with('success','删除成功');
         } else {
             return back()->with('error','删除失败');
         }
