@@ -70,6 +70,7 @@
                             @if($v->status==0)
                              <button type="button"  onclick="changeStatus({{ $v->id }},0)"" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                               激活
+      
                             </button>
                             @elseif($v->status==1)
                             <!-- Button trigger modal -->

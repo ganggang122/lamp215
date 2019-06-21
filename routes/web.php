@@ -38,6 +38,7 @@ Route::get('home/address/index' , 'Home\AddressController@index');
 Route::post('home/address/create' , 'Home\AddressController@create');
 //前台默认地址修改
 Route::get('home/address/update/{id}' , 'Home\AddressController@update');
+
 //前台地址修改
 Route::get('home/address/edit/{id}' , 'Home\AddressController@edit');
 //前台地址执行修改
@@ -48,6 +49,10 @@ Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
 Route::get('home/information/index' , 'Home\InformationController@index');
 //前台用户添加个人信息
 Route::post('home/information/create' , 'Home\InformationController@create');
+
+
+//前台 新闻 路由
+Route::resource('home/news','Home\NewsController');
 
 
 
@@ -72,8 +77,12 @@ Route::resource('admin/links','Admin\LinksController');
 //后台 收货地址
 Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
 Route::resource('admin/address','Admin\AddressController');
+
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
+
+//后台 新闻 路由
+Route::resource('admin/news','Admin\NewsController');
 
 
 

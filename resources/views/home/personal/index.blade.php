@@ -423,4 +423,60 @@
 
 			</div>
 
+
 @include('home.public.information.footer')
+
+			<aside class="menu">
+				<ul>
+					<li class="person active">
+						<a href="index.html">个人中心</a>
+					</li>
+					<li class="person">
+						<a href="#">个人资料</a>
+						<ul>
+							<li> <a href="information.html">个人信息</a></li>
+							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="/home/address/index">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的交易</a>
+						<ul>
+							<li><a href="order.html">订单管理</a></li>
+							<li> <a href="change.html">退款售后</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="#">我的资产</a>
+						<ul>
+							<li> <a href="coupon.html">优惠券 </a></li>
+							<li> <a href="bonus.html">红包</a></li>
+							<li> <a href="bill.html">账单明细</a></li>
+						</ul>
+					</li>
+
+					<li class="person">
+						<a href="#">我的小窝</a>
+						<ul>
+							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="foot.html">足迹</a></li>
+							<li> <a href="comment.html">评价</a></li>
+							<li> <a href="/home/news">消息</a></li>
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
+		</div>
+		<!--引导 -->
+		<div class="navCir">
+			<li><a href="home/home.html"><i class="am-icon-home "></i>首页</a></li>
+			<li><a href="home/sort.html"><i class="am-icon-list"></i>分类</a></li>
+			<li><a href="home/shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
+			<li class="active"><a href="index.html"><i class="am-icon-user"></i>我的</a></li>					
+		</div>
+	</body>
+
+</html>
+>>>>>>> origin/xiaoma
