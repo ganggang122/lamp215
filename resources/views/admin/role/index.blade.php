@@ -26,7 +26,7 @@
                                             @endforeach
                                         </td>
                                         <td align='center'>
-                                            <a href="/admin/role/{{ $v->id }}" class='btn btn-info'>修改权限</a>
+                                            <a href="/admin/role/{{ $v->id }}/edit" class='btn btn-info'>修改权限</a>
                                         </td>
                                     </tr>
                                @endforeach 

@@ -27,8 +27,14 @@
                                     	<img src="/uploads/{{ $v->profile }}" style='width:150px;border-radius:5%'>
                                     </td>
                                     <td align="center">
-                                    	<a href="" class='btn btn-info'>修改</a>&nbsp;&nbsp;&nbsp;
-                                    	<a href="" class='btn btn-danger'>删除</a>
+                                    	<a href="/admin/adminuser/{{ $v->id }}/edit" class='btn btn-info'>修改</a>&nbsp;&nbsp;&nbsp;
+                                    	<form action='/admin/adminuser/{{ $v->id }}'  method='post' style='display:inline-block'>
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button class='btn btn-danger'>删除</button>   
+                                        </form>
+                                        
+
                                     </td>
                                 </tr>
                                 @endforeach
