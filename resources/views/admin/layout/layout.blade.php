@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 
+
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
@@ -35,7 +36,7 @@
 <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<title>MWS Admin - Grids and Panels</title>
+<title>xin-shop</title>
 @section('css')
 
 @show
@@ -125,6 +126,7 @@
                         </ul>
                     </li>
                 </ul>
+
                    <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 轮播图管理</a>
@@ -193,6 +195,17 @@
                         <ul>
                             <li><a href="/admin/news/create">添加新闻</a></li>
                             <li><a href="/admin/news">新闻列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-dribbble"></i>品牌管理</a>
+                        <ul>
+                            <li><a href="/admin/brands/create">添加品牌</a></li>
+                            <li><a href="/admin/brands">品牌列表</a></li>
+
                         </ul>
                     </li>
                 </ul>

@@ -66,6 +66,7 @@ Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@c
 
 
 //后台 栏目 路由
+
 Route::resource('admin/cates','Admin\CatesController');
 //后台 轮播图 路由
 
@@ -77,6 +78,13 @@ Route::resource('admin/links','Admin\LinksController');
 //后台 收货地址
 Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
 Route::resource('admin/address','Admin\AddressController');
+
+
+Route::resource('admin/cates',  'Admin\CatesController');
+// 后台 品牌管理 路由
+Route::resource('admin/brands', 'Admin\BrandsController');
+// 文件上传路由
+Route::post('admin/upload', 'Admin\BrandsController@upload');
 
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
