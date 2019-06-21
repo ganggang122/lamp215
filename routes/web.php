@@ -20,5 +20,9 @@ Route::resource('admin/cates',  'Admin\CatesController');
 Route::resource('admin/brands', 'Admin\BrandsController');
 // 文件上传路由
 Route::post('admin/upload', 'Admin\BrandsController@upload');
+// 后台商品路由
+Route::resource('admin/goods','Admin\GoodsController');
+
+
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
