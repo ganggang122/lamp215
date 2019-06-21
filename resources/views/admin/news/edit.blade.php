@@ -13,22 +13,31 @@
 @endif
 <div class="mws-panel grid_8">
         <div class="mws-panel-header" style="height:50px">
-            <span>链接添加</span>
+            <span>新闻添加</span>
         </div>
         <div class="mws-panel-body no-padding">
-            <form class="mws-form" action="/admin/links" method="post" enctype="multipart/form-data">
+            <form class="mws-form" action="/admin/news/{{$news->id}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
+                  {{ method_field('PUT') }}
                 <div class="mws-form-inline">
                     <div class="mws-form-row">
-                        <label class="mws-form-label">链接名称</label>
+                        <label class="mws-form-label">新闻标题</label>
                         <div class="mws-form-item">
-                            <input type="text" name="lname" value="{{old('lname')}}" class="small">
+                            <input type="text" name="title" value="{{$news->title}}" class="small">
+                        </div>
+                    </div>
+                    <img src="/uploads/{{$news->image}}" style="width:200px">
+                    <input type="hidden" name="old_image" value="{{$news->image}}">
+                     <div class="mws-form-row">
+                        <label class="mws-form-label">新闻图片</label>
+                        <div class="mws-form-item" style="width:500px">
+                            <input type="file" name="image" value="" class="small">
                         </div>
                     </div>
                     <div class="mws-form-row">
-                        <label class="mws-form-label">链接地址</label>
+                        <label class="mws-form-label">新闻内容</label>
                         <div class="mws-form-item">
-                            <input type="text" name="url" placeholder="例:https://www.xy.com" value="{{old('url')}}" class="small">
+                            <input type="text" name="content" value="{{$news->content}}" class="small">
                         </div>
                     </div>
                 <div class="mws-button-row">

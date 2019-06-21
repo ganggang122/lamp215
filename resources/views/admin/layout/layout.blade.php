@@ -183,8 +183,16 @@
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 收货地址管理</a>
                         <ul>
-                            <li><a href="/admin/address/create">添加收货地址</a></li>
                             <li><a href="/admin/address">收货地址列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i> 新闻管理</a>
+                        <ul>
+                            <li><a href="/admin/news/create">添加新闻</a></li>
+                            <li><a href="/admin/news">新闻列表</a></li>
                         </ul>
                     </li>
                 </ul>
