@@ -6,8 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cate; 
 
+use App\Models\Banners; 
+use App\Models\Link;
+
+
+
 class IndexController extends Controller
 {
+    public static function getLinksData()
+    {
+        $links = Link::all();
+        return $links;
+    }
 
     public static function getCatesData($pid = 0)
     {
@@ -24,8 +34,13 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $data = self::getCatesData(0);
-        return view('home.index.index',['data'=>$data]);
+         $links = self::getLinksData();
+         $data = self::getCatesData(0);
+         $banners = Banners::where('status',1)->get();
+         return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
+
+        
+
     }
 
     /**

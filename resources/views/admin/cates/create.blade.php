@@ -1,4 +1,4 @@
-@extends('admin.layout.layout');
+@extends('admin.layout.layout')
 
 @section('content')
 
@@ -12,14 +12,14 @@
 </div>
 @endif
 <div class="mws-panel grid_8">
-    	<div class="mws-panel-header">
+    	<div class="mws-panel-header"  style="height:50px;">
         	<span>栏目添加</span>
         </div>
         <div class="mws-panel-body no-padding">
         	<form class="mws-form" action="/admin/cates" method="post" enctype="multipart/form-data">
         		{{csrf_field()}}
-        		<div class="mws-form-inline">
-        			<div class="mws-form-row">
+        		<div class="mws-form-inline" >
+        			<div class="mws-form-row"   >
         				<label class="mws-form-label">栏目名称</label>
         				<div class="mws-form-item">
         					<input type="text" name="cname" value="{{old('uname')}}" class="small">
