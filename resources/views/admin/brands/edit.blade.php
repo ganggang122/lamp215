@@ -12,7 +12,7 @@
     @endif
 
     <div class="mws-panel grid_8">
-        <div class="mws-panel-header">
+        <div class="mws-panel-header" style="height:50px">
             <span>品牌修改</span>
         </div>
         <div class="mws-panel-body no-padding">

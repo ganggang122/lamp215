@@ -90,7 +90,7 @@
 								<div class="new-addr-btn">
 									<a href="/home/address/edit/{{ $v->id }}"><i class="am-icon-edit"></i>编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="/home/address/destory/{{ $v->id }}><i class="am-icon-trash"></i>删除</a>
+									<a href="/home/address/destory/{{ $v->id }}"><i class="am-icon-trash"></i>删除</a>
 								</div>
 								@endif
 							@endforeach
@@ -121,6 +121,16 @@
 								        </ul>
 								    </div>
 								@endif	
+								@if(session('error'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('error') }}')
+									   </script>
+									@endif
+									@if(session('success'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('success') }}')
+									   </script>
+									@endif
 									<form class="am-form am-form-horizontal"  action="/home/address/create"  method="post">
 										{{ csrf_field()  }}
 

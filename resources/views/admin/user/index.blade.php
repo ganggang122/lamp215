@@ -30,7 +30,7 @@
 			邮箱: <input type="text" name='search_email' value={{$parmas['search_email'] or ''}}>
 			<input type="submit" class='btn btn-info'>
 		</form>
-		<div class="mws-panel-header">
+		<div class="mws-panel-header"  style="height:50px">
 	    	<span><i class="icon-table"></i>用 户 列 表</span>
 	    </div>
 	    <div class="mws-panel-body no-padding">

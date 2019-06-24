@@ -11,7 +11,7 @@
             </ul>
         </div>
    		@endif
-    	<div class="mws-panel-header">
+    	<div class="mws-panel-header" style="height:50px">
         	<span>添 加 用 户</span>
         </div>
         <div class="mws-panel-body no-padding">

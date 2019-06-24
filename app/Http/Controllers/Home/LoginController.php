@@ -30,6 +30,7 @@ class LoginController extends Controller
             ]);
          $users_name = $request->input('uname' ,'');
          $users_upass = $request->input('upass' , '');
+         
 
          $users_data =Users::where('uname' , $users_name)->orwhere('email' , $users_name)->orwhere('phone',$users_name)->first();
          

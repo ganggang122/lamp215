@@ -8,7 +8,7 @@
 						<a href="#">个人资料</a>
 						<ul>
 							<li> <a href="/home/information/index">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
+							<li> <a href="/home/safe/index">安全设置</a></li>
 							<li> <a href="/home/address/index">收货地址</a></li>
 						</ul>
 					</li>

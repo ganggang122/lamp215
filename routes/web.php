@@ -49,6 +49,10 @@ Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
 Route::get('home/information/index' , 'Home\InformationController@index');
 //前台用户添加个人信息
 Route::post('home/information/create' , 'Home\InformationController@create');
+//前台用户修改密码
+Route::get('home/safe/index' , 'Home\SafeController@index');
+//执行用户修改密码
+Route::post('home/safe/update' , 'Home\SafeController@update');
 
 
 //前台 新闻 路由
@@ -91,6 +95,12 @@ Route::resource('home/index','Home\IndexController');
 
 //后台 新闻 路由
 Route::resource('admin/news','Admin\NewsController');
+//后天商品规格
+Route::resource('admin/specific' , 'Admin\SpecificController');
+//后台添加商品规格
+Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
+
 
 
 
