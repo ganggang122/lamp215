@@ -209,6 +209,16 @@
                         </ul>
                     </li>
                 </ul>
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-dribbble"></i>商城头条</a>
+                        <ul>
+                            <li><a href="/admin/blog/create">添加头条</a></li>
+                            <li><a href="/admin/blog">头条列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>                
             </div>
         </div>
         

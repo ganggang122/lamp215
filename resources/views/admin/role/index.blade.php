@@ -27,7 +27,11 @@
                                         </td>
                                         <td align='center'>
                                             <a href="/admin/role/{{ $v->id }}/edit" class='btn btn-info'>修改权限</a>
-                                        </td>
+                                        <form action='/admin/role/{{ $v->id }}'  method='post' style='display:inline-block'>
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button class='btn btn-danger'>删除</button>   
+                                        </form>                                        </td>
                                     </tr>
                                @endforeach 
                             </tbody>

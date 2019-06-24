@@ -65,6 +65,11 @@ Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@c
 
 
 
+
+
+
+
+
 //后台 栏目 路由
 
 Route::resource('admin/cates','Admin\CatesController');
@@ -131,5 +136,89 @@ Route::get('admin/rbac',function(){
 	Route::resource('admin/role','Admin\RoleController');
 	//后台 权限 路由
 	Route::resource('admin/node','Admin\NodeController');
+	//后台 公告 路由
+	Route::resource('admin/blog','Admin\BlogController');
+	Route::get('/admim/blog/msg','Admin\BlogController@msg');
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================================
+
+ //前台 收藏商品 点击收藏功能 路由
+Route::get('home/collect/collect','Home\CollectController@collect');
+//前台 收藏夹 主页
+Route::get('home/collect/index','Home\CollectController@index');
+//前台 收藏夹 删除收藏 按钮
+Route::get('home/collect/del','Home\CollectController@del');
+
+
+// ============================================
+

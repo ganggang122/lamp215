@@ -211,5 +211,11 @@ class RoleController extends Controller
     public function destroy($id)
     {
         //
+        $res = DB::table('role')->delete($id);
+        if ( $res ) {
+            return redirect('admin/role')->with('success','删除成功');
+        } else {
+            return back()->with('error','删除失败');       
+        }
     }
 }
