@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Users;
+use App\Models\Collect;
 class IndexController extends Controller
 {
     /**
@@ -14,7 +15,24 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('admin.index.index');
+        //这是前台 商品详情页 收藏功能的 是否收藏该商品的信息 先暂存在这里
+        //获取该用户是否收藏过当前商品
+        //获取用户id
+        $uid = 18;
+        //获取商品id
+        $gid = 3;
+        //获取用户信息
+        $user = Users::where('id',$uid)->first();
+        //获取该用户收藏的所有商品id
+        $user_gids = $user->userCollect;
+        //将该用户的收藏商品id 存到同一数组
+        $collects = [];
+        foreach($user_gids as $v){
+            $collects[] = $v->gid;
+        }
+        //判断当前商品是否被收藏
+        $collect = in_array($gid,$collects);
+        return view('admin.index.index',['collect'=>$collect]);
     }
 
     /**
