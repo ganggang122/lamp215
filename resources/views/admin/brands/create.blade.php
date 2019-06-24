@@ -1,5 +1,5 @@
 @extends('admin.layout.layout')
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
 @section('content')
     @if (count($errors) > 0)
         <div class="mws-form-message error">
@@ -13,11 +13,12 @@
 
     <div class="mws-panel grid_8">
         <div class="mws-panel-header">
-            <span>Inline Form</span>
+            <span>品牌添加</span>
         </div>
         <div class="mws-panel-body no-padding">
             <form id="art_form" class="mws-form" method="post" action="/admin/brands"  enctype="multipart/form-data">
                 {{csrf_field() }}
+                {{--<input type="hidden" name="token" value="{{csrf_token()}}">--}}
                 <div class="mws-form-inline">
 
                     <div class="mws-form-row">
@@ -40,13 +41,48 @@
                         </div>
                     </div>
 
-                    <div class="mws-form-row">
+                    <div class="mws-form-row"  style="width: 725px;">
                         <label class="mws-form-label">品牌Logo</label>
-                        <div class="mws-form-item" style="width: 455px; ">
+                        <div class="mws-form-item" style="width: 500px; ">
                             <input type="hidden"  name="photo" id="art_thumb" value="art_thumb">
                             <input type="file" name="file_upload" id="file_upload" multiple="true">
                             <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
                         </div>
+                        {{--<script type="text/javascript">
+                            let token = $('input[type=hidden]').val();
+                            console.log(token);
+                            $(function(){
+                                $('#upload').Huploadify({
+                                    auto:true,
+                                    fileTypeExts:'*.wmv;*.jpg;*.png;*.exe',
+                                    multi:true,
+                                    formData:{
+                                            'token': token
+                                    },
+                                    fileSizeLimit:9999999999999,
+                                    showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+                                    showUploadedSize:true,
+                                    removeTimeout:9999999,
+                                    uploader:'/admin/upload',
+                                    onUploadStart:function(){
+                                        //alert('开始上传');
+
+
+                                    },
+                                    onInit:function(){
+                                        //alert('初始化');
+                                    },
+                                    onUploadComplete:function(){
+                                        //alert('上传完成');
+                                    },
+                                    onDelete:function(file){
+                                        console.log('删除的文件：'+file);
+                                        console.log(file);
+                                    }
+                                });
+                            });
+                        </script>--}}
+
                         <script type="text/javascript">
                             $(function () {
                                 $("#file_upload").change(function () {
@@ -68,7 +104,7 @@
                                     alert("请选择图片文件");
                                     return;
                                 }
-                                 var formData = new FormData($('#art_form')[0]);
+                                // var formData = new FormData($('#art_form')[0]);
                                 var formData = new FormData();
                                 formData.append('file_upload', $('#file_upload')[0].files[0]);
                                 formData.append('_token', '{{csrf_token()}}');

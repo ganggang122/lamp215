@@ -25,7 +25,7 @@ Route::get('home/index' ,'Home\PageController@index');
 //前台个人中心
 Route::get('home/personal' , 'Home\PersonalController@index');
 //前台商品列表页面
-Route::get('home/list/index' , 'Home\ListController@index');
+Route::get('home/list/index/{cid}' , 'Home\ListController@index');
 
 
 
@@ -82,15 +82,21 @@ Route::resource('admin/address','Admin\AddressController');
 
 Route::resource('admin/cates',  'Admin\CatesController');
 // 后台 品牌管理 路由
+// 品牌状态路由
+Route::get('admin/brands/changeStatus', 'Admin\BrandsController@changeStatus');
+// 后台品牌
 Route::resource('admin/brands', 'Admin\BrandsController');
 // 文件上传路由
 Route::post('admin/upload', 'Admin\BrandsController@upload');
-<<<<<<< HEAD
+
 // 后台商品路由
 Route::resource('admin/goods','Admin\GoodsController');
 
-=======
->>>>>>> 358d830b6530d266619b6f745441ad2050d9559f
+//后天商品规格路由
+Route::resource('admin/specific' , 'Admin\SpecificController');
+//后台添加商品规格
+Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
 
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
