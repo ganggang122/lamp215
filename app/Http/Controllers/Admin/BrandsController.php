@@ -16,9 +16,12 @@ class BrandsController extends Controller
      */
     public function upload(Request $request)
     {
+        // dd( $request->all());
+    
         // 获取客户端传来的文件
          $file = $request->file('file_upload');
-        // $file = $request->all();
+       /* $filename = $_FILES['file']['name'];
+        dd($filename);*/
         if ($file->isValid()) {
             // 获取文件上传对象的后缀名
             $ext = $file->getClientOriginalExtension();
@@ -115,7 +118,7 @@ class BrandsController extends Controller
             'cid.required'   => '分类名称必选',
             'bname.required' => '品牌名称必填',
             'bname.unique'   => '品牌名称已存在',
-            'photo.unique'   => '上传品牌图片',
+            'photo.required'   => '请上传品牌图片',
         ]);
         //接收表单传来的数据
         
@@ -194,6 +197,27 @@ class BrandsController extends Controller
         }
         
     }
+    
+    /**
+     * 修改品牌状态
+     */
+    
+    public function changeStatus(Request $request)
+    {
+        $status = $request->input('status', 0);
+        $id = $request->input('id');
+    
+        $brands = Brands::find($id);
+        $brands->status = $status;
+        $res = $brands->save();
+        if ($res) {
+            return redirect('admin/brands')->with('success','修改品牌状态成功');
+        } else {
+            return back()->with('error','修改品牌状态失败');
+        
+        }
+        
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -203,13 +227,21 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
+        
         //执行删除
         $res = Brands::destroy($id);
+        
+        $data = [];
+        
         if ($res) {
-            return redirect('admin/brands')->with('success','删除品牌成功');
+            $data['error'] = 0;
+            $data['msg'] = '删除成功';
         } else {
-            return back()->with('error','删除品牌失败');
+            $data['error'] = 1;
+            $data['msg'] = '删除失败';
         }
+        
+        return $data;
     
         
     }

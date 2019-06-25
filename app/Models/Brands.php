@@ -12,7 +12,7 @@ class Brands extends Model
     // 查询对应的分类名称
     public function catesname()
     {
-        return $this->belongsTo('app\Models\Cate', 'cid');
+        return $this->belongsTo('App\Models\Cate', 'cid');
     }
     
 }
