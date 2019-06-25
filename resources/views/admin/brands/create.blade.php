@@ -15,14 +15,14 @@
 
         <div class="mws-panel-header"  style="height:50px">
 
-        <div class="mws-panel-header">
+        
 
             <span>品牌添加</span>
         </div>
         <div class="mws-panel-body no-padding">
             <form id="art_form" class="mws-form" method="post" action="/admin/brands"  enctype="multipart/form-data">
                 {{csrf_field() }}
-                {{--<input type="hidden" name="token" value="{{csrf_token()}}">--}}
+               <input type="hidden" name="token" value="{{csrf_token()}}">	
                 <div class="mws-form-inline">
 
                     <div class="mws-form-row">
@@ -52,7 +52,20 @@
                             <input type="file" name="file_upload" id="file_upload" multiple="true">
                             <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
                         </div>
-                        {{--<script type="text/javascript">
+                       
+                    </div>
+
+
+                </div>
+                <div class="mws-button-row">
+                    <input type="submit" value="Submit" class="btn btn-danger">
+                    <input type="reset" value="Reset" class="btn ">
+                </div>
+            </form>
+        </div>
+   
+    </div>
+     <script type="text/javascript">
                             let token = $('input[type=hidden]').val();
                             console.log(token);
                             $(function(){
@@ -85,7 +98,7 @@
                                     }
                                 });
                             });
-                        </script>--}}
+                        </script>
 
                         <script type="text/javascript">
                             $(function () {
@@ -132,15 +145,4 @@
                                 });
                             }
                         </script>
-                    </div>
-
-
-                </div>
-                <div class="mws-button-row">
-                    <input type="submit" value="Submit" class="btn btn-danger">
-                    <input type="reset" value="Reset" class="btn ">
-                </div>
-            </form>
-        </div>
-    </div>
 @endsection

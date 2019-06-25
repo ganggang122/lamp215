@@ -25,7 +25,7 @@
                                    
                                     <td align="center">
                                     	
-                                    	<form action='/admin/specific/{{$v->id4}}'  method='post' style='display:inline-block'>
+                                    	<form action='/admin/specific/{{$v->id}}'  method='post' style='display:inline-block'>
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button class='btn btn-danger'>删除</button>   

@@ -210,7 +210,7 @@
                         </ul>
                     </li>
                 </ul>
-<<<<<<< HEAD
+
 
                  <ul>
                     <li>
@@ -228,7 +228,9 @@
                         <ul>
                             <li><a href="/admin/goods/create">添加商品</a></li>
                             <li><a href="/admin/goods">商品列表</a></li>
-
+                        </ul>
+                    </li>
+                </ul>
 
                 <ul>
                     <li>
@@ -252,7 +254,7 @@
                         </ul>
                     </li>
                 </ul>                
-
+                <ul>
                 <li>
                     <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
                     <ul>

@@ -11,7 +11,7 @@
         @endif
 
     <div class="mws-panel">
-        <div class="mws-panel-header">
+        <div class="mws-panel-header"  style="height:50px">
             <span>商品添加</span>
         </div>
         <div class="mws-panel-body no-padding">
@@ -27,7 +27,7 @@
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品编号</label>
                         <div class="mws-form-item">
-                            <input type="text" name="goodsNum" value="{{$goodsNum}}" class="required email large">
+                            <input type="text" name="goodsNum" value="{{$goodsNum}}" class="required email large"   disabled>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                             <select class="required large" name="cid">
                                 <option value="0">请选择</option>
                                 @foreach($goodsCate as $k=>$v)
-                                    <option value="{{$v->id}}">{{$v->cname}}</option>
+                                    <option value="{{$v->id}}"  {{ substr_count($v->path,',') <=1 ? 'disabled' : ''}}>{{$v->cname}}</option>
                                 @endforeach
                             </select>
                         </div>
