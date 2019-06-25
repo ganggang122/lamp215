@@ -173,15 +173,6 @@
                         </ul>
                     </li>
                 </ul>
-                <ul>
-                    <li>
-                        <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
-                        <ul>
-                            <li><a href="/admin/links/create">添加链接</a></li>
-                            <li><a href="/admin/links">链接列表</a></li>
-                        </ul>
-                    </li>
-                </ul>
                  <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 收货地址管理</a>
@@ -210,7 +201,7 @@
                         </ul>
                     </li>
                 </ul>
-<<<<<<< HEAD
+
 
                  <ul>
                     <li>
@@ -228,19 +219,11 @@
                         <ul>
                             <li><a href="/admin/goods/create">添加商品</a></li>
                             <li><a href="/admin/goods">商品列表</a></li>
-
-
-                <ul>
-                    <li>
-                        <a href="#"><i class="layui-icon layui-icon-tree"></i>商品管理</a>
-                        <ul>
-                            <li><a href="/admin/goods/create">添加商品</a></li>
-                            <li><a href="/admin/goods">商品列表</a></li>
-
                         </ul>
                     </li>
                 </ul>
 
+    
                 <ul>
 
                     <li>
@@ -253,15 +236,7 @@
                     </li>
                 </ul>                
 
-                <li>
-                    <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
-                    <ul>
-                        <li><a href="/admin/specific/create">添加规格</a></li>
-                        <li><a href="/admin/specific">规格列表</a></li>
-
-                    </ul>
-                </li>
-                </ul>
+       
 
 
             </div>

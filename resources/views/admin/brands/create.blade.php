@@ -52,40 +52,7 @@
                             <input type="file" name="file_upload" id="file_upload" multiple="true">
                             <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
                         </div>
-                        {{--<script type="text/javascript">
-                            let token = $('input[type=hidden]').val();
-                            console.log(token);
-                            $(function(){
-                                $('#upload').Huploadify({
-                                    auto:true,
-                                    fileTypeExts:'*.wmv;*.jpg;*.png;*.exe',
-                                    multi:true,
-                                    formData:{
-                                            'token': token
-                                    },
-                                    fileSizeLimit:9999999999999,
-                                    showUploadedPercent:true,//是否实时显示上传的百分比，如20%
-                                    showUploadedSize:true,
-                                    removeTimeout:9999999,
-                                    uploader:'/admin/upload',
-                                    onUploadStart:function(){
-                                        //alert('开始上传');
-
-
-                                    },
-                                    onInit:function(){
-                                        //alert('初始化');
-                                    },
-                                    onUploadComplete:function(){
-                                        //alert('上传完成');
-                                    },
-                                    onDelete:function(file){
-                                        console.log('删除的文件：'+file);
-                                        console.log(file);
-                                    }
-                                });
-                            });
-                        </script>--}}
+                        
 
                         <script type="text/javascript">
                             $(function () {

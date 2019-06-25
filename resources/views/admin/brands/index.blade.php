@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 
 @section('content')
-<<<<<<< HEAD
+
 <div class="mws-panel grid_8">
     <div class="mws-panel-header"  style="height:50px">
         <span><i class="icon-table"></i>品牌列表</span>
