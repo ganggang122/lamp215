@@ -129,13 +129,18 @@ class AddressController extends Controller
     	    if($res){
     	    	return  back()->with('success' , '添加成功');
     	    }else{
-    	    	return  back()->error('error' , '添加失败');
+    	    	return  back()->with('error' , '添加失败');
     	    }
     }
 
     public  function destory($id)
     {
-         dump($id);
+        $res  = Address::destroy($id);
+         if($res){
+    	    	return  back()->with('success' , '删除成功');
+    }else{
+    	    	return  back()->with('error' , '删除失败');
+    }
     }
 
 }

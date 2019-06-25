@@ -55,7 +55,7 @@
 																	<dl class="dl-sort">
 																		<dt><span title="{{$vv->cname}}">{{$vv->cname}}</span></dt>
 																		@foreach($vv->sub as $kkk=>$vvv)
-																		<dd><a title="{{$vvv->cname}}" href="/home/list/index"><span>{{$vvv->cname}}</span></a></dd>
+																		<dd><a title="{{$vvv->cname}}" href="/home/list/index/{{$vvv->id}}"><span>{{$vvv->cname}}</span></a></dd>
 																		@endforeach
 																	</dl>
 																	
@@ -218,7 +218,7 @@
 					<!--今日推荐 -->
 
 					<div class="am-g am-g-fixed recommendation">
-						<div class="clock am-u-sm-3" ">
+						<div class="clock am-u-sm-3" >
 							<img src="/h/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>
@@ -1385,7 +1385,7 @@
 							</div>
 							<div class="login_btnbox ">
 								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+								<a href="/home/collect/index" class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
@@ -1421,7 +1421,7 @@
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="#">
+						<a href="/home/collect/index">
 							<span class="wdsc "><img src="/h/images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">

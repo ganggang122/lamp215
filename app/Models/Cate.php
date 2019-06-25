@@ -8,4 +8,5 @@ class Cate extends Model
 {
     //表名约定
     public $table = 'cates';
+    
 }

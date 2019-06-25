@@ -13,7 +13,8 @@
 
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
-
+<link rel="stylesheet" type="text/css" href="/Huploadify/Huploadify.css">
+<link rel="stylesheet" href="/layui/css/layui.css">
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/fonts/ptsans/stylesheet.css" media="screen">
@@ -209,6 +210,60 @@
                         </ul>
                     </li>
                 </ul>
+<<<<<<< HEAD
+
+                 <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
+                        <ul>
+                            <li><a href="/admin/specific/create">添加规格</a></li>
+                            <li><a href="/admin/specific">规格列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                  <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i>商品管理</a>
+                        <ul>
+                            <li><a href="/admin/goods/create">添加商品</a></li>
+                            <li><a href="/admin/goods">商品列表</a></li>
+
+
+                <ul>
+                    <li>
+                        <a href="#"><i class="layui-icon layui-icon-tree"></i>商品管理</a>
+                        <ul>
+                            <li><a href="/admin/goods/create">添加商品</a></li>
+                            <li><a href="/admin/goods">商品列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul>
+
+                    <li>
+                        <a href="#"><i class="icon-dribbble"></i>商城头条</a>
+                        <ul>
+                            <li><a href="/admin/blog/create">添加头条</a></li>
+                            <li><a href="/admin/blog">头条列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>                
+
+                <li>
+                    <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
+                    <ul>
+                        <li><a href="/admin/specific/create">添加规格</a></li>
+                        <li><a href="/admin/specific">规格列表</a></li>
+
+                    </ul>
+                </li>
+                </ul>
+
+
             </div>
         </div>
         
@@ -243,7 +298,10 @@
     </div>
 
     <!-- JavaScript Plugins -->
-    <script src="/d/js/libs/jquery-1.8.3.min.js"></script>
+
+
+    <script src="/Huploadify/jquery.Huploadify.js"></script>
+    <script src="/layui/layui.all.js"></script>
     <script src="/d/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/d/js/libs/jquery.placeholder.min.js"></script>
     <script src="/d/custom-plugins/fileinput.js"></script>

@@ -25,7 +25,7 @@ Route::get('home/index' ,'Home\PageController@index');
 //前台个人中心
 Route::get('home/personal' , 'Home\PersonalController@index');
 //前台商品列表页面
-Route::get('home/list/index' , 'Home\ListController@index');
+Route::get('home/list/index/{cid}' , 'Home\ListController@index');
 
 
 
@@ -49,6 +49,10 @@ Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
 Route::get('home/information/index' , 'Home\InformationController@index');
 //前台用户添加个人信息
 Route::post('home/information/create' , 'Home\InformationController@create');
+//前台用户修改密码
+Route::get('home/safe/index' , 'Home\SafeController@index');
+//执行用户修改密码
+Route::post('home/safe/update' , 'Home\SafeController@update');
 
 
 //前台 新闻 路由
@@ -62,6 +66,11 @@ Route::get('home/register/sendPhone','Home\ResgisterController@sendPhone');
 Route::post('home/register/store','Home\ResgisterController@store');
 Route::post('home/register/insert','Home\ResgisterController@insert');
 Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@changeStatus');
+
+
+
+
+
 
 
 
@@ -82,15 +91,33 @@ Route::resource('admin/address','Admin\AddressController');
 
 Route::resource('admin/cates',  'Admin\CatesController');
 // 后台 品牌管理 路由
+// 品牌状态路由
+Route::get('admin/brands/changeStatus', 'Admin\BrandsController@changeStatus');
+// 后台品牌
 Route::resource('admin/brands', 'Admin\BrandsController');
 // 文件上传路由
 Route::post('admin/upload', 'Admin\BrandsController@upload');
+
+// 后台商品路由
+Route::resource('admin/goods','Admin\GoodsController');
+
+//后天商品规格路由
+Route::resource('admin/specific' , 'Admin\SpecificController');
+//后台添加商品规格
+Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
 
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
 
 //后台 新闻 路由
 Route::resource('admin/news','Admin\NewsController');
+//后天商品规格
+Route::resource('admin/specific' , 'Admin\SpecificController');
+//后台添加商品规格
+Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
+
 
 
 
@@ -131,5 +158,89 @@ Route::get('admin/rbac',function(){
 	Route::resource('admin/role','Admin\RoleController');
 	//后台 权限 路由
 	Route::resource('admin/node','Admin\NodeController');
+	//后台 公告 路由
+	Route::resource('admin/blog','Admin\BlogController');
+	Route::get('/admim/blog/msg','Admin\BlogController@msg');
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================================
+
+ //前台 收藏商品 点击收藏功能 路由
+Route::get('home/collect/collect','Home\CollectController@collect');
+//前台 收藏夹 主页
+Route::get('home/collect/index','Home\CollectController@index');
+//前台 收藏夹 删除收藏 按钮
+Route::get('home/collect/del','Home\CollectController@del');
+
+
+// ============================================
+
