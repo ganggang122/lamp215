@@ -16,7 +16,7 @@ class BrandsController extends Controller
      */
     public function upload(Request $request)
     {
-        // dd( $request->all());
+        dump( $request->all());
     
         // 获取客户端传来的文件
          $file = $request->file('file_upload');
