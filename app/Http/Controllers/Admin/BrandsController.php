@@ -14,10 +14,10 @@ class BrandsController extends Controller
      * 上传至阿里云oss
      * @return $newfile
      */
-    public function upload(Request $request)
+    public   function  upload(Request $request)
     {
         // dd( $request->all());
-    
+        
         // 获取客户端传来的文件
          $file = $request->file('file_upload');
        /* $filename = $_FILES['file']['name'];
@@ -95,7 +95,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-       
+         
         //引入添加页面 发送分类数据
         return view('admin.brands.create', ['cates'=>CatesController::getCates()]);
     }
