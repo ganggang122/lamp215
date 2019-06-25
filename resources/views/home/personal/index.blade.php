@@ -53,7 +53,7 @@
 									</div>
 									<div class="m-right">
 										<div class="m-new">
-											<a href="news.html"><i class="am-icon-bell-o"></i>消息</a>
+											<a href="/"><i class="am-icon-bell-o"></i>消息</a>
 										</div>
 										<div class="m-address">
 											<a href="address.html" class="i-trigger">我的收货地址</a>
