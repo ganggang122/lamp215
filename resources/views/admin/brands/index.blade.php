@@ -7,11 +7,8 @@
         <span><i class="icon-table"></i>品牌列表</span>
 
 
-    <div class="mws-panel grid_8">
-    <div class="mws-panel-header">
-        <span><i class="icon-table" ></i>品牌列表</span>
-        <span><i class="icon-table"></i><a href="/admin/brands/create">品牌添加</a></span>
-
+  
+      
 
     </div>
     <div class="mws-panel-body no-padding">
@@ -48,11 +45,8 @@
                 <td>{{$v->created_at}}</td>
                 <td>
                     <a href="/admin/brands/{{$v->id}}/edit" class="btn btn-success">修改</a>
-                    {{--<form action="/admin/brands/{{ $v->id }}" method="post" style="display: inline-block;">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    </form>--}}
-                    {{--<input type="submit" value="删除" class="btn btn-danger">--}}
+                    
+                    
                     <a href="javascript:;" onclick="delBrands({{$v->id}}, this)" class="btn btn-danger">删除</a>
                 @if($v->status == 0)
                         <a href="javascript:;"
@@ -69,7 +63,7 @@
 
 
                 </td>
-            </tr>`
+            </tr>
 
 
             @endforeach
@@ -128,7 +122,7 @@
         </script>
 
 
-        {{--model--}}
+        
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

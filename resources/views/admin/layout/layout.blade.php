@@ -36,6 +36,7 @@
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>xin-shop</title>
 @section('css')
@@ -223,6 +224,17 @@
                     </li>
                 </ul>
 
+                <ul>
+                    <li>
+                        <a href="#"><i class="layui-icon layui-icon-tree"></i>商品管理</a>
+                        <ul>
+                            <li><a href="/admin/goods/create">添加商品</a></li>
+                            <li><a href="/admin/goods">商品列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
     
                 <ul>
 
@@ -235,10 +247,6 @@
                         </ul>
                     </li>
                 </ul>                
-
-       
-
-
             </div>
         </div>
         

@@ -111,8 +111,10 @@ class SpecificController extends Controller
         $res = Specific::destroy($id);
         if($res){
         	return back()->with('error' ,'删除成功');
+        	exit;
         }else{
         	return back()->with('success' , '删除失败');
+        	exit;
         }
     }
 }

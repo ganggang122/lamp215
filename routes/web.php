@@ -25,7 +25,7 @@ Route::get('home/index' ,'Home\PageController@index');
 //前台个人中心
 Route::get('home/personal' , 'Home\PersonalController@index');
 //前台商品列表页面
-Route::get('home/list/index/{cid}' , 'Home\ListController@index');
+Route::get('home/list/index/{cid}/{id}' , 'Home\ListController@index');
 
 
 
@@ -57,9 +57,8 @@ Route::post('home/safe/update' , 'Home\SafeController@update');
 
 //前台 新闻 路由
 Route::resource('home/news','Home\NewsController');
-
-
-
+//前台 搜索 路由
+Route::get('home/search/index','Home\SearchController@index');
 //  前台注册  邮箱  手机号
 Route::get('home/register','Home\ResgisterController@index');
 Route::get('home/register/sendPhone','Home\ResgisterController@sendPhone');
