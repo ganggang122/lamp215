@@ -71,12 +71,12 @@ class CollectController extends Controller
     		$store->uid = $uid;
     		$store->gid = $gid;
     		$store->save();
-    		echo 'ok';
+    		echo json_encode('ok');
     		exit;
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
-    			echo 'del';
+    			echo json_encode('del');
     			exit;
     		}
     	}

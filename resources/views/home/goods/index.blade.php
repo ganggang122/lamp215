@@ -186,7 +186,7 @@
 				if ( res == 'del') {
 					$(obj).html('点击收藏');
 				}
-			},'html')
+			},'json')
 		}
 	</script>
 

@@ -172,7 +172,12 @@ Route::get('admin/rbac',function(){
 	//后台 今日推荐 置顶路由
 	Route::get('admin/recommend/changeTop','Admin\RecommendController@changeTop');
 	Route::resource('admin/recommend','Admin\RecommendController');
-
+	//后台 秒杀管理 路由
+	//置顶路由
+	Route::get('admin/seckill/changeTop','Admin\SeckillController@changeTop');
+	//启用路由
+	Route::get('admin/seckill/changeStatus','Admin\SeckillController@changeStatus');
+	Route::resource('admin/seckill','Admin\SeckillController');
 
 });
 
