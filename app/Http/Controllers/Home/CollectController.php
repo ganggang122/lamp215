@@ -13,7 +13,7 @@ class CollectController extends Controller
     public function index()
     {
     	//获取用户id
-        $uid = 18;
+        $uid = 2;
         //获取用户信息
         $user = Users::where('id',$uid)->first();
         //获取该用户收藏的所有商品id
@@ -52,9 +52,9 @@ class CollectController extends Controller
     {
     	//先判断是否登录
     	//接收商品id
-    	$gid = $request->input('gid',3);
+    	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
-    	$uid = 18;
+    	$uid = 2;
     	//获取该用户所有收藏商品的id
     	$user = Users::where('id',$uid)->first();
     	$user_gids = $user->userCollect;

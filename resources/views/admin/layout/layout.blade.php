@@ -265,7 +265,16 @@
                     </ul>
                 </li>
                 </ul>
+                <ul>
+                <li>
+                    <a href="#"><i class="icon-align-justify"></i>今日推荐管理</a>
+                    <ul>
+                        <li><a href="/admin/recommend/create">添加推荐</a></li>
+                        <li><a href="/admin/recommend">推荐列表</a></li>
 
+                    </ul>
+                </li>
+                </ul>
 
             </div>
         </div>

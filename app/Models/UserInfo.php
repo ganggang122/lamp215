@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserInfo extends Model
 {
     //指定表
-    protected $table = 'user_info';
+    protected $table = 'home_usersinfo';
 
 
 }

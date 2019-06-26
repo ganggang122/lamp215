@@ -130,16 +130,13 @@
 						<div class="demo">
 
 							<ul>
-								<li class="title-first"><a target="_blank" href="#">
-									<img src="/h/images/TJ2.jpg"></img>
-									<span>[特惠]</span>商城爆品1分秒								
-								</a></li>
-								<li class="title-first"><a target="_blank" href="#">
-									<span>[公告]</span>商城与广州市签署战略合作协议
+								@foreach($headline1 as $v)
+								<li class="title-first"><a target="_blank" href="/home/blog/{{ $v->id }}">
+									{{ $v->title }}
 								     <img src="/h/images/TJ.jpg"></img>
 								     <p>XXXXXXXXXXXXXXXXXX</p>
 							    </a></li>
-							    
+							    @endforeach
 						<div class="mod-vip">
 							@if(session('home_usersinfo'))
 							<div class="m-baseinfo">
@@ -184,11 +181,9 @@
 							</div>
 							<div class="clear"></div>	
 						</div>																	    
-							    
-								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-								<li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
-								
+							    @foreach($headline2 as $v)
+								<li><a target="_blank" href="/home/blog/{{ $v->id }}">{{ $v->title }}</a></li>
+								@endforeach
 							</ul>
                         <div class="advTip"><img src="/h/images/advTip.jpg"/></div>
 						</div>
@@ -222,33 +217,17 @@
 							<img src="/h/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>
+						@foreach($recommends as $v)
 						<div class="am-u-sm-4 am-u-lg-3 ">
 							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
+								<h3>{{ $v->big }}</h3>
+								<h4>{{ $v->small }}</h4>
 							</div>
 							<div class="recommendationMain one">
-								<a href="introduction.html"><img src="/h/images/tj.png "></img></a>
+								<a href="/home/list/index/{{ $v->cid }}"><img src="/uploads/{{ $v->profile }}" style='width:120px;border-radius:5%'></img></a>
 							</div>
 						</div>						
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>囤货过冬</h3>
-								<h4>让爱早回家</h4>
-							</div>
-							<div class="recommendationMain two">
-								<img src="/h/images/tj1.png "></img>
-							</div>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>浪漫情人节</h3>
-								<h4>甜甜蜜蜜</h4>
-							</div>
-							<div class="recommendationMain three">
-								<img src="/h/images/tj2.png "></img>
-							</div>
-						</div>
+						@endforeach
 
 					</div>
 					<div class="clear "></div>
