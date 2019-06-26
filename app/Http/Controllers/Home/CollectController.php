@@ -24,7 +24,7 @@ class CollectController extends Controller
             $collects[] = $v->gid;
         }
         //获取所有收藏商品的详细信息
-        $goods = DB::table('good_detail')->whereIn('id',$collects)->get();
+        $goods = DB::table('goods')->whereIn('id',$collects)->get();
 		return view('home.collect.index',['goods'=>$goods]);
     }
 
