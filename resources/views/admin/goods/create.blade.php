@@ -14,10 +14,10 @@
         <div class="mws-panel-header"  style="height:50px">
             <span>商品添加</span>
         </div>
-        <div class="mws-panel-body no-padding">
+        <div class="mws-panel-body no-padding" >
             <form class="mws-form" action="/admin/goods/add" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
-                <div class="mws-form-inline">
+                <div class="mws-form-inline" style="width:80%">
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品名称</label>
                         <div class="mws-form-item">

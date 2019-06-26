@@ -53,6 +53,17 @@ Route::post('home/information/create' , 'Home\InformationController@create');
 Route::get('home/safe/index' , 'Home\SafeController@index');
 //执行用户修改密码
 Route::post('home/safe/update' , 'Home\SafeController@update');
+//加入购物车
+Route::post('home/shopcart/store' , 'Home\ShopcartController@store');
+//前台购物车
+Route::get('home/shopcart/index' , 'Home\ShopcartController@index');
+//前台购物车小计加法
+Route::get('home/shopcart/add' , 'Home\ShopcartController@add');
+//前台购物车小计减法
+Route::get('home/shopcart/minus' , 'Home\ShopcartController@minus');
+//前台结算页面
+Route::get('home/pay/index' , 'Home\PayController@index');
+
 
 
 //前台 新闻 路由

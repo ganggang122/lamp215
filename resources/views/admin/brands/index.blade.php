@@ -45,11 +45,7 @@
                 <td>{{$v->created_at}}</td>
                 <td>
                     <a href="/admin/brands/{{$v->id}}/edit" class="btn btn-success">修改</a>
-                    <form action="/admin/brands/{{ $v->id }}" method="post" style="display: inline-block;">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    </form>
-                    <input type="submit" value="删除" class="btn btn-danger">
+                   
                     <a href="javascript:;" onclick="delBrands({{$v->id}}, this)" class="btn btn-danger">删除</a>
                 @if($v->status == 0)
                         <a href="javascript:;"
