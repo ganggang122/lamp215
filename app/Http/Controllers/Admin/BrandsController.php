@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brands;
+use App\Models\Goods;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\OSS;
@@ -14,10 +15,13 @@ class BrandsController extends Controller
      * 上传至阿里云oss
      * @return $newfile
      */
-    public function upload(Request $request)
+    public   function  upload(Request $request)
     {
-        dump( $request->all());
-    
+
+
+        // dd( $request->all());
+        
+
         // 获取客户端传来的文件
          $file = $request->file('file_upload');
        /* $filename = $_FILES['file']['name'];
@@ -95,7 +99,7 @@ class BrandsController extends Controller
      */
     public function create()
     {
-       
+         
         //引入添加页面 发送分类数据
         return view('admin.brands.create', ['cates'=>CatesController::getCates()]);
     }
@@ -118,7 +122,7 @@ class BrandsController extends Controller
             'cid.required'   => '分类名称必选',
             'bname.required' => '品牌名称必填',
             'bname.unique'   => '品牌名称已存在',
-            'photo.required'   => '请上传品牌图片',
+            'photo.required' => '请上传品牌图片',
         ]);
         //接收表单传来的数据
         
@@ -227,22 +231,27 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        
-        //执行删除
-        $res = Brands::destroy($id);
-        
-        $data = [];
-        
-        if ($res) {
-            $data['error'] = 0;
-            $data['msg'] = '删除成功';
-        } else {
-            $data['error'] = 1;
-            $data['msg'] = '删除失败';
-        }
-        
-        return $data;
     
-        
+        //执行删除
+        // 查询品牌下是否有商品
+        $good = Goods::where('bid', $id)->first();
+        // 创建空数组保存删除状态
+        $data = [];
+        //判断品牌下是否有商品
+        if (!$good) {
+            $res = Brands::destroy($id);
+            if ($res) {
+                $data['error'] = 0;
+                $data['msg'] = '删除成功';
+            } else {
+                $data['error'] = 1;
+                $data['msg'] = '删除失败';
+            }
+        } else {
+            $data['error'] = 2;
+            $data['msg'] = '品牌下有商品不能删除';
+        }
+    
+        return $data;
     }
 }

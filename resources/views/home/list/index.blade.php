@@ -106,7 +106,7 @@
 									@foreach($goods as $k=>$v)
 									<li>
 										<div class="i-pic limit">
-											<img src={{ $v->goodsinfo['goodsPhotoinfo1']}} />
+											<a href="/home/good/info/{{$v->id}}"><img src={{ $v->goodsinfo['goodsPhotoinfo1']}} /></a>
 											<p class="title fl">{{$v->goodsName}}</p>
 
 											<p class="price fl">

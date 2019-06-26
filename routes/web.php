@@ -26,6 +26,8 @@ Route::get('home/index' ,'Home\PageController@index');
 Route::get('home/personal' , 'Home\PersonalController@index');
 //前台商品列表页面
 Route::get('home/list/index/{cid}' , 'Home\ListController@index');
+//前台商品详情页
+Route::get('home/good/info/{gid}', 'Home\GoodsController@index');
 
 
 
