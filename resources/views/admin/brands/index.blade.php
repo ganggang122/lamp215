@@ -45,7 +45,7 @@
                 <td>{{$v->created_at}}</td>
                 <td>
                     <a href="/admin/brands/{{$v->id}}/edit" class="btn btn-success">修改</a>
-                   
+
                     <a href="javascript:;" onclick="delBrands({{$v->id}}, this)" class="btn btn-danger">删除</a>
                 @if($v->status == 0)
                         <a href="javascript:;"
@@ -92,11 +92,14 @@
 //                       location.href = location.href;
                             //var t=setTimeout("location.href = location.href;",2000);
                             $(obj).parent().parent().remove();
-                        }else{
+                        }else if(data.error == 1){
                             layer.msg(data.msg, {icon: 5});
 
                             var t=setTimeout("location.href = location.href;",2000);
                             //location.href = location.href;
+                        }else {
+                            layer.msg(data.msg, {icon: 5});
+
                         }
 
 

@@ -18,7 +18,7 @@
             <form id="art_form" class="mws-form" method="post" action="/admin/goods"  enctype="multipart/form-data">
                 {{csrf_field() }}
                 <div class="mws-form-inline">
-                    <input type="hidden" name="gid" value="{{$gid}}">
+                    {{--<input type="hidden" name="gid" value="{{$gid}}">--}}
                     @foreach($specific  as  $k=>$v)
                         <div class="mws-form-row">
                             <label class="mws-form-label">{{$v->specname}}</label>
@@ -44,16 +44,28 @@
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品图片</label>
                         <div class="mws-form-item">
+
                             <div class="fileinput-holder"  style="width:50%">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb"  >
                                 <span ><input type="file"    name="file_upload" id="file_upload" class="required" multiple="true"  ></span></div>
+
+                            <div class="fileinput-holder" style="position: relative;">
+                                <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb">
+                                <span><input type="file" name="file_upload" id="file_upload" class="required" multiple="true" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;"></span></div>
+
+
                             <br>
                                 <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
                             <label for="picture" class="error" generated="true" style="display:none"></label>
                         </div>
+
                         <br>
 
                         <div class="mws-form-row"  style="margin-left:-25px">
+
+                    </div>
+                        <div class="mws-form-row">
+
                             <label class="mws-form-label">商品详情</label>
                             <div class="mws-form-item">
                                 <script id="container" style="margin-left:-30px" name="content" type="text/plain">
@@ -118,6 +130,7 @@
                     <input type="reset" value="重置" class="btn ">
                 </div>
             </form>
+
         </div>
     </div>
     <!-- 配置文件 -->

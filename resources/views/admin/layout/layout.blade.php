@@ -212,7 +212,6 @@
                     </li>
                 </ul>
 
-
                  <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
@@ -223,6 +222,7 @@
                         </ul>
                     </li>
                 </ul>
+
                   <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i>商品管理</a>
@@ -255,6 +255,7 @@
                         </ul>
                     </li>
                 </ul>                
+
                 <ul>
                 <li>
                     <a href="#"><i class="icon-align-justify"></i>商品规格管理</a>
@@ -275,6 +276,7 @@
                     </ul>
                 </li>
                 </ul>
+
 
             </div>
         </div>
