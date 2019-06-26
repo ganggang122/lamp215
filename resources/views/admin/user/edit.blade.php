@@ -18,7 +18,7 @@
         	<form class="mws-form" action="/admin/users/{{ $user->id }}" method='post' enctype="multipart/form-data">
         		{{ csrf_field() }}
                 {{ method_field('PATCH') }}
-                <input type="hidden" name='old_profile' value='{{ $user->userInfo->profile }}'>
+                <input type="hidden" name='old_profile' value='{{ $user->home->profile }}'>
         		<div class="mws-form-inline">
         			<div class="mws-form-row">
         				<label class="mws-form-label">用 户 名</label>
@@ -42,7 +42,7 @@
         				<label class="mws-form-label">头 像</label>
         				<div class="mws-form-item" style='width:395px'>
         					<input type="file" class="small" name='profile'>
-                            <img style='width:200px;' src="/uploads/{{$user->userInfo->profile}}" alt="">
+                            <img style='width:200px;' src="/uploads/{{$user->home->profile}}" alt="">
         				</div>
         			</div>
         		</div>

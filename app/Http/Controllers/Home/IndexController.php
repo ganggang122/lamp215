@@ -8,7 +8,7 @@ use App\Models\Cate;
 
 use App\Models\Banners; 
 use App\Models\Link;
-
+use DB;
 
 
 class IndexController extends Controller
@@ -37,7 +37,12 @@ class IndexController extends Controller
          $links = self::getLinksData();
          $data = self::getCatesData(0);
          $banners = Banners::where('status',1)->get();
-         return view('home.index.index',['data'=>$data,'banners'=>$banners,'links'=>$links]);
+         //获取商城头条 2条 3条
+         $headline1 = DB::table('blog')->orderBy('top','desc')->orderBy('updated_at','desc')->skip(0)->take(2)->get();
+         $headline2 = DB::table('blog')->orderBy('top','desc')->orderBy('updated_at','desc')->skip(2)->take(3)->get();
+         //获取今日推荐
+         $recommends = DB::table('recommend')->where('status',2)->orderBy('top','desc')->orderBy('updated_at','desc')->get();
+         return view('home.index.index',['recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);
 
         
 

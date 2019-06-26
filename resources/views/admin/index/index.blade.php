@@ -2,7 +2,7 @@
 
 @section('content')
 	<div>
-		<input type='hidden' id='gid' name='gid' value='3'>
+		<input type='hidden' id='gid' name='gid' value='46'>
 		<button onclick='collect(this)'>{{ $collect ? ' 已收藏 ': '点击收藏' }}</button>
 	</div>
 	<script>

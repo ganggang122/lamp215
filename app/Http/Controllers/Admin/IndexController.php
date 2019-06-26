@@ -18,9 +18,9 @@ class IndexController extends Controller
         //这是前台 商品详情页 收藏功能的 是否收藏该商品的信息 先暂存在这里
         //获取该用户是否收藏过当前商品
         //获取用户id
-        $uid = 18;
+        $uid = 2;
         //获取商品id
-        $gid = 3;
+        $gid = 46;
         //获取用户信息
         $user = Users::where('id',$uid)->first();
         //获取该用户收藏的所有商品id

@@ -27,7 +27,7 @@ class BlogController extends Controller
     public function index()
     {
         //获取所有头条信息
-        $blogs = DB::table('blog')->orderBy('top','desc')->orderBy('created_at','desc')->get();
+        $blogs = DB::table('blog')->orderBy('top','desc')->orderBy('updated_at','desc')->get();
         return view('admin.blog.index',['blogs'=>$blogs]);
     }
 

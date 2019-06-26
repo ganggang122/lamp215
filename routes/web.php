@@ -117,16 +117,6 @@ Route::resource('admin/specific' , 'Admin\SpecificController');
 //后台添加商品规格
 Route::post('admin/goods/add' , 'Admin\GoodsController@add');
 
-
-
-
-
-
-
-
-
-
-
 //后台 登录页 路由
 Route::get('admin/login','Admin\LoginController@login');
 //后台 登录 验证
@@ -161,6 +151,12 @@ Route::get('admin/rbac',function(){
 	//后台 公告 路由
 	Route::resource('admin/blog','Admin\BlogController');
 	Route::get('/admim/blog/msg','Admin\BlogController@msg');
+	//后台 今日推荐 管理
+	Route::get('admin/recommend/changeStatus','Admin\RecommendController@changeStatus');
+	//后台 今日推荐 置顶路由
+	Route::get('admin/recommend/changeTop','Admin\RecommendController@changeTop');
+	Route::resource('admin/recommend','Admin\RecommendController');
+
 
 });
 
@@ -240,7 +236,7 @@ Route::get('home/collect/collect','Home\CollectController@collect');
 Route::get('home/collect/index','Home\CollectController@index');
 //前台 收藏夹 删除收藏 按钮
 Route::get('home/collect/del','Home\CollectController@del');
-
-
+//前台 头条 详情页
+Route::get('home/blog/{id}','Home\BlogController@index');
 // ============================================
 
