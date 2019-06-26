@@ -67,7 +67,8 @@ class SearchController extends Controller
     	}
     	
     	$goods = self::getData($search);
-    	return view('home.search.index',['goods'=>$goods,'search'=>$search]);
+    	$links = IndexController::getLinksData();
+    	return view('home.search.index',['goods'=>$goods,'search'=>$search,'links'=>$links]);
     }
     
 
