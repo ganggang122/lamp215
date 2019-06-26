@@ -15,17 +15,19 @@ class BrandsController extends Controller
      * 上传至阿里云oss
      * @return $newfile
      */
-    public   function  upload(Request $request)
+    public function upload(Request $request)
     {
+
 
 
         // dd( $request->all());
         
 
+
         // 获取客户端传来的文件
          $file = $request->file('file_upload');
-       /* $filename = $_FILES['file']['name'];
-        dd($filename);*/
+        // $filename = $_FILES['file']['name'];
+        
         if ($file->isValid()) {
             // 获取文件上传对象的后缀名
             $ext = $file->getClientOriginalExtension();
@@ -35,7 +37,7 @@ class BrandsController extends Controller
 //            $dirpath = public_path().'/uploads'.'/'.date('Ymd');
             $dirpath = public_path().'/uploads/';
             //将文件移动到指定目录，并以新文件名命名
-            //$file->move($dirpath, $newfile);
+            // $file->move($dirpath, $newfile);
             // 将文件移入阿里云oss存储
             OSS::upload($newfile, $file->getRealPath());
     

@@ -52,8 +52,10 @@
                             <input type="file" name="file_upload" id="file_upload" multiple="true">
                             <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/" id="img1" alt="" style="width: 80px;height: 80px;">
                         </div>
+
                        
                     </div>
+
 
 
                 </div>
@@ -67,11 +69,7 @@
     </div>
     
                         <script type="text/javascript">
-	                        	$.ajaxSetup({
-								    headers: {
-								        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-								    }
-								});
+	                        	
                         	
                             $(function () {
                                 $("#file_upload").change(function () {

@@ -174,15 +174,6 @@
                         </ul>
                     </li>
                 </ul>
-                <ul>
-                    <li>
-                        <a href="#"><i class="icon-align-justify"></i> 链接管理</a>
-                        <ul>
-                            <li><a href="/admin/links/create">添加链接</a></li>
-                            <li><a href="/admin/links">链接列表</a></li>
-                        </ul>
-                    </li>
-                </ul>
                  <ul>
                     <li>
                         <a href="#"><i class="icon-align-justify"></i> 收货地址管理</a>
@@ -244,6 +235,7 @@
                     </li>
                 </ul>
 
+    
                 <ul>
 
                     <li>
@@ -255,6 +247,7 @@
                         </ul>
                     </li>
                 </ul>                
+
 
                 <ul>
                 <li>
@@ -276,6 +269,7 @@
                     </ul>
                 </li>
                 </ul>
+
 
 
             </div>

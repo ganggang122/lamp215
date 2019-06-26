@@ -20,7 +20,6 @@ class AddressController extends Controller
 
     	  return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
 
-    	return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
    
     }
 
