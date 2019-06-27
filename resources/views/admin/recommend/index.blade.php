@@ -67,7 +67,7 @@
                     function changeTop(id)
                     {
                         $.get('/admin/recommend/changeTop',{id},function(res){
-                                console.log(res);
+                               
                         },'html')
                     }
         		</script>        

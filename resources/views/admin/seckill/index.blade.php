@@ -65,7 +65,6 @@
                     function changeTop(id)
                     {
                         $.get('/admin/seckill/changeTop',{id},function(res){
-                                console.log(res);
                         },'html')
                     }
         		</script> 

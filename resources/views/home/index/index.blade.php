@@ -246,32 +246,32 @@
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								<img src="/h/images/activity1.jpg "></img>
+								<img src="/uploads/{{ $seckills[0]->profile }} "></img>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>
+								<h3>{{ $seckills[0]->seckill }}</h3>
 							</div>														
 						</div>
 						
 						<div class="am-u-sm-3 ">
 						  <div class="icon-sale two "></div>	
-							<h4>特惠</h4>
+							<h4>秒杀</h4>
 							<div class="activityMain ">
-								<img src="/h/images/activity2.jpg "></img>
+								<img src="/uploads/{{ $seckills[1]->profile }} "></img>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>								
+								<h3>{{ $seckills[1]->seckill }}</h3>								
 							</div>							
 						</div>						
 						
 						<div class="am-u-sm-3 ">
 							<div class="icon-sale three "></div>
-							<h4>团购</h4>
+							<h4>秒杀</h4>
 							<div class="activityMain ">
-								<img src="/h/images/activity3.jpg "></img>
+								<img src="/uploads/{{ $seckills[2]->profile }} "></img>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>
+								<h3>{{ $seckills[2]->seckill }}</h3>
 							</div>							
 						</div>						
 
@@ -279,10 +279,10 @@
 							<div class="icon-sale "></div>
 							<h4>超值</h4>
 							<div class="activityMain ">
-								<img src="/h/images/activity.jpg "></img>
+								<img src="/uploads/{{ $seckills[3]->profile }} "></img>
 							</div>
 							<div class="info ">
-								<h3>春节送礼优选</h3>
+								<h3>{{ $seckills[3]->seckill }}</h3>
 							</div>													
 						</div>
 
