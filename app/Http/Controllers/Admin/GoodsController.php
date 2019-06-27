@@ -128,7 +128,7 @@ class GoodsController extends Controller
     {
     
         //验证数据
-        $this->validate($request,[
+        /*$this->validate($request,[
             'bid' =>'required|numeric',
             'specName1' =>'required',
             'specName2' =>'required',
@@ -144,7 +144,7 @@ class GoodsController extends Controller
             
     
     
-        ]);
+        ]);*/
         // 开始事务
         DB::beginTransaction();
         // dd(session('goods'));

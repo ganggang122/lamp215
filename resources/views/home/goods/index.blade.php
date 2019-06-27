@@ -176,7 +176,7 @@
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
-									<dt>促销价</dt>
+									<dt>促销价123</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{$good->shopPrice}}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">

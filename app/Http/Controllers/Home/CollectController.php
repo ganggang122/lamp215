@@ -16,6 +16,7 @@ class CollectController extends Controller
         $uid = 2;
         //获取用户信息
         $user = Users::where('id',$uid)->first();
+        // dd($user);
         //获取该用户收藏的所有商品id
         $user_gids = $user->userCollect;
         //将该用户的收藏商品id 存到同一数组
@@ -24,7 +25,7 @@ class CollectController extends Controller
             $collects[] = $v->gid;
         }
         //获取所有收藏商品的详细信息
-        $goods = DB::table('good_detail')->whereIn('id',$collects)->get();
+        $goods = DB::table('goods')->whereIn('id',$collects)->get();
 		return view('home.collect.index',['goods'=>$goods]);
     }
 
