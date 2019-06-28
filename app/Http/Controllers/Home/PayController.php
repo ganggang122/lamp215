@@ -10,12 +10,14 @@ use App\Models\Address;
 class PayController extends Controller
 {
     //结算页面
-    public  function index()
-    {  
-        $uid = session('home_usersinfo')->id;
+    public function index(Request $request, $id)
+    {
+        dd($id);
+        dump($request->all);
+        /*$uid = session('home_usersinfo')->id;
 
         $address_data = Address::where('uid',$uid)->get();
         
-    	return  view('home.pay.index' , ['address_data' => $address_data]);
+    	return  view('home.pay.index' , ['address_data' => $address_data]);*/
     }
 }

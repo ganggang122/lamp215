@@ -26,8 +26,14 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.goods.index');
+        //查询商品数据 显示
+        $goods = Goods::all();
+        
+        
+        
+        return view('admin.goods.index', [
+            'goods' => $goods,
+        ]);
         
     }
 
@@ -59,8 +65,10 @@ class GoodsController extends Controller
         $this->validate($request,[
             'goodsName' =>'required|unique:goods',
             'goodsNum' =>'required|numeric',
-            'marketPrice' =>'required|numeric',
-            'shopPrice' =>'required|numeric',
+            /*'marketPrice' =>'required|numeric',
+            'shopPrice' =>'required|numeric',*/
+            'marketPrice' =>'required',
+            'shopPrice' =>'required',
             'goodsStock' =>'required|numeric',
             'cid' => 'required',
             'goodsStatus' => 'required'
@@ -70,9 +78,9 @@ class GoodsController extends Controller
             'goodsNum.required'  => '商品编号必填',
             'goodsNum.numeric'   => '商品编号为数字',
             'marketPrice.required'  =>'市场价格必填',
-            'marketPrice.numeric'   => '市场价格为数字',
+//            'marketPrice.numeric'   => '市场价格为数字',
             'shopPrice.required'  =>'店铺价格必填',
-            'shopPrice.numeric'   => '店铺价格为数字',
+//            'shopPrice.numeric'   => '店铺价格为数字',
             'goodsStock.required'  =>'库存数量必填',
             'goodsStock.numeric'   => '库存数量为数字',
             'cid.required' => '商品分类必填',
@@ -128,7 +136,7 @@ class GoodsController extends Controller
     {
     
         //验证数据
-        $this->validate($request,[
+        /*$this->validate($request,[
             'bid' =>'required|numeric',
             'specName1' =>'required',
             'specName2' =>'required',
@@ -141,10 +149,8 @@ class GoodsController extends Controller
             'specName2.required'  =>'商品规格必填',
             'goodsPhoto.required'  =>'商品图片必上传',
             'goodsContent.required'  =>'商品详情内容必填',
-            
     
-    
-        ]);
+        ]);*/
         // 开始事务
         DB::beginTransaction();
         // dd(session('goods'));
@@ -170,15 +176,16 @@ class GoodsController extends Controller
         $goods_info->specName2 = $data['specName'][1];
         $goods_info->goodsPhotoinfo1 = $data['goodsPhoto'];
         $goods_info->goodsContent = $data['content'];
-    
+        
         if ($gid) {
             $res = $goods_info->save();
+            DB::table('goods')->where('id', $gid)->update(['goodsPhoto'=>$data['goodsPhoto']]);
             if ($res) {
-                DB::commit();
+                 DB::commit();
                 session(['goods'=>null]);
                 return redirect('admin/goods')->with('success', '添加商品成功');
             } else {
-                DB::rollBack();
+                 DB::rollBack();
                 return back()->with('error', '添加失败');
             }
         }
@@ -239,6 +246,17 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除
+        $res = Goods::destroy($id);
+        $data = [];
+        if ($res) {
+            $data['error'] = 0;
+            $data['msg'] = '删除成功';
+        } else {
+            $data['error'] = 1;
+            $data['msg'] = '删除失败';
+        }
+        
+        return $data;
     }
 }

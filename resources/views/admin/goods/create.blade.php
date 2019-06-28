@@ -28,7 +28,6 @@
                         <label class="mws-form-label">商品编号</label>
                         <div class="mws-form-item">
 
-                            <input type="text" name="goodsNum" value="{{$goodsNum}}" class="required email large"   disabled>
 
                             <input type="text" name="goodsNum" value="{{$goodsNum}}" class="required email large"   >
 

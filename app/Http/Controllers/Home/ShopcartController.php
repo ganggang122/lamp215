@@ -11,32 +11,36 @@ class ShopcartController extends Controller
 {  
    public  function  store(Request  $request)
    {
-      $gid = $request->input('gid',0);
-      $gidspec1 = $request->input('gidspec1' , '');
-      $gidspec2 = $request->input('gidspec2' , '');
-      $gidspecid1 = $request->input('gidspecid1' , 0);
-      $gidspecid1 = $request->input('gidspecid2' , 0);
+       $gid = $request->input('id',0);
+       $shopPrice = $request->input('shopPrice', 0);
+       $num = $request->input('num', 0);
+       $specName1 = $request->input('specName1' , '');
+       $specValue1 = $request->input('specValue1' , '');
+       $specName2 = $request->input('specName2' , '');
+       $specValue2 = $request->input('specValue2' , '');
 
       $shop_data = new Shopcart;
-      $shop_data->uid = session('home_usersinfo')->id;
+      // $shop_data->uid = session('home_usersinfo')->id;
       $shop_data->gid = $gid;
-      $shop_data->gidspec1 = $gidspec1;
-      $shop_data->gidspec2 = $gidspec2;
-      $shop_data->gidspecid1 =  $gidspecid1;
-      $shop_data->gidspecid2 =  $gidspecid2;
+      $shop_data->num = $num;
+      $shop_data->shopPrice = $shopPrice;
+      $shop_data->specName1 = $specName1;
+      $shop_data->specValue1 = $specValue1;
+      $shop_data->specName2 =  $specName2;
+      $shop_data->specValue2 =  $specValue2;
       $res = $shop_data->save();
+      
       if($res){
-          return back()->with('success' , '加入购物车成功');
+          echo  json_encode(['msg'=>'success' , 'info'=>'加入购物车成功']);
           exit;
+       /* $data['error'] = 0;
+        $data['msg']   = '加入购物车成功';*/
       }else{
-         return back()->with('error' , '加入购物车失败');
+          echo  json_encode(['msg'=>'error' , 'info'=>'加入购物车失败']);
           exit;
-
+         /* $data['error'] = 1;
+          $data['msg']   = '加入购物车失败';*/
       }
-     
-
-
-
    }
    //购物车页面
    public  function  index()

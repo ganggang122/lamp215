@@ -63,16 +63,17 @@
 									@foreach($goods as $k=>$v)
 									<li>
 										<div class="i-pic limit">
-											<a href="/home/good/info/{{$v->id}}"><img src={{ $v->goodsinfo['goodsPhotoinfo1']}} /></a>
+											<a href="/home/good/info/{{$v->id}}"><img src="{{ $v->goodsinfo['goodsPhotoinfo1']}}" /></a>
 											<p class="title fl">{{$v->goodsName}}</p>
-
-											<p class="price fl">
-												<b>¥</b>
-												<strong>{{$v->shopPrice}}</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
+											<a href="/home/good/info/{{$v->id}}">
+												<p class="price fl">
+													<b>¥</b>
+													<strong>{{$v->marketPrice}}</strong>
+												</p>
+												<p class="number fl">
+													销量<span>1110</span>
+												</p>
+											</a>
 										</div>
 									</li>
 									@endforeach

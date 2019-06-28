@@ -9,17 +9,13 @@
 
 		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
 		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-
 		<link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
-
+		<link type="text/css" href="/h/css/optstyle.css" rel="stylesheet" />
 		<link href="/h/css/hmstyle.css" rel="stylesheet" type="text/css"/>
+		<link type="text/css" href="/h/css/style.css" rel="stylesheet" />
 		<link href="/h/css/skin.css" rel="stylesheet" type="text/css" />
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
-
-		
-
-
 	</head>
 
 	<body>
