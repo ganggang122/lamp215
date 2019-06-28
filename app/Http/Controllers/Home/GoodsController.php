@@ -19,6 +19,7 @@ class GoodsController extends Controller
     public function index($id)
     {
         $good = Goods::where('id', $id)->first();
+
         // 组合商品店铺价格
         $len = strlen($good->shopPrice);
         if ($len > 8) {
@@ -33,9 +34,12 @@ class GoodsController extends Controller
         
         // 查询商品下的规格名称
         $path = Cate::find($good->cid)->path;
-        $pid = (int)explode(',', $path)[1];
+
+        $pid = (int)explode(',',$path)[1];
+
 //        返回商品规格名称
         $specName = Specific::where('cid', $pid)->get();
+       
         // 第一个商品属性名
         $sepcName1 = $specName[0]->specname;
         // 第二个商品属性名
@@ -48,7 +52,7 @@ class GoodsController extends Controller
         $specValue2 = explode( ',', $specValue2);
         
         //获取用户id
-        $uid = 2;
+        $uid = 12;
         //获取商品id
         $gid = $good->id;
         //获取用户信息

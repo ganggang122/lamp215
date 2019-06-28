@@ -20,7 +20,7 @@ class ShopcartController extends Controller
        $specValue2 = $request->input('specValue2' , '');
 
       $shop_data = new Shopcart;
-      // $shop_data->uid = session('home_usersinfo')->id;
+      $shop_data->uid = session('home_usersinfo')->id;
       $shop_data->gid = $gid;
       $shop_data->num = $num;
       $shop_data->shopPrice = $shopPrice;
@@ -46,8 +46,10 @@ class ShopcartController extends Controller
    public  function  index()
    {
     $prices = self::zongji();
-    $goods_data = Shopcart::get();
-  
+    $uid = session('home_usersinfo')->id;
+    $goods_data = Shopcart::where('uid',$uid)->get();
+
+    
    	return  view('home.shopcart.index',['prices'=>$prices,'goods_data'=>$goods_data,'links'=>IndexController::getLinksData()]);
    }
     //购物车加好计算
@@ -55,9 +57,11 @@ class ShopcartController extends Controller
    { 
      $num  = $request->input('num' ,0); //2
      $gid  = $request->input('gid' , 0);
+     $id   = $request->input('id' ,0);
      $pricesold = $request->input('pricesold' , 0);
+
      session(['pricesold'=>$pricesold]);
-     $goods_data = Goods::find($gid);
+     $goods_data = Shopcart::find($id);
   
      
       if( session('pricesold') !=0 ){
@@ -101,7 +105,8 @@ class ShopcartController extends Controller
    //统计购物车单价总计
    public  static function  zongji()
    {
-   	  $goods_data = Goods::get();
+   	  $uid = session('home_usersinfo')->id;
+   	  $goods_data = Shopcart::where('uid',$uid)->get();
       $num = 0;
    	  foreach($goods_data  as  $k=>$v){
          $num +=$v->shopPrice;

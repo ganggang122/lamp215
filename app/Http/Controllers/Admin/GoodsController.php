@@ -150,6 +150,7 @@ class GoodsController extends Controller
             'goodsPhoto.required'  =>'商品图片必上传',
             'goodsContent.required'  =>'商品详情内容必填',
     
+
         ]);*/
         // 开始事务
         DB::beginTransaction();

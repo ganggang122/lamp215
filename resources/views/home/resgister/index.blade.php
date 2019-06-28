@@ -38,7 +38,9 @@
 								    <div class="alert alert-danger">
 								        <ul>
 								            @foreach ($errors->all() as $error)
-								                <li style="color:red">*{{ $error }}</li>
+								           <script type="text/javascript">
+								                alert('{{ $error }}')
+                                             </script>
 								            @endforeach
 								        </ul>
 								    </div>

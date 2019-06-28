@@ -26,27 +26,25 @@ class InformationController extends Controller
            $this->validate($request, [
                 'profile' => 'required',
                 'nickname' => 'required',
-                'uname' => 'required',
+                'uname' => 'required|regex:/^[\w]{6,32}$/',
                 'sex' => 'required',
                 'year' => 'required',
                 'moth' =>  'required',
                 'day' => 'required',
-                'phone' => 'required|unique:users|regex:/^1{1}[3-9]{1}[\d]{9}$/',
-                'email' => 'required',
+                
                 
 
             ],[ 
             	'nickname.required' =>'昵称必填',
             	'uname.required' => '用户名必填',
-                'phone.required'=>'手机号必填',
-                'phone.regex'=>'手机号格式错误',
-                'year.required' => '所属省份必填',
-                'moth.required' => '所属市/直辖市必填',
-                'day.required' => '所属市区必填',
-                'email.required' => '邮箱必填',
+               
+                'year.required' => '所属年必填',
+                'moth.required' => '所属月必填',
+                'day.required' => '所属日必填',
+                
                 'sex.required' =>  '性别必填',
                 'profile.required' => '头像必填',
-                'phone.unique' => '该手机号已经注册'
+                
 
             ]);
 
@@ -70,18 +68,21 @@ class InformationController extends Controller
            }
            
            $id = session('home_usersinfo')->id;
-          $res1 = Users::where('id', $id)->update(['uname'=>$uname ,'phone'=>$phone ,'email'=>$email]);
+           $res1 = Users::where('id', $id)->update(['uname'=>$uname]);
            
    
             
            $home_usersinfo = new Homeusers;
            $home_usersinfo->uid = $id;
-           $home_usersinfo->birth = $birth;
-           $home_usersinfo->nickname  = $nickname;
-           $home_usersinfo->sex = $sex;
-           $home_usersinfo->profile = $file_path;
+           Homeusers::where('uid',$id)->update(['birth'=>$birth]);
+           Homeusers::where('uid',$id)->update(['nickname'=>$nickname]);
+  
+           Homeusers::where('uid',$id)->update(['sex'=>$sex]);
+  
+           Homeusers::where('uid',$id)->update(['profile'=>$file_path]);
+           
 
-           $res = $home_usersinfo->save();
+          
 
            if($res  &&   $res1){
            	return back()->with('success' , '保存成功');

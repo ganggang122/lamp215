@@ -16,9 +16,6 @@
     });
 </script>
 
-<div class="clear"></div>
-            <b class="line"></b>
-			<div class="listMain">
 
 				<!--分类-->
 			<div class="nav-table">
@@ -98,7 +95,7 @@
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										{{--<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>--}}
+										<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 										<a href="#"><img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 									</div>
 								</li>
@@ -127,6 +124,26 @@
 							<input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
 							<button onclick='collect(this)'>{{ $collect ? ' 已收藏 ': '点击收藏' }}</button>
 						</div>
+
+						<script>
+							function collect(obj)
+							{
+								//获取商品id
+								
+								let gid = $('#gid').val();
+
+								$.get('/home/collect/collect',{gid},function(res){
+									if( res == 'ok') {
+										$(obj).html('已收藏');
+									} 
+									if ( res == 'del') {
+										$(obj).html('点击收藏');
+									}
+									console.log(res)
+								},'json')
+							}
+						</script>
+
 	<script>
 		function collect(obj)
 		{
@@ -139,9 +156,10 @@
 				if ( res == 'del') {
 					$(obj).html('点击收藏');
 				}
-			},'html')
+			},'json')
 		}
 	</script>
+
 
 
 						<div class="tb-detail-list">
@@ -214,12 +232,16 @@
 											<form  action="" method="post">
 													{{csrf_field()}}
 												<div class="theme-signin-left">
--
+
 													<div class="theme-options">
 														<div class="cart-title" id="specName1">{{$specName1}}</div>
 														<ul>
 															@foreach($specValue1 as $k=>$v)
+
+															<li class="sku-line ">{{$v}}<i></i></li>
+
 															<li class="sku-line">{{$v}}<i></i></li>
+
 															@endforeach
 														</ul>
 													</div>

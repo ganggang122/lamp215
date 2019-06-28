@@ -13,9 +13,10 @@ class CollectController extends Controller
     public function index()
     {
     	//获取用户id
-        $uid = 2;
+        $uid = 12;
         //获取用户信息
         $user = Users::where('id',$uid)->first();
+        // dd($user);
         //获取该用户收藏的所有商品id
         $user_gids = $user->userCollect;
         //将该用户的收藏商品id 存到同一数组
@@ -48,13 +49,13 @@ class CollectController extends Controller
     }
 
     //商品详情页 点击添加 收藏 功能
-        public function collect(Request $request)
+     public function collect(Request $request)
     {
     	//先判断是否登录
     	//接收商品id
     	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
-    	$uid = 2;
+    	$uid = 12;
     	//获取该用户所有收藏商品的id
     	$user = Users::where('id',$uid)->first();
     	$user_gids = $user->userCollect;
@@ -71,13 +72,21 @@ class CollectController extends Controller
     		$store->uid = $uid;
     		$store->gid = $gid;
     		$store->save();
-    		echo 'ok';
+    		echo json_encode('ok');
+<<<<<<< HEAD
+    		die;
+=======
     		exit;
+>>>>>>> origin/lx
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
-    			echo 'del';
+    			echo json_encode('del');
+<<<<<<< HEAD
+    			die;
+=======
     			exit;
+>>>>>>> origin/lx
     		}
     	}
     }

@@ -16,7 +16,17 @@
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
 			
 	</head>
+	<style  type="text/css">
+	 .am-form-group~img{
+	   	 position: absolute;
+         margin-top: 5px;
+        
+         width:90px;
 
+	   }
+
+	    
+    </style>
 	<body>
 		<!--头 -->
 		 @include('home.public.information.header')
@@ -95,7 +105,12 @@
 								            @endforeach
 								        </ul>
 								    </div>
-								@endif	
+								@endif
+								@if(session('error'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('error') }}')
+									   </script>
+									@endif	
 							<form class="am-form am-form-horizontal"  action="/home/information/create"  method="post" enctype="multipart/form-data">
                                      {{ csrf_field() }}
 								<div class="am-form-group">
@@ -109,7 +124,7 @@
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">姓名</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" placeholder="name"  value="{{$users_data->uname}}" name="uname">
+										<input type="text" id="user-name2" placeholder="请使用拼音"  value="{{$users_data->uname}}" name="uname" >
 
 									</div>
 								</div>
@@ -153,22 +168,28 @@
 									</div>
 							
 								</div>
-								
+								@if(!session('home_usersinfo')->phone)
 								<div class="am-form-group">
-									<label for="user-phone" class="am-form-label">电话</label>
+									<label for="user-phone" class="am-form-label">电子邮箱</label>
 									<div class="am-form-content">
-										<input id="user-phone" placeholder="telephonenumber" type="tel"  value="{{$users_data->phone}}" name="phone">
+										<input id="user-phone" placeholder="telephonenumber" type="tel"  value="{{$users_data->email}}" name="phone"  disabled>
 
 									</div>
 								</div>
+								<img   src="/h/images/shouji.jpg"><a style="position:absolute;margin-left:100px;font-size:15px;margin-top:30px"  href="/home/email/phone">绑定手机</a>
+								@endif
+								@if(!session('home_usersinfo')->email)
 								<div class="am-form-group">
-									<label for="user-email" class="am-form-label">电子邮件</label>
+									<label for="user-email" class="am-form-label">电话</label>
 									<div class="am-form-content">
-										<input id="user-email" placeholder="Email" type="email" value="{{$users_data->email}}" name="email">
+										<input id="user-email" placeholder="Email" type="email" value="{{$users_data->phone}}" name="email"  disabled>
 
 									</div>
 								</div>
-								<div class="am-form-group">
+								<img  src="/h/images/youxiang.jpg">
+								<a href="/home/email/email" style="position:absolute;margin-left:100px;font-size:15px;margin-top:30px">绑定邮箱</a>
+								@endif
+								<div class="am-form-group"  style="margin-top:100px">
 									<label for="user-email" class="am-form-label">头像</label>
 									<div class="am-form-content">
 										<input  id="user-email" type="file" name="profile"  >
@@ -177,32 +198,7 @@
 								</div>
 								
 
-								<div class="am-form-group address">
-									<label for="user-address" class="am-form-label">收货地址</label>
-									<div class="am-form-content address">
-										<a href="address.html">
-											<p class="new-mu_l2cw">
-												<span class="province">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
-												<span class="am-icon-angle-right"></span>
-											</p>
-										</a>
-
-									</div>
-								</div>
-								<div class="am-form-group safety">
-									<label for="user-safety" class="am-form-label">账号安全</label>
-									<div class="am-form-content safety">
-										<a href="safety.html">
-
-											<span class="am-icon-angle-right"></span>
-
-										</a>
-
-									</div>
-								</div>
+								
 								<div class="info-btn">
 									<input  type="submit" class="am-btn am-btn-danger"  value="保存修改">
 								</div>
