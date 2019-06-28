@@ -269,7 +269,16 @@
                     </ul>
                 </li>
                 </ul>
+                <ul>
+                <li>
+                    <a href="#"><i class="icon-align-justify"></i>秒送管理</a>
+                    <ul>
+                        <li><a href="/admin/seckill/create">添加秒杀</a></li>
+                        <li><a href="/admin/seckill">秒杀列表</a></li>
 
+                    </ul>
+                </li>
+                </ul>
 
 
             </div>
