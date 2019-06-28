@@ -35,20 +35,36 @@ class ListController extends Controller
          if ($id == 'n') {
           // 查询对应分类下，上架的商品
           $goods = Goods::where('cid', $cid)->where('goodsStatus', 1)->get();
-        } else {
+             /*foreach ($goods as $k => $v) {
+                 $shopPrice  = explode(',', $v->shopPrice);
+                 $shopPrice = $shopPrice[0];
+    
+             }*/
+    
+         } else {
           $goods = Goods::where('cid', $cid)->where('bid',$id)->where('goodsStatus', 1)->get();
-          }
+         }
    		} else {
          $goods = SearchController::getData();
       }
      
+
    		 $links = IndexController::getLinksData();
+
    		
 
    		    
        	
    			 
+
        return view('home.list.index',['goods'=>$goods,'brands'=>self::getBrands($cid),'cid'=>$cid,'links'=>$links]);
+
+       return view('home.list.index',[
+           'goods'=>$goods,
+           'brands'=>self::getBrands($cid),
+           'cid'=>$cid,
+       ]);
+
    }
    
   

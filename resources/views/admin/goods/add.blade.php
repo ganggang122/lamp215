@@ -45,82 +45,78 @@
                         <label class="mws-form-label">商品图片</label>
                         <div class="mws-form-item">
 
+
                             <!-- <div class="fileinput-holder"  style="width:50%">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb"  >
                                 <span ><input type="file"    name="file_upload" id="file_upload" class="required" multiple="true"  ></span></div> -->
 
+
                             <div class="fileinput-holder" style="position: relative;">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb">
-                                <span><input type="file" name="file_upload" id="file_upload" class="required" multiple="true" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;"></span></div>
-
+                                <span>
+                                    <input type="file" name="file_upload" id="file_upload" class="required" multiple="true" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;">
+                                </span>
+                            </div>
 
                             <br>
-                                <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
+                            <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">
                             <label for="picture" class="error" generated="true" style="display:none"></label>
                         </div>
-
-                        <br>
-
-                        <div class="mws-form-row"  style="margin-left:-25px">
-
                     </div>
-                        <div class="mws-form-row">
+                    <div class="mws-form-row">
+                        <label class="mws-form-label">商品详情</label>
+                        <div class="mws-form-item">
+                            <script id="container" name="content" type="text/plain">
 
-                            <label class="mws-form-label">商品详情</label>
-                            <div class="mws-form-item">
-                                <script id="container" style="margin-left:-30px" name="content" type="text/plain">
-
-                                </script>
-                            </div>
+                            </script>
                         </div>
+                    </div>
 
-                        <script type="text/javascript">
-                            $(function () {
-                                $("#file_upload").change(function () {
-                                    $('img1').show();
-                                    uploadImage();
-                                });
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#file_upload").change(function () {
+                                $('img1').show();
+                                uploadImage();
                             });
-                            function uploadImage() {
-                                // 判断是否有选择上传文件
-                                var imgPath = $("#file_upload").val();
-                                if (imgPath == "") {
-                                    alert("请选择上传图片！");
-                                    return;
-                                }
-                                //判断上传文件的后缀名
-                                var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
-                                if (strExtension != 'jpg' && strExtension != 'gif'
-                                    && strExtension != 'png' && strExtension != 'bmp') {
-                                    alert("请选择图片文件");
-                                    return;
-                                }
-                                // var formData = new FormData($('#art_form')[0]);
-                                var formData = new FormData();
-                                formData.append('file_upload', $('#file_upload')[0].files[0]);
-                                formData.append('_token', '{{csrf_token()}}');
-                                $.ajax({
-                                    type: "POST",
-                                    url: "/admin/upload",
-                                    data: formData,
-                                    async: true,
-                                    cache: false,
-                                    contentType: false,
-                                    processData: false,
-                                    success: function(data) {
-                                        // $('#img1').attr('src','/uploads/'+data);
-                                        $('#img1').attr('src','https://lamp215.oss-cn-beijing.aliyuncs.com/'+data);
-                                        $('#img1').show();
-                                        $('#art_thumb').val('https://lamp215.oss-cn-beijing.aliyuncs.com/'+data);
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("上传失败，请检查网络后重试");
-                                    }
-                                });
+                        });
+                        function uploadImage() {
+                            // 判断是否有选择上传文件
+                            var imgPath = $("#file_upload").val();
+                            if (imgPath == "") {
+                                alert("请选择上传图片！");
+                                return;
                             }
-
-
-                        </script>
+                            //判断上传文件的后缀名
+                            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                            if (strExtension != 'jpg' && strExtension != 'gif'
+                                && strExtension != 'png' && strExtension != 'bmp') {
+                                alert("请选择图片文件");
+                                return;
+                            }
+                            // var formData = new FormData($('#art_form')[0]);
+                            var formData = new FormData();
+                            formData.append('file_upload', $('#file_upload')[0].files[0]);
+                            formData.append('_token', '{{csrf_token()}}');
+                            $.ajax({
+                                type: "POST",
+                                url: "/admin/upload",
+                                data: formData,
+                                async: true,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success: function(data) {
+                                    // $('#img1').attr('src','/uploads/'+data);
+                                    $('#img1').attr('src','https://lamp215.oss-cn-beijing.aliyuncs.com/'+data);
+                                    $('#img1').show();
+                                    $('#art_thumb').val('https://lamp215.oss-cn-beijing.aliyuncs.com/'+data);
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    alert("上传失败，请检查网络后重试");
+                                }
+                            });
+                        }
+                    </script>
 
 
                    

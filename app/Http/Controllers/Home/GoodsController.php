@@ -20,6 +20,18 @@ class GoodsController extends Controller
     {
         $good = Goods::where('id', $id)->first();
 
+        // 组合商品店铺价格
+        $len = strlen($good->shopPrice);
+        if ($len > 8) {
+            $shopPrice = explode(',',$good->shopPrice);
+    
+            $shopPrice = $shopPrice[0].'-'.$shopPrice[2];
+    
+        }else{
+            $shopPrice = $good->shopPrice;
+        }
+        
+        
         // 查询商品下的规格名称
         $path = Cate::find($good->cid)->path;
 
@@ -56,6 +68,7 @@ class GoodsController extends Controller
         $collect = in_array($gid,$collects);        
         return view('home.goods.index', [
             'good'=>$good,
+            'shopPrice' => $shopPrice,
             'specName1'  => $sepcName1,
             'specName2'  => $sepcName2,
             'specValue1' => $specValue1,

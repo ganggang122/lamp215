@@ -303,7 +303,8 @@ div.zoomMask { position:absolute; background:url(../images/mask.png)repeat scrol
 .theme-options ul{overflow: hidden;float: none;}
 .theme-signin-left {max-width:100%;margin-bottom: 0;}
 .theme-signin-left .sku-line{margin: 5px;cursor: pointer;}
-.theme-signin-left .cart-title{margin-left: -46px;margin-top:10px;font-size:12px ;font-weight: 100;color:#888 ;float: left;}   	
+.theme-signin-left .sku-line-li{margin: 5px;cursor: pointer;}
+.theme-signin-left .cart-title{margin-left: -46px;margin-top:10px;font-size:12px ;font-weight: 100;color:#888 ;float: left;}
    	
 
 /*优惠活动*/

@@ -80,8 +80,8 @@
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line">{{$v-> shopspecific1->specname}}：{{$v->gidspec1}}</span>
-											<span class="sku-line">{{$v-> shopspecific2->specname}}：{{$v->gidspec2}}</span>
+											<span class="sku-line">{{$v->specName1}}：{{$v->specValue1}}</span>
+											<span class="sku-line">{{$v-> specName2}}：{{$v->specValue2}}</span>
 							
 										</div>
 									</li>
@@ -89,10 +89,10 @@
 										<div class="item-price price-promo-promo">
 											<div class="price-content">
 												<div class="price-line">
-													<em class="price-original">{{$v->shopprice->marketPrice}}</em>
+													<em class="price-original">{{$v->shopPrice}}</em>
 												</div>
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">{{ $v->shopprice->shopPrice }}</em>
+													<em class="J_Price price-now" tabindex="0">{{ $v->shopPrice }}</em>
 												</div>
 											</div>
 										</div>
@@ -101,16 +101,16 @@
 										<div class="amount-wrapper ">
 											<div class="item-amount ">
 												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" onclick="minus(this,{{$v->gid}})"/>
+													<input class="min am-btn" name="" type="button" value="-" onclick="minus(this,{{$v->gid}},{{$v->id}})"/>
 													<input class="text_box" name="" type="text" value="1" style="width:30px;" />
-													<input class="add am-btn" name="" type="button" value="+" onclick="add(this,{{$v->gid}})"  />
+													<input class="add am-btn" name="" type="button" value="+" onclick="add(this,{{$v->gid}},{{$v->id}})"  />
 												</div>
 											</div>
 										</div>
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" id="abc" class="J_ItemSum number" value="{{$v->shopprice->shopPrice}}">{{$v->shopprice->shopPrice}}</em>
+											<em tabindex="0" id="abc" class="J_ItemSum number" value="{{$v->shopprice->shopPrice}}">{{$v->shopPrice}}</em>
 										</div>
 									</li>
 									<li class="td td-op">
@@ -176,16 +176,16 @@
 			   </div>
 			   <script  type="text/javascript">
 			   	    
-			   	    function  add(obj,id){
+			   	    function  add(obj,gid,id){
                     let  num = parseInt($(obj).prev().val());
                     //1
                     
-                    let  gid  = id
+                    let  goodid  = gid
                    //当前合计
                     let  pricesold = $('#J_Total').text()
                     console.log(pricesold);
                     							//1      //当前合计
-                    $.get('/home/shopcart/add' ,{num,gid,pricesold},function(res){
+                    $.get('/home/shopcart/add' ,{num,goodid,pricesold,id},function(res){
                     	   let  resold = res.split('-')
                             $(obj).parent().parent().parent().parent().next().find('#abc').text(resold[0]);
                             $('#J_Total').text(resold[1])

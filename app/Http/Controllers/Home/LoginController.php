@@ -71,7 +71,7 @@ class LoginController extends Controller
 
     //用户退出
     public  function  logout()
-    {
+    {  
         session(['home_usersinfo'=>false]);
      	session(['users_status'=>false]);
      	return  back();

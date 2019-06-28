@@ -1,49 +1,38 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+@include('home.public.header')
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<title>商品页面</title>
-
-		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
-		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
-		<link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
-		<link type="text/css" href="/h/css/optstyle.css" rel="stylesheet" />
-		<link type="text/css" href="/h/css/style.css" rel="stylesheet" />
-
-		<script type="text/javascript" src="/h/basic/js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="/h/basic/js/quick_links.js"></script>
-
-		<script type="text/javascript" src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
-		<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
-		<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
-		<script type="text/javascript" src="/h/js/list.js"></script>
-
-	</head>
-
-	<body>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script type="text/javascript" src="/h/basic/js/quick_links.js"></script>
+<script type="text/javascript" src="/h/js/list.js"></script>
+<script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
+<script type="text/javascript" src="/h/js/jquery.flexslider.js"></script>
+<link rel="stylesheet" href="/layui-v2.4.5/layui/css/layui.css">
+<script src="/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    //一般直接写在一个js文件中
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
 
 
-		<!--顶部导航条 -->
-@include('home.public.information.header')		
+    });
+</script>
+
+
 				<!--分类-->
 			<div class="nav-table">
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
-					   <div class="nav-cont">
-							<ul>
-								<li class="index"><a href="#">首页</a></li>
-                                <li class="qc"><a href="#">闪购</a></li>
-                                <li class="qc"><a href="#">限时抢</a></li>
-                                <li class="qc"><a href="#">团购</a></li>
-                                <li class="qc last"><a href="#">大包装</a></li>
-							</ul>
-						    <div class="nav-extra">
-						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
-						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
-						    </div>
-						</div>
+                <div class="long-title"><span class="all-goods">全部分类</span></div>
+                <div class="nav-cont">
+                    <ul>
+					<li class="index"><a href="#">首页</a></li>
+                        <li class="qc"><a href="#">闪购</a></li>
+                        <li class="qc"><a href="#">限时抢</a></li>
+                        <li class="qc"><a href="#">团购</a></li>
+                        <li class="qc last"><a href="#">大包装</a></li>
+                    </ul>
+                    <div class="nav-extra">
+                        <i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+                        <i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+                    </div>
+                </div>
 			</div>
 				<ol class="am-breadcrumb am-breadcrumb-slash">
 					<li><a href="#">首页</a></li>
@@ -97,8 +86,12 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="{{$good->goodsinfo['goodsPhotoinfo1']}}"><img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" alt="细节展示放大镜特效" rel="{{$good->goodsinfo['goodsPhotoinfo1']}}" class="jqzoom" /></a>
-							</div>
+								<a  href="{{$good->goodsinfo['goodsPhotoinfo1']}}">
+                                    <img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" id="goodsPhotoinfo1" alt="细节展示放大镜特效" rel="{{$good->goodsinfo['goodsPhotoinfo1']}}" class="jqzoom" />
+
+                                </a>
+
+                            </div>
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
@@ -174,7 +167,7 @@
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">{{$good->shopPrice}}</b>  </dd>
+									<dd><em>¥</em><b class="sys_item_price" id="shopPrice">{{$shopPrice}}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">
 									<dt>原价</dt>
@@ -236,34 +229,38 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form class="theme-signin" name="loginform" action="" method="post">
-
+											<form  action="" method="post">
+													{{csrf_field()}}
 												<div class="theme-signin-left">
 
 													<div class="theme-options">
-														<div class="cart-title">{{$specName1}}</div>
+														<div class="cart-title" id="specName1">{{$specName1}}</div>
 														<ul>
 															@foreach($specValue1 as $k=>$v)
-															<li class="sku-line ">{{$v;';;;;'}}<i></i></li>
+
+															<li class="sku-line ">{{$v}}<i></i></li>
+
+															<li class="sku-line">{{$v}}<i></i></li>
+
 															@endforeach
 														</ul>
 													</div>
 													<div class="theme-options">
-														<div class="cart-title">{{$specName2}}</div>
+														<div class="cart-title" id="specName2">{{$specName2}}</div>
 														<ul>
 
 															@foreach($specValue2 as $k=>$v)
-																<li class="sku-line ">{{$v}}<i></i></li>
+																<li class="sku-line-li" id="specValue2" onclick="specValue2('{{$v}}','{{$good->shopPrice}}')">{{$v}}<i></i></li>
 															@endforeach
 														</ul>
 													</div>
 													<div class="theme-options">
 														<div class="cart-title number">数量</div>
 														<dd>
-															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
-															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+															<input id="min" class="am-btn am-btn-default" name="" onclick="minus()" type="button" value="-" />
+															<input id="text_box" name="" type="text" value="1"  style="width:30px;" />
+															<input id="add" class="am-btn am-btn-default" name="" onclick='update()' type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$good->goodsStock}}</span>件</span>
 														</dd>
 
 													</div>
@@ -284,7 +281,6 @@
 													</div>
 												</div>
 
-											</form>
 										</div>
 									</div>
 
@@ -317,26 +313,106 @@
 							<div class="pay-opt">
 							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
 							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
-							
+
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
-								</div>
+									{{--<a type="submit" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
+                                    {{--<button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>--}}
+                                    <button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>
+                                </div>
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a id="LikBasket" title="加入购物车"  href="javascript:;" onclick="goodCart('{{$good->id}}')"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
 
 					</div>
+				</form>
 
-					<div class="clear"></div>
+<div class="clear"></div>
 
 				</div>
 
+                {{--动态获取价格js--}}
+                    <script>
+                        function specValue2(val, shopPrice) {
+
+                            let str1 = shopPrice.split(',');
+                            if (val == '6+128' || val == '128' ) {
+                                 $('.sys_item_price').html(str1[0]);
+                            }else if (val == '8+128' ||  val == '256' ) {
+                                 $('.sys_item_price').html(str1[1]);
+                            }else if (val == '8+256' || val == '512' ){
+                                 $('.sys_item_price').html(str1[2]);
+                            }
+                        }
+
+
+                        // 加
+                        function update(obj) {
+                            var num = parseInt($('#text_box').eq(0).val())+1  ;
+                        }
+
+                        // 减
+                        function minus() {
+                            num = $('#text_box').eq(0).val()-1;
+
+                        }
+
+                        // 加入购物车
+                        function goodCart(id) {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+
+                            let num =$('#text_box').eq(0).val();
+                           /* let goodsPhotoinfo1 = $('#jqzoom').src;
+                            // console.log(goodsPhotoinfo1); 没值*/
+                            // 规格名称1
+                            let specName1 = $('#specName1').html();
+                            // 获取规格值1
+                            let specValue1 = $('.sku-line.selected').html().replace('<i></i>', '');
+                            // 规格名称2
+                            let specName2 = $('#specName2').html();
+                            // 规格值2
+                            let specValue2 = $('.sku-line-li.selected').html().replace('<i></i>', '');
+
+                            // 店铺价格
+                            let  shopPrice = $('#shopPrice').html();
+
+
+                            $.post('/home/shopcart/store', {id,specName1,specValue1,specName2,specValue2,shopPrice,num},function (res) {
+                               /* if(data.error == 0){
+                                    layer.msg(data.msg, {icon: 6});
+                                }else (data.error == 1){
+                                    layer.msg(data.msg, {icon: 5});
+                                }*/
+                                if(res.msg = 'error'){
+                                    layer.msg(res.info,{icon:6})
+                                }else{
+                                    alert(res.info)
+                                }
+
+                            },'json');
+
+                        }
+
+
+                        /*let specName2 =  $('#specName2').val();
+                        console.log(specName2);*/
+                        /*let  specName1 =  $('#specName1').val();
+                        console.log(specName1);
+                        let
+
+                        console.log(specName2);*/
+
+
+                    </script>
 				<!--优惠套装-->
 				<div class="match">
 					<div class="match-title">优惠套装</div>
