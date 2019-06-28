@@ -173,7 +173,7 @@
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
-									<dt>促销价123</dt>
+									<dt>促销价</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{$good->shopPrice}}</b>  </dd>
 								</li>
 								<li class="price iteminfo_mktprice">
@@ -244,7 +244,7 @@
 														<div class="cart-title">{{$specName1}}</div>
 														<ul>
 															@foreach($specValue1 as $k=>$v)
-															<li class="sku-line ">{{$v';;;;'}}<i></i></li>
+															<li class="sku-line ">{{$v;';;;;'}}<i></i></li>
 															@endforeach
 														</ul>
 													</div>
