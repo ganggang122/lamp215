@@ -42,13 +42,13 @@ class ListController extends Controller
          $goods = SearchController::getData();
       }
      
-   		
+   		 $links = IndexController::getLinksData();
    		
 
    		    
        	
    			 
-       return view('home.list.index',['goods'=>$goods,'brands'=>self::getBrands($cid),'cid'=>$cid]);
+       return view('home.list.index',['goods'=>$goods,'brands'=>self::getBrands($cid),'cid'=>$cid,'links'=>$links]);
    }
    
   

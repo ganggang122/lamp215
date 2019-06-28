@@ -45,9 +45,9 @@
                         <label class="mws-form-label">商品图片</label>
                         <div class="mws-form-item">
 
-                            <div class="fileinput-holder"  style="width:50%">
+                            <!-- <div class="fileinput-holder"  style="width:50%">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb"  >
-                                <span ><input type="file"    name="file_upload" id="file_upload" class="required" multiple="true"  ></span></div>
+                                <span ><input type="file"    name="file_upload" id="file_upload" class="required" multiple="true"  ></span></div> -->
 
                             <div class="fileinput-holder" style="position: relative;">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb">
