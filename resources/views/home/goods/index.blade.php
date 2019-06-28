@@ -124,7 +124,26 @@
 						<!--名称-->
 						<div class="tb-detail-hd">
 							<h1>{{$good->goodsName}}</h1>
+							<input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
+							<button onclick='collect(this)'>{{ $collect ? ' 已收藏 ': '点击收藏' }}</button>
 						</div>
+	<script>
+		function collect(obj)
+		{
+			//获取商品id
+			let gid = $('#gid').val();
+			$.get('/home/collect/collect',{'gid':gid},function(res){
+				if( res == 'ok') {
+					$(obj).html('已收藏');
+				} 
+				if ( res == 'del') {
+					$(obj).html('点击收藏');
+				}
+			},'html')
+		}
+	</script>
+
+
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
@@ -1221,7 +1240,7 @@
 								</div>
 								<div class="login_btnbox">
 									<a href="#" class="login_order">我的订单</a>
-									<a href="#" class="login_favorite">我的收藏</a>
+									<a href="/home/collect/index" class="login_favorite">我的收藏</a>
 								</div>
 								<i class="icon_arrow_white"></i>
 							</div>
@@ -1257,7 +1276,7 @@
 						</div>
 
 						<div id="brand" class="item">
-							<a href="#">
+							<a href="/home/collect/index">
 								<span class="wdsc"><img src="/h/images/wdsc.png" /></span>
 							</a>
 							<div class="mp_tooltip">

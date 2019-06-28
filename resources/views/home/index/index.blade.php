@@ -224,7 +224,7 @@
 								<h4>{{ $v->small }}</h4>
 							</div>
 							<div class="recommendationMain one">
-								<a href="/home/list/index/{{ $v->cid }}"><img src="/uploads/{{ $v->profile }}" style='width:120px;border-radius:5%'></img></a>
+								<a href="/home/list/index/{{ $v->cid }}/n"><img src="/uploads/{{ $v->profile }}" style='width:120px;border-radius:5%'></img></a>
 							</div>
 						</div>						
 						@endforeach
