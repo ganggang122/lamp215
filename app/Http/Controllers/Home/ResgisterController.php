@@ -63,7 +63,22 @@ class ResgisterController extends Controller
 
 
    		// 接收数据
-   		dump($request->all());
+   		
+
+   		$users = new Users;
+   		$users->phone = $phone;
+   		$users->upass = Hash::make($request->input('upass' , 0));
+   		$users->status = 1;
+   		$token = str_random(30);
+   		$users->token = $token;
+   		$res1 = $users->save();
+   		if($res1){
+   			 echo "<script>alert('注册成功');location.href='/home/index'</script>";
+   			 exit;
+   		}else{
+            return back();
+   		}
+
 
 
    		// 压入到数据库
@@ -153,7 +168,9 @@ class ResgisterController extends Controller
 	            $s = $m->to($email)->subject('【LAMPoto】提醒邮件!');
 
 	            if($s){
-	            	echo "用户注册成功，请尽快完成激活";
+	            	echo  "<script>alert('注册成功,请尽快激活');location.href='/home/index'</script>";
+	            }else{
+	            	echo  "<script>alert('发送失败')</script>";
 	            }
 	        });	
     	}
@@ -178,7 +195,7 @@ class ResgisterController extends Controller
     	$user->token = str_random(30);
 
     	if($user->save()){
-    		echo "激活成功";
+    		echo "<script>alert('激活成功');location.href='/home/index'</script>";
     	}else{
     		echo "激活失败";
     	}

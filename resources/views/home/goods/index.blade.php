@@ -27,50 +27,7 @@
 
 
 		<!--顶部导航条 -->
-		<div class="am-container header">
-			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
-					</div>
-				</div>
-			</ul>
-			<ul class="message-r">
-				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
-				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
-			</ul>
-			</div>
-
-			<!--悬浮搜索框-->
-
-			<div class="nav white">
-				<div class="logo"><img src="/h/images/logo.png" /></div>
-				<div class="logoBig">
-					<li><img src="/h/images/logobig.png" /></li>
-				</div>
-				<div class="search-bar pr">
-					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
-				</div>
-			</div>
-
-			<div class="clear"></div>
-            <b class="line"></b>
-			<div class="listMain">
-
+@include('home.public.information.header')		
 				<!--分类-->
 			<div class="nav-table">
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
@@ -145,7 +102,7 @@
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										{{--<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>--}}
+										<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 										<a href="#"><img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 									</div>
 								</li>
@@ -174,21 +131,24 @@
 							<input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
 							<button onclick='collect(this)'>{{ $collect ? ' 已收藏 ': '点击收藏' }}</button>
 						</div>
-	<script>
-		function collect(obj)
-		{
-			//获取商品id
-			let gid = $('#gid').val();
-			$.get('/home/collect/collect',{'gid':gid},function(res){
-				if( res == 'ok') {
-					$(obj).html('已收藏');
-				} 
-				if ( res == 'del') {
-					$(obj).html('点击收藏');
-				}
-			},'html')
-		}
-	</script>
+						<script>
+							function collect(obj)
+							{
+								//获取商品id
+								
+								let gid = $('#gid').val();
+
+								$.get('/home/collect/collect',{gid},function(res){
+									if( res == 'ok') {
+										$(obj).html('已收藏');
+									} 
+									if ( res == 'del') {
+										$(obj).html('点击收藏');
+									}
+									console.log(res)
+								},'json')
+							}
+						</script>
 
 
 						<div class="tb-detail-list">
@@ -266,7 +226,7 @@
 														<div class="cart-title">{{$specName1}}</div>
 														<ul>
 															@foreach($specValue1 as $k=>$v)
-															<li class="sku-line ">{{$v}}<i></i></li>
+															<li class="sku-line ">{{$v;';;;;'}}<i></i></li>
 															@endforeach
 														</ul>
 													</div>

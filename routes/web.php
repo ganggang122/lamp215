@@ -14,16 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//前台登录
+//前台登录页面
 Route::get('home/login/index' , 'Home\LoginController@index');
+//执行前台用户登录
+Route::post('home/login/dologin' , 'Home\LoginController@dologin');
 //前台用户退出
 Route::get('home/logout' , 'Home\LoginController@logout');
 
-Route::post('home/login/dologin' , 'Home\LoginController@dologin');
 //首页
 Route::get('home/index' ,'Home\PageController@index');
-//前台个人中心
-Route::get('home/personal' , 'Home\PersonalController@index');
+
 //前台商品列表页面
 
 Route::get('home/list/index/{cid}' , 'Home\ListController@index');
@@ -33,32 +33,51 @@ Route::get('home/good/info/{gid}', 'Home\GoodsController@index');
 Route::get('home/list/index/{cid}/{id}' , 'Home\ListController@index');
 
 
+Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
+   //前台个人中心
+   Route::get('personal' , 'Home\PersonalController@index');
+   //前台地址列表
+   Route::get('address/index' , 'Home\AddressController@index');
+   //前台添加地址
+   Route::post('address/create' , 'Home\AddressController@create');
+   //前台默认地址修改
+   Route::get('address/update/{id}' , 'Home\AddressController@update');
+
+	//前台地址修改
+	Route::get('address/edit/{id}' , 'Home\AddressController@edit');
+	//前台地址执行修改
+	Route::post('address/show/{id}' , 'Home\AddressController@show');
+	//前台地址删除
+	Route::get('address/destory/{id}' ,'Home\AddressController@destory');
+	//前台用户个人信息
+	Route::get('information/index' , 'Home\InformationController@index');
+	//前台用户添加个人信息
+	Route::post('information/create' , 'Home\InformationController@create');
+	//前台用户修改密码
+	Route::get('safe/index' , 'Home\SafeController@index');
+	//执行用户修改密码
+	Route::post('safe/update' , 'Home\SafeController@update');
+	//前台邮箱修改
+	Route::get('email/index' ,'Home\EmailController@index');
+	Route::post('email/storemail' ,'Home\EmailController@storemail');
+	//前台修改手机号
+	Route::get('email/phone' , 'Home\EmailController@phone');
+	Route::post('email/storephone' , 'Home\EmailController@storephone');
+
+
+});
 
 
 
 
 
-//前台地址列表
-Route::get('home/address/index' , 'Home\AddressController@index');
-//前台添加地址
-Route::post('home/address/create' , 'Home\AddressController@create');
-//前台默认地址修改
-Route::get('home/address/update/{id}' , 'Home\AddressController@update');
 
-//前台地址修改
-Route::get('home/address/edit/{id}' , 'Home\AddressController@edit');
-//前台地址执行修改
-Route::post('home/address/show/{id}' , 'Home\AddressController@show');
-//前台地址删除
-Route::get('home/address/destory/{id}' ,'Home\AddressController@destory');
-//前台用户个人信息
-Route::get('home/information/index' , 'Home\InformationController@index');
-//前台用户添加个人信息
-Route::post('home/information/create' , 'Home\InformationController@create');
-//前台用户修改密码
-Route::get('home/safe/index' , 'Home\SafeController@index');
-//执行用户修改密码
-Route::post('home/safe/update' , 'Home\SafeController@update');
+
+
+
+
+
+
 //加入购物车
 Route::post('home/shopcart/store' , 'Home\ShopcartController@store');
 //前台购物车
@@ -76,11 +95,17 @@ Route::get('home/pay/index' , 'Home\PayController@index');
 Route::resource('home/news','Home\NewsController');
 //前台 搜索 路由
 Route::get('home/search/index','Home\SearchController@index');
-//  前台注册  邮箱  手机号
+
+
+//  前台注册页面
 Route::get('home/register','Home\ResgisterController@index');
+//前台手机注册信息
 Route::get('home/register/sendPhone','Home\ResgisterController@sendPhone');
+//执行前台手机注册操作
 Route::post('home/register/store','Home\ResgisterController@store');
+//前台邮箱注册
 Route::post('home/register/insert','Home\ResgisterController@insert');
+//前台邮箱激活
 Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@changeStatus');
 
 

@@ -21,47 +21,7 @@
 	<body>
 
 		<!--顶部导航条 -->
-		<div class="am-container header">
-			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
-					</div>
-				</div>
-			</ul>
-			<ul class="message-r">
-				<div class="topMessage home">
-					<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-				<div class="topMessage mini-cart">
-					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
-				<div class="topMessage favorite">
-					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
-			</ul>
-			</div>
-
-			<!--悬浮搜索框-->
-
-			<div class="nav white">
-				<div class="logo"><img src="/h/images/logo.png" /></div>
-				<div class="logoBig">
-					<li><img src="/h/images/logobig.png" /></li>
-				</div>
-
-				<div class="search-bar pr">
-					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
-				</div>
-			</div>
-
+@include('home.public.information.header')		
 			<div class="clear"></div>
 			<div class="concent">
 				<!--地址 -->
@@ -140,7 +100,7 @@
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-									<a href="/home/address/update/{{ $v->id }}">设为默认</a>
+									<a href="/home/address/update/{{ $v->id }}">选择地址</a>
 									<span class="new-addr-bar">|</span>
 									<a href="/home/address/destory/{{ $v->id }}">删除</a>
 								</div>
@@ -492,51 +452,43 @@
 				<hr/>
 
 				<div class="am-u-md-12">
-					<form class="am-form am-form-horizontal">
+					<form class="am-form am-form-horizontal" action="/home/address/create"  method="post">
+										{{ csrf_field()  }}
 
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">收货人</label>
 							<div class="am-form-content">
-								<input type="text" id="user-name" placeholder="收货人">
+								<input type="text" id="user-name" name="uname" placeholder="收货人">
 							</div>
 						</div>
 
 						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">手机号码</label>
+							<label for="user-phone"  sclass="am-form-label">手机号码</label>
 							<div class="am-form-content">
-								<input id="user-phone" placeholder="手机号必填" type="email">
+								<input id="user-phone" name="phone" placeholder="手机号必填" type="text">
 							</div>
 						</div>
 
 						<div class="am-form-group">
 							<label for="user-phone" class="am-form-label">所在地</label>
 							<div class="am-form-content address">
-								<select data-am-selected>
-									<option value="a">浙江省</option>
-									<option value="b">湖北省</option>
-								</select>
-								<select data-am-selected>
-									<option value="a">温州市</option>
-									<option value="b">武汉市</option>
-								</select>
-								<select data-am-selected>
-									<option value="a">瑞安区</option>
-									<option value="b">洪山区</option>
-								</select>
+								<select id="Province" runat="server" name="province" style="width: 90px" ></select>
+												<select id="Country" runat="server" name="country" style="width: 90px"></select>
+												<select id="Town" runat="server" name="town" style="width: 90px"></select>
 							</div>
 						</div>
 
 						<div class="am-form-group">
 							<label for="user-intro" class="am-form-label">详细地址</label>
 							<div class="am-form-content">
-								<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+								<textarea class="" rows="3" name="address" id="user-intro" placeholder="输入详细地址"></textarea>
 								<small>100字以内写出你的详细地址...</small>
 							</div>
 						</div>
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<div class="am-btn am-btn-danger">保存</div>
+								<input  type="submit" class="am-btn am-btn-danger" value="保存"></a>
 								<div class="am-btn am-btn-danger close">取消</div>
 							</div>
 						</div>
@@ -547,5 +499,8 @@
 
 			<div class="clear"></div>
 	</body>
-
+	<script type="text/javascript" src="/area.js"></script>
+ <script language="javascript">
+			setup();
+		    </script>
 </html>

@@ -1356,9 +1356,22 @@
 						</a>
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
-								<p class="avatar_imgbox "><img src="/h/images/no-img_mid_.jpg " /></p>
+								@if(session('home_usersinfo'))
+								<p class="avatar_imgbox ">
+									@if(session('home_usersinfo')->home->profile)
+									<img src="/uploads/{{ session('home_usersinfo')->home->profile }}">
+									@else
+									<img src="/h/images/getAvatar.do.jpg">
+									@endif
+								    </p>
+								    @endif
 								<ul class="user_info ">
-									<li>用户名sl1903</li>
+									<li>用户名&nbsp;
+								@if(!empty( session('home_usersinfo')->home->nickname ))
+								{{ session('home_usersinfo')->home->nickname }}
+								@else
+							    {{ str_random(5) }}
+							    @endif</li>
 									<li>级&nbsp;别普通会员</li>
 								</ul>
 							</div>

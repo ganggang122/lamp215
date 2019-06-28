@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use  App\Models\Users;
 use  Hash;
+use  App\Models\UserInfo;
 
 class LoginController extends Controller
 {
@@ -35,16 +36,37 @@ class LoginController extends Controller
          $users_data =Users::where('uname' , $users_name)->orwhere('email' , $users_name)->orwhere('phone',$users_name)->first();
          
          $upass =  $users_data->upass;
-      
+         
          if(!Hash::check($users_upass,$upass)){
             return  back()->with('error' , '用户名或者密码错误');
+            exit;
          }
 
+         if($users_data->status == 0){
+            return  back()->with('error' , '账号未激活');
+            exit;
+         }
+        
      	session(['home_usersinfo'=>$users_data]);
      	session(['users_status'=>true]);
-     	return  redirect('home/index');
+     	$id = session('home_usersinfo')->id;
+     	$uid_data =UserInfo::select('uid')->get();
+        $data = [];
+     	foreach($uid_data as  $k=>$v){
+         	$data[] = $v->uid;
+         }
+
+         if(!in_array($id , $data)){
+           $users_data = new UserInfo;
+      	   $users_data->uid = session('home_usersinfo')->id;
+      	   $users_data->save();
+      	   return  redirect('home/index');
+         }else{
+      	
+
+     	  return  redirect('home/index');
  
-       
+       }
     }
 
     //用户退出
