@@ -67,7 +67,10 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
 	//前台修改手机号
 	Route::get('email/phone' , 'Home\EmailController@phone');
 	Route::post('email/storephone' , 'Home\EmailController@storephone');
-
+ 
+	//前台订单页
+    Route::get('orders/index', 'Home\OrdersController@index');
+    
  
 });
 
@@ -92,6 +95,9 @@ Route::get('home/shopcart/add' , 'Home\ShopcartController@add');
 Route::get('home/shopcart/minus' , 'Home\ShopcartController@minus');
 //前台结算页面
 Route::get('home/pay/index' , 'Home\PayController@index');
+
+// 前台立即购买提交订单页
+Route::post('home/pay/create/{id}' , 'Home\PayController@create');
 //前台删除购物车
 Route::get('home/shopcart/destory/{id}' ,'Home\ShopcartController@destory');
 //前台支付成功

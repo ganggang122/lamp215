@@ -54,7 +54,8 @@ class PayController extends Controller
        	'specname2' => $specName2[$k],
           ]);
          Orders::insert($order_data);
-	
+
+
         }
         Shopcart::destroy($v);
 
@@ -64,6 +65,7 @@ class PayController extends Controller
 
        
         
+
 
        //统计总计价钱
        $zongji =self::zongji();
@@ -84,6 +86,7 @@ class PayController extends Controller
       return  view('home.pay.index' , ['num'=>$num,'address_data' => $address_data,'shop'=>$shop,'zongji'=>$zongji]);
     }
 
+
     public  static function  zongji()
     {
       $uid = session('home_usersinfo')->id;
@@ -94,6 +97,65 @@ class PayController extends Controller
    	  }
    	    return $num;
     }
-  
+
+    
+    
+    public function create(Request $request)
+    {
+        
+        //获取数据
+        $gid = $request->input('gid', 0);
+        // 用户id
+        $uid = session('home_usersinfo')->id;
+        // 商品价格
+        $goodsprice = $request->input('shopPrice', 0);
+        // 商品数量
+        $num = $request->input('num', 0);
+        // 商品规格名称1
+        $specName1 = $request->input('specName1', '');
+        // 商品规格值1
+        $specValue1 = $request->input('specValue1', '');
+        // 商品规格名称2
+        $specName2 = $request->input('specName2', '');
+        // 商品规格值2
+        $specValue2 = $request->input('specValue2', '');
+    
+        $orders = new Orders();
+    
+        $orders->gid = $gid;
+        $orders->uid = $uid;
+        $orders->goodsprice = $goodsprice;
+        $orders->goodnum = $num;
+        // 拼接商品规格1
+        $orders->specname1 = $specName1.':'.$specValue1;
+        
+        // 拼接商品规格2
+        $orders->specname2 = $specName2 . ':' . $specValue2;
+        // 订单状态
+        $orders->status = 1;
+        // 存入订单
+        $orders->save();
+    
+        $uid = session('home_usersinfo')->id;
+        $address_data = Address::where('uid',$uid)->get();
+    
+        $shop = Orders::where('uid',$uid)->get();
+        
+        // 合计
+        $zongji =  $goodsprice * $num;
+        
+        return view('home.pay.index',[
+            'shop' => $shop,
+            'address_data' => $address_data,
+            'num' => $num,
+            'zongji' => $zongji,
+            
+            
+        ]);
+    
+        
+    
+    }
+    
 
 }

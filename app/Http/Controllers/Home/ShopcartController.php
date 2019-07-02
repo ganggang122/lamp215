@@ -34,13 +34,9 @@ class ShopcartController extends Controller
       if($res){
           echo  json_encode(['msg'=>'success' , 'info'=>'加入购物车成功']);
           exit;
-       /* $data['error'] = 0;
-        $data['msg']   = '加入购物车成功';*/
       }else{
           echo  json_encode(['msg'=>'error' , 'info'=>'加入购物车失败']);
           exit;
-         /* $data['error'] = 1;
-          $data['msg']   = '加入购物车失败';*/
       }
    }
    //购物车页面
