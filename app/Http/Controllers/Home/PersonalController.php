@@ -12,6 +12,8 @@ class PersonalController extends Controller
     //个人中心
     public  function  index()
     {
-    	return  view('home.personal.index',['links'=>IndexController::getLinksData()]);
+    	 //统计购物车数量
+        $num  =  ShopcartController::num();
+    	return  view('home.personal.index',['num'=>$num,'links'=>IndexController::getLinksData()]);
     }
 }

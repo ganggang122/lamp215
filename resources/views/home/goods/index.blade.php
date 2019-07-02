@@ -96,7 +96,6 @@
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 										<a href="#"><img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 									</div>
 								</li>
@@ -229,7 +228,7 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form  action="/home/pay/index/{{$good->id}}" method="post" enctype="multipart/form-data">
+											<form action="/home/pay/create/{{$good->id}}" method="post" enctype="multipart/form-data">
 													{{csrf_field()}}
                                                 <input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
                                                 <div class="theme-signin-left">
@@ -318,9 +317,9 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									{{--<a type="submit" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
-                                    {{--<button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>--}}
-                                    <button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>
+									{{--<a id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
+                                    <button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>
+                                    {{--<button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>--}}
                                 </div>
 							</li>
 							<li>
@@ -363,7 +362,7 @@
 
                         // 加
                         function update(obj) {
-                            var num = parseInt($('#text_box').eq(0).val())+1  ;
+                            var num = parseInt($('#text_box').eq(0).val())+1;
                             $('input[name=num]').val(num);
                         }
 
@@ -381,12 +380,17 @@
                                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                                 }
                             });
+                            //判断商品规格值1是否存在
+                            /*let selct = $('.selected').html();
+                            if (selct == '') {
+                                alert(111);
+                            }*/
+
                             let num =$('#text_box').eq(0).val();
                             // 规格名称1
                             let specName1 = $('#specName1').html();
                             // 获取规格值1
                             let specValue1 = $('#specValue1').find('.selected').html().replace('<i></i>', '');
-
                             // 规格名称2
                             let specName2 = $('#specName2').html();
                             // 规格值2
