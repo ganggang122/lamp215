@@ -119,48 +119,14 @@ Route::get('home/register/changeStatus/{id}/{token}','Home\ResgisterController@c
 
 
 
-//后台 栏目 路由
-
-Route::resource('admin/cates','Admin\CatesController');
-//后台 轮播图 路由
 
 
-Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
-Route::resource('admin/banners','Admin\BannersController');
-//后台 链接 路由
-Route::resource('admin/links','Admin\LinksController');
-//后台 收货地址
-Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
-Route::resource('admin/address','Admin\AddressController');
-
-
-Route::resource('admin/cates',  'Admin\CatesController');
-// 后台 品牌管理 路由
-// 品牌状态路由
-Route::get('admin/brands/changeStatus', 'Admin\BrandsController@changeStatus');
-// 后台品牌
-Route::resource('admin/brands', 'Admin\BrandsController');
-// 文件上传路由
-Route::post('admin/upload', 'Admin\BrandsController@upload');
-
-// 后台商品路由
-Route::resource('admin/goods','Admin\GoodsController');
-
-//后天商品规格路由
-Route::resource('admin/specific' , 'Admin\SpecificController');
-//后台添加商品规格
-Route::post('admin/goods/add' , 'Admin\GoodsController@add');
 
 
 //前台 首页 路由
 Route::resource('home/index','Home\IndexController');
 
-//后台 新闻 路由
-Route::resource('admin/news','Admin\NewsController');
-//后天商品规格
-Route::resource('admin/specific' , 'Admin\SpecificController');
-//后台添加商品规格
-Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
 
 //后台 登录页 路由
 Route::get('admin/login','Admin\LoginController@login');
@@ -174,9 +140,9 @@ Route::get('admin/rbac',function(){
 });
 
 //后台 登录，node权限 中间
-// Route::group(['middleware'=>['login','node']],function(){
+Route::group(['middleware'=>['login','node']],function(){
 // Route::group(['middleware'=>'login'],function(){
- Route::group([],function(){
+ // Route::group([],function(){
 	//后台 首页
 	Route::get('admin','Admin\IndexController@index');
 
@@ -191,16 +157,20 @@ Route::get('admin/rbac',function(){
 
 	//后台 岗位&部门 路由
 	Route::resource('admin/role','Admin\RoleController');
+
 	//后台 权限 路由
 	Route::resource('admin/node','Admin\NodeController');
+	
 	//后台 公告 路由
 	Route::resource('admin/blog','Admin\BlogController');
 	Route::get('/admim/blog/msg','Admin\BlogController@msg');
+
 	//后台 今日推荐 管理
 	Route::get('admin/recommend/changeStatus','Admin\RecommendController@changeStatus');
 	//后台 今日推荐 置顶路由
 	Route::get('admin/recommend/changeTop','Admin\RecommendController@changeTop');
 	Route::resource('admin/recommend','Admin\RecommendController');
+
 	//后台 秒杀管理 路由
 	//置顶路由
 	Route::get('admin/seckill/changeTop','Admin\SeckillController@changeTop');
@@ -208,6 +178,46 @@ Route::get('admin/rbac',function(){
 	Route::get('admin/seckill/changeStatus','Admin\SeckillController@changeStatus');
 	Route::resource('admin/seckill','Admin\SeckillController');
 
+	//后台 栏目 路由
+	Route::resource('admin/cates','Admin\CatesController');
+
+	//后台 轮播图 路由
+	Route::get('admin/banners/changeStatus','Admin\BannersController@changeStatus');
+	Route::resource('admin/banners','Admin\BannersController');
+
+	//后台 链接 路由
+	Route::resource('admin/links','Admin\LinksController');
+
+	//后台 收货地址
+	Route::get('admin/address/getAddress','Admin\AddressController@getAddress');
+	Route::resource('admin/address','Admin\AddressController');
+
+	// 后台 品牌管理 路由
+	// 品牌状态路由
+	Route::get('admin/brands/changeStatus', 'Admin\BrandsController@changeStatus');
+
+	// 后台品牌
+	Route::resource('admin/brands', 'Admin\BrandsController');
+	// 文件上传路由
+	Route::post('admin/upload', 'Admin\BrandsController@upload');
+
+	// 后台商品路由
+	Route::resource('admin/goods','Admin\GoodsController');
+
+	//后天商品规格路由
+	Route::resource('admin/specific' , 'Admin\SpecificController');
+
+	//后台添加商品规格
+	Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+
+	//后台 新闻 路由
+	Route::resource('admin/news','Admin\NewsController');
+
+	//后天商品规格
+	Route::resource('admin/specific' , 'Admin\SpecificController');
+
+	//后台添加商品规格
+	Route::post('admin/goods/add' , 'Admin\GoodsController@add');
 });
 
 

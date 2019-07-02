@@ -106,8 +106,8 @@
 									<div class="s-item">
 
 										<div class="s-pic">
-											<a href="#" class="s-pic-link">
-												<img src="/uploads/{{ $v->goodsPhoto }}" alt="{{ $v->goodsName }}" title="{{$v->goodsName}}" class="s-pic-img s-guess-item-img">
+											<a href="/home/good/info/{{ $v->id }}" class="s-pic-link">
+												<img src="{{ $v->goodsPhoto }}" alt="{{ $v->goodsName }}" title="{{$v->goodsName}}" class="s-pic-img s-guess-item-img">
 											@if( $v->goodsStatus == 0 )
 											<span class="tip-title">已下架</span>
 											@endif

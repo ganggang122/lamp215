@@ -277,7 +277,7 @@
 
 						<div class="am-u-sm-3 last ">
 							<div class="icon-sale "></div>
-							<h4>超值</h4>
+							<h4>秒杀</h4>
 							<div class="activityMain ">
 								<img src="/uploads/{{ $seckills[3]->profile }} "></img>
 							</div>

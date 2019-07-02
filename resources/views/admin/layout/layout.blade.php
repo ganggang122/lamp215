@@ -65,13 +65,13 @@
             
                 <!-- User Photo -->
                 <div id="mws-user-photo">
-                    <img src="/d/example/profile.jpg" alt="User Photo">
+                    <img src="/d/example/profile.jpg " alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, {{ 0?session('admin_user_info')->uname  :2 }}
+                        Hello, {{ session('admin_user_info')->uname ? session('admin_user_info')->uname  :2 }}
                     </div>
                     <ul>
                         <li><a href="#">Profile</a></li>

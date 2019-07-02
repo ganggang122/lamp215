@@ -51,7 +51,7 @@
         			function changeStatus(id,obj)
         			{
         				$.get('/admin/recommend/changeStatus',{id},function(res){
-        					if( res == 'ok') {
+        					if( res.trim().length == 2) {
 	  							if ( $(obj).html() =='开启' ) {
 	  								$(obj).html('关闭')
 	  								$(obj).parent().prev().html('启用');

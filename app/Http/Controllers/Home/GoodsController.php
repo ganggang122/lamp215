@@ -52,7 +52,12 @@ class GoodsController extends Controller
         $specValue2 = explode( ',', $specValue2);
         
         //获取用户id
-        $uid = 12;
+        if( session('home_usersinfo') ) {
+            $uid = session('home_usersinfo')->id;
+        } else {
+             $uid = 2;
+        }
+       
         //获取商品id
         $gid = $good->id;
         //获取用户信息
