@@ -29,20 +29,22 @@ class PayController extends Controller
        $goodid = $request->input('goodid' , 0);
        $specName1 = $request->input('specName1' , 0);
        $specName2 = $request->input('specName2'  , 0);
-       //判断gid是否已经存入,如果没有的话再压入
-       $good_id =  Orders::select('gid')->get();
+       //判断sid是否已经存入,如果没有的话再压入
+       //sid代表购物车id
+       $good_id =  Orders::select('sid')->get();
        $goodid_data = [];
         foreach($good_id as  $k=>$v){
-         	$goodid_data[] =  (string)$v->gid;
+         	$goodid_data[] =  (string)$v->sid;
          }
         
         
 
   	$order_data = [];
     foreach($shopid as  $k=>$v){
-    	if(!in_array( $goodid[$k], $goodid_data)){
+    	if(!in_array( $v, $goodid_data)){
     	 array_push($order_data,[
        	'uid' => session('home_usersinfo')->id,
+        'sid' => $shopid[$k],
        	'goodnum' => $goodnum[$k],
        	'goodsprice' => $goodsprice[$k],
        	'gid' => $goodid[$k],
@@ -50,13 +52,15 @@ class PayController extends Controller
        	'specname2' => $specName2[$k],
           ]);
          Orders::insert($order_data);
+
     		
         }
+
        }  
        
        
 
-      
+       
         
        //统计总计价钱
        $zongji = ShopcartController::zongji();
@@ -70,4 +74,5 @@ class PayController extends Controller
 
       return  view('home.pay.index' , ['num'=>$num,'address_data' => $address_data,'shop'=>$shop,'zongji'=>$zongji]);
     }
+    
 }
