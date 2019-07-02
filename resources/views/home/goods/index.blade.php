@@ -232,7 +232,7 @@
 													{{csrf_field()}}
                                                 <input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
                                                 <div class="theme-signin-left">
-                                                    <input type="hidden" name="shopPrice" value="" >
+                                                    <input type="hidden" name="shopPrice" value="{{$good->shopPrice}}" >
 													<div class="theme-options">
 														<div class="cart-title" id="specName1">{{$specName1}}</div>
                                                         <input type="hidden" name="specName1" value="{{$specName1}}">
@@ -381,10 +381,10 @@
                                 }
                             });
                             //判断商品规格值1是否存在
-                            /*let selct = $('.selected').html();
+                            let selct = $('.selected').html();
                             if (selct == '') {
                                 alert(111);
-                            }*/
+                            }
 
                             let num =$('#text_box').eq(0).val();
                             // 规格名称1

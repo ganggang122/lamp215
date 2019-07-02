@@ -75,6 +75,7 @@ class PayController extends Controller
     
     public function create(Request $request)
     {
+        
         //获取数据
         $gid = $request->input('gid', 0);
         // 用户id
