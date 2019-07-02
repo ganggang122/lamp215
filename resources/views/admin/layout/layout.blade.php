@@ -121,10 +121,10 @@
                 </ul>
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-align-justify"></i> 栏目管理</a>
+                        <a href="#"><i class="icon-align-justify"></i> 分类管理</a>
                         <ul>
-                            <li><a href="/admin/cates/create">添加栏目</a></li>
-                            <li><a href="/admin/cates">栏目列表</a></li>
+                            <li><a href="/admin/cates/create">添加分类</a></li>
+                            <li><a href="/admin/cates">分类列表</a></li>
                         </ul>
                     </li>
                 </ul>
