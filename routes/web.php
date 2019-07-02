@@ -140,9 +140,9 @@ Route::get('admin/rbac',function(){
 });
 
 //后台 登录，node权限 中间
-Route::group(['middleware'=>['login','node']],function(){
+// Route::group(['middleware'=>['login','node']],function(){
 // Route::group(['middleware'=>'login'],function(){
- // Route::group([],function(){
+ Route::group([],function(){
 	//后台 首页
 	Route::get('admin','Admin\IndexController@index');
 
