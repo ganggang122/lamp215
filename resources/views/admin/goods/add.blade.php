@@ -10,8 +10,8 @@
         </div>
     @endif
 
-    <div class="mws-panel grid_8">
-        <div class="mws-panel-header"  style="height:50px">
+    <div class="mws-panel grid_8" style="margin-left: -25px; ">
+        <div class="mws-panel-header"  style="height:50px; " >
             <span>商品详情添加</span>
         </div>
         <div class="mws-panel-body no-padding">
@@ -23,7 +23,7 @@
                         <div class="mws-form-row">
                             <label class="mws-form-label">{{$v->specname}}</label>
                             <div class="mws-form-item">
-                                <input type="text" name="specName[]" value="" class="small" >
+                                <input type="text" name="specName[]" value="" placeholder="若输入多个值请以','分隔" class="small" >
 
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="mws-form-row">
                         <label class="mws-form-label">商品品牌</label>
                          <div class="mws-form-item">
-                             <select class="required large" name="bid"  style="width:40%">
+                             <select class="required large" name="bid"  style="width:55%" >
                                  <option value="0">请选择</option>
                                  @foreach($brands as $k=>$v)
                                      <option value="{{$v->id}}" {{ substr_count($v->path,',') >= 1 ? 'disabled' : ''}}>{{$v->bname}}</option>
@@ -46,17 +46,20 @@
                         <div class="mws-form-item">
 
 
-                            <!-- <div class="fileinput-holder"  style="width:50%">
+                            <div class="fileinput-holder"  style="width:55%">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb"  >
-                                <span ><input type="file"    name="file_upload" id="file_upload" class="required" multiple="true"  ></span></div> -->
+                                <span>
+                                    <input type="file" name="file_upload" id="file_upload" class="required" multiple="true"  >
+                                </span>
+                            </div>
 
 
-                            <div class="fileinput-holder" style="position: relative;">
+                            {{--<div class="fileinput-holder" style="position: relative;">
                                 <input type="hidden"  name="goodsPhoto" id="art_thumb" value="art_thumb">
                                 <span>
                                     <input type="file" name="file_upload" id="file_upload" class="required" multiple="true" style="position: absolute; top: 0px; right: 0px; margin: 0px; cursor: pointer; font-size: 999px; opacity: 0; z-index: 999;">
                                 </span>
-                            </div>
+                            </div>--}}
 
                             <br>
                             <img src="https://lamp215.oss-cn-beijing.aliyuncs.com/156091289878275d09a4026742c.jpg" id="img1" alt="" style="width: 80px;height: 80px;">

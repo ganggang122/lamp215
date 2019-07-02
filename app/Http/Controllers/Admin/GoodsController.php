@@ -21,18 +21,33 @@ class GoodsController extends Controller
     }
     /**
      * Display a listing of the resource.
-     *
+     * 商品列表页无刷新修改商品照片
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+  
+    
+    public function index(Request $request)
     {
+        // 获取搜索条件
+        $search_num = $request->input('search_num','');
+        $search_name = $request->input('search_name','');
+        $goods = Goods::where('goodsNum','like','%'.$search_num.'%')
+            ->where('goodsName','like','%'.$search_name.'%')
+            /*->where('cid',$request->input('cid',''))
+            ->where('bid',$request->input('bid',''))*/
+            ->paginate(5);
         //查询商品数据 显示
-        $goods = Goods::all();
+        // $goods = Goods::all();
         
         
         
         return view('admin.goods.index', [
             'goods' => $goods,
+            'goodsCate' => CatesController::getCates(),
+            'params'=>$request->all(),
+            'brandName' => Brands::all(),
+            
         ]);
         
     }
@@ -157,7 +172,8 @@ class GoodsController extends Controller
         // dd(session('goods'));
         // 插入商品返回商品id
         $gid = Goods::insertGetId(session('goods'));
-    
+        
+        
         // 获取数据
         $data = $request->all();
     
@@ -196,7 +212,7 @@ class GoodsController extends Controller
         }*/
     
     
-        /*$res = $goods_info->save();
+        /*/$res = $goods_info->save();
         if ($res) {
             return redirect('admin/goods')->with('success','添加商品成功');
         } else {
@@ -211,10 +227,49 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id,Request $request)
+    public function show($id)
     {
-        //修改商品状态
-        dd($request->all());
+        // 接收传递过来商品状态
+        $good = Goods::where('id',$id)->first();
+        $goods = Goods::find($id);
+    
+        if ($good->goodsStatus == 1) {
+            $goods->goodsStatus = 2;
+            $goods->save();
+            return response()->json(['goodsStatus'=>2]);
+        } else {
+            $goods->goodsStatus = 1;
+            $goods->save();
+            return response()->json(['goodsStatus'=>1]);
+        }
+        
+        
+        
+        
+        /*//修改商品状态
+        if ($status == 1) {
+            // 修改为下架
+            $goods->GoodsStatus = 2;
+            // 保存
+            $res = $goods->save();
+            if ($res) {
+                $good = Goods::where('id', $id)->first();
+                $goodStatus = $good->goodsStatus;
+                echo $goodStatus;
+            }
+        } elseif($status == 2) {
+            // 修改为上架`
+            $goods->GoodsStatus = 1;
+            // 保存
+            $res = $goods->save();
+            if ($res) {
+                $good = Goods::where('id', $id)->first();
+                $goodStatus = $good->goodsStatus;
+                echo $goodStatus;
+            }
+        } else {
+        
+        }*/
         
     }
 
@@ -226,7 +281,32 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //查询数据，加载修改页面
+        $good = Goods::find($id);
+        // 三级分类id 获取一级分类id
+        $path = Cate::find($good->cid)->path;
+        $pid = (int)explode(',', $path)[1];
+        // 查询对应品牌
+        $brands   = Brands::where('cid' , $pid)->get();
+        // 查询对应规格值名称
+        $specName = Specific::where('cid', $pid)->get();
+    
+        $specName1 = $specName[0]->specname;
+        $specName2 = $specName[1]->specname;
+        
+        
+        // 查询对应规格值
+        $specValue = Goods_Info::where('gid', $good->id)->first();
+        
+        return view('admin.goods.edit',[
+            'good' => $good,
+            'goodsCate'  => CatesController::getCates(),
+            'brandName' => $brands,
+            'specName1' => $specName1,
+            'specName2' => $specName2,
+            'specValue1' => $specValue->specName1,
+            'specValue2' => $specValue->specName2,
+        ]);
     }
 
     /**
@@ -238,7 +318,69 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    
+        DB::beginTransaction();
+        //数据验证
+        $this->validate($request, [
+            'cid' => 'required',
+            'bid' =>'required|numeric',
+            'marketPrice' =>'required',
+            'shopPrice' =>'required',
+            'goodsStock' =>'required|numeric',
+            'specValue1' =>'required',
+            'specValue2' =>'required',
+            'goodsPhoto' =>'required'
+        ], [
+            'cid.required' => '商品分类必填',
+            'bid.required'  => '商品品牌必填',
+            'marketPrice.required'  =>'市场价格必填',
+            'shopPrice.required'  =>'店铺价格必填',
+            'goodsStock.required'  =>'库存数量必填',
+            'goodsStock.numeric'   => '库存数量为数字',
+            'specValue1.required'  =>'商品规格必填',
+            'specValue2.required'  =>'商品规格必填',
+            'goodsPhoto.required'  =>'商品图片必上传',
+        ]);
+        
+        $data = $request->except('_token', '_method', 'file_upload');
+    
+        $good = Goods::find($id);
+        $good->cid = $data['cid'];
+        $good->bid = $data['bid'];
+        $good->marketPrice = $data['marketPrice'];
+        $good->shopPrice = $data['shopPrice'];
+        $good->goodsStock = $data['goodsStock'];
+        $good->goodsPhoto = $data['goodsPhoto'];
+        
+        $res1 = $good->save();
+        if ($res1) {
+            // 获取id
+            $gid = $good->id;
+            // 获取goods_info id号
+            $good_info_id = Goods_Info::where('gid', $gid)->first();
+            // 获取goods_info 修改的这一条
+            $good_info = Goods_Info::find($good_info_id->id);
+            $good_info->gid = $gid;
+            $good->info = $data['bid'];
+            $good_info->specName1 = $data['specValue1'];
+            $good_info->specName2 = $data['specValue2'];
+            $good_info->goodsPhotoinfo1 = $data['goodsPhoto'];
+    
+            $res2 =  $good_info->save();
+            if ($res1 && $res2) {
+                DB::commit();
+                return redirect('admin/goods')->with('success','修改商品成功');
+            } else {
+                DB::rollBack();
+                return back()->with('error','修改商品失败');
+            }
+    
+    
+        }
+        
+        
+        
+    
     }
 
     /**
@@ -261,5 +403,33 @@ class GoodsController extends Controller
         }
         
         return $data;
+    }
+    
+    public function ajaxname(Request $request)
+    {
+        sleep(2);
+        // dd($request->all());
+        $id = $request->input('id', 0);
+        $name = $request->input('name', '');
+        
+        // $good = Goods::where('id',$id)->first();
+        $res = DB::table('goods')->where('goodsName', $name)->first();
+        if ($res) {
+            // 用户名存在
+            return response()->json(['code'=>0]);
+        } else {
+            $r = DB::table('goods')->where('id',$id)->update(['goodsName' => $name,
+            ]);
+            if ($r) {
+//                1.表示成功
+                return response()->json(['code'=>1]);
+            } else {
+                //2.表示失败
+                return response()->json(['code'=>2]);
+                
+            }
+        }
+        
+        
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="mws-panel grid_8">
+<div class="mws-panel grid_8" style="margin-left: -27px;">
     <div class="mws-panel-header"  style="height:50px">
         <span><i class="icon-table"></i>品牌列表</span>
 

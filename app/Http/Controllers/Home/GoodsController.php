@@ -64,6 +64,12 @@ class GoodsController extends Controller
         foreach($user_gids as $v){
             $collects[] = $v->gid;
         }
+        
+        //获取当前商品的评论
+        $comment = new CommentController();
+        $comment_conent = $comment->index($id);
+        
+        
         //判断当前商品是否被收藏
         $collect = in_array($gid,$collects);        
         return view('home.goods.index', [
@@ -73,6 +79,7 @@ class GoodsController extends Controller
             'specName2'  => $sepcName2,
             'specValue1' => $specValue1,
             'specValue2' => $specValue2,
+            'data' => $comment_conent,
             'collect'    => $collect,
         ]);
     }

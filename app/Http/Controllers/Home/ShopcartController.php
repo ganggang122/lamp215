@@ -20,7 +20,7 @@ class ShopcartController extends Controller
        $specValue2 = $request->input('specValue2' , '');
 
       $shop_data = new Shopcart;
-      $shop_data->uid = session('home_usersinfo')->id;
+      // $shop_data->uid = session('home_usersinfo')->id;
       $shop_data->gid = $gid;
       $shop_data->num = $num;
       $shop_data->shopPrice = $shopPrice;
