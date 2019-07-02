@@ -27,9 +27,10 @@ class NodeMiddleware
             if ( in_array('index',$v)) {
                 $aduser_nodes[$k][] = 'show';
             }
-            //如有有 添加权限 就添加stroe权限
+            //如有有 添加权限 就添加stroe destroy
             if ( in_array('create',$v)) {
                 $aduser_nodes[$k][] = 'store';
+                $aduser_nodes[$k][] = 'destroy';
             }
             //如有有 修改权限 就添加update权限
             if ( in_array('edit',$v)) {

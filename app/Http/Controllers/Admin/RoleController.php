@@ -16,11 +16,22 @@ class RoleController extends Controller
     protected static function getControllerName()
     {
         //控制器cname对应的中文名称
-        $cnames['UserController'] = '用户管理';
-        $cnames['CateController'] = '栏目管理';
+        $cnames['UsersController'] = '用户管理';
+        $cnames['CatesController'] = '栏目管理';
         $cnames['AdminuserController'] = '管理员管理';
         $cnames['RoleController'] = '岗位管理';
         $cnames['NodeController'] = '权限管理';
+        $cnames['BannersController'] = '轮播图管理';
+        $cnames['LinksController'] = '链接管理';
+        $cnames['NewsController'] = '新闻管理';
+        $cnames['AddressController'] = '收货地址管理';
+        $cnames['BrandsController'] = '品牌管理';
+        $cnames['SpecificController'] = '商品规格管理';
+        $cnames['GoodsController'] = '商品管理';
+        $cnames['BlogController'] = '商城头条管理';
+        $cnames['RecommendController'] = '今日推荐管理';
+        $cnames['SeckillController'] = '秒杀管理';
+
         return  $cnames;
     } 
 

@@ -36,6 +36,7 @@ class LoginController extends Controller
         //查询用户的后台权限
         $admin_user_nodes =  DB::select(' select cname,aname from node as n,aduser_role as adro,role_node as rono where adro.uid = '.$uid.' and adro.rid= rono.rid and rono.nid = n.id;');
 		session(['admin_user_nodes'=>$admin_user_nodes]);
+
         return redirect('admin');
     }
 
