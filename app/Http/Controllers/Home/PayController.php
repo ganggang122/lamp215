@@ -90,7 +90,7 @@ class PayController extends Controller
     public  static function  zongji()
     {
       $uid = session('home_usersinfo')->id;
-   	  $goods_data = Orders::where('uid',$uid)->get();
+   	  $goods_data = Orders::where('uid',$uid)->where('status' ,1)->get();
       $num = 0;
    	  foreach($goods_data  as  $k=>$v){
          $num +=$v->goodnum * $v->goodsprice;

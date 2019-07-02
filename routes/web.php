@@ -70,6 +70,8 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
  
 	//前台订单页
     Route::get('orders/index', 'Home\OrdersController@index');
+    //前台购物车
+    Route::get('shopcart/index' , 'Home\ShopcartController@index');
     
  
 });
@@ -87,8 +89,7 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
 
 //加入购物车
 Route::post('home/shopcart/store' , 'Home\ShopcartController@store');
-//前台购物车
-Route::get('home/shopcart/index' , 'Home\ShopcartController@index');
+
 //前台购物车小计加法
 Route::get('home/shopcart/add' , 'Home\ShopcartController@add');
 //前台购物车小计减法
@@ -163,6 +164,8 @@ Route::resource('admin/specific' , 'Admin\SpecificController');
 Route::post('admin/goods/add' , 'Admin\GoodsController@add');
 //后台订单
 Route::get('admin/order/index' , 'Admin\OrderController@index');
+//修改订单状态
+Route::get('admin/order/add/{id}' ,  'Admin\OrderController@add');
 
 
 

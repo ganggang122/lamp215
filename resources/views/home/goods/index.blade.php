@@ -389,11 +389,23 @@
                             let num =$('#text_box').eq(0).val();
                             // 规格名称1
                             let specName1 = $('#specName1').html();
+                            //判断规格值
+                            if ($('#specValue1').find('.selected').html() == undefined) {
+                            	alert('商品属性1不能为空')
+                            	return false;
+                            }
+                            
                             // 获取规格值1
                             let specValue1 = $('#specValue1').find('.selected').html().replace('<i></i>', '');
+
+
                             // 规格名称2
                             let specName2 = $('#specName2').html();
                             // 规格值2
+                            if ($('#specValue2').find('.selected').html() == undefined) {
+                            	alert('商品属性2不能为空')
+                            	return false;
+                            }
                             let specValue2 = $('#specValue2').find('.selected').html().replace('<i></i>', '');
                             // 店铺价格
                             let  shopPrice = $('#shopPrice').html();

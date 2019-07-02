@@ -71,7 +71,7 @@
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, {{ session('admin_user_info')->uname ? session('admin_user_info')->uname  :2 }}
+                        Hello, {{ session('admin_user_info') ? session('admin_user_info')->uname  :2 }}
                     </div>
                     <ul>
                         <li><a href="#">Profile</a></li>

@@ -1,8 +1,9 @@
 @extends('admin.layout.layout')
 @section('css')
+
 @show
 @section('content')
-	
+
 	<div class="mws-panel grid_8">
     	<div class="mws-panel-header"  style="height:50px">
         	<span><i class="icon-table"></i>订单列表</span>
@@ -13,24 +14,39 @@
                     <tr>
                         <th>ID</th>
                         <th>订单用户</th>
-                        <th>商品ID</th>
+                        <th>商品名称</th>
                         <th>商品数量</th>
                         <th>商品属性一</th>
                         <th>商品属性二</th>
                         <th>商品价格</th>
+                        <th>显示状态</th>
+                        <th>修改状态</th>
                     </tr>
                 </thead>
                 <tbody>
                 	@foreach($order_data as $k=>$v)
 						<tr>
-							<td style="width:50px">{{$v->id}}</td>
-							<td style="width:50px">{{$v->uid}}</td>
-							<td style="width:60px">{{$v->goods->goodsName}}</td>
-							<td style="width:100px">{{$v->goodnum}}</td>
-							<td style="width:100px">{{$v->specname1}}</td>
-							<td style="width:100px">{{$v->specname2}}</td>
-							<td style="width:100px">{{$v->goodsprice}}</td>
-
+							<td>{{$v->id}}</td>
+							<td>{{$v->uid}}</td>
+							<td  title="{{$v->goods->goodsName}}" style="width:120px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{$v->goods->goodsName}}</td>
+							<td>{{$v->goodnum}}</td>
+							<td >{{$v->specname1}}</td>
+							<td >{{$v->specname2}}</td>
+							<td >{{$v->goodsprice}}</td>
+							@if($v->status == 2)
+							<td  >已付款</td>
+							<td ><a  href="/admin/order/add/{{$v->id}}">代发货</a></td>
+							@endif
+							@if($v->status == 3)
+							<td style="color:red">待收货</td>
+							<td>不能修改</td>
+							@endif
+							@if($v->status == 4)
+							<td style="color:red">待评价</td>
+							<td>不能修改</td>
+							@endif
+							
+							
 							
 						</tr>
                 	@endforeach

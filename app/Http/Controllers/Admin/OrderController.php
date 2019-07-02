@@ -15,4 +15,9 @@ class OrderController extends Controller
         
     	return  view('admin.order.index',['order_data'=>$order_data]);
     }
+    public  function  add($id)
+    {
+        $res =  Orders::where('id',$id)->update(['status'=>3]);
+        return back()->with('success','状态修改成功');
+    }
 }

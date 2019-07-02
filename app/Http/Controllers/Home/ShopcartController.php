@@ -120,7 +120,12 @@ class ShopcartController extends Controller
 
    public  static  function  num()
    {
-       $uid = session('home_usersinfo')->id;
+      if(!session('home_usersinfo')){
+      
+      	return false; 
+      }
+      $uid = session('home_usersinfo')->id;
+
       $goods_data = Shopcart::where('uid',$uid)->get();
       $goodnum = 0;
       foreach($goods_data  as  $k=>$v){
