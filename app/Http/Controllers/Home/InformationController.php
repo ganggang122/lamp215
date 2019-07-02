@@ -28,7 +28,7 @@ class InformationController extends Controller
            $this->validate($request, [
                 'profile' => 'required',
                 'nickname' => 'required',
-                'uname' => 'required|regex:/^[\w]{6,32}$/',
+                'uname' => 'required|unique:users|regex:/^[\w]{6,32}$/',
                 'sex' => 'required',
                 'year' => 'required',
                 'moth' =>  'required',
@@ -39,7 +39,7 @@ class InformationController extends Controller
             ],[ 
             	'nickname.required' =>'昵称必填',
             	'uname.required' => '用户名必填',
-               
+                'uname.unique' => '用户名已存在',
                 'year.required' => '所属年必填',
                 'moth.required' => '所属月必填',
                 'day.required' => '所属日必填',
@@ -55,6 +55,7 @@ class InformationController extends Controller
            $nickname = $request->input('nickname' , '');  
            $sex   = $request->input('sex' ,'');
            $uname = $request->input('uname' , '');
+
            $phone = $request->input('phone' ,'');
            $email = $request->input('email' ,'');
            $year = $request->input('year' ,'');
@@ -86,7 +87,7 @@ class InformationController extends Controller
 
           
 
-           if($res  &&   $res1){
+           if($res1){
            	return back()->with('success' , '保存成功');
            }else{
            	return back()->with('error' , '保存失败');

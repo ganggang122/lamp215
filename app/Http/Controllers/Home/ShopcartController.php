@@ -49,12 +49,16 @@ class ShopcartController extends Controller
     $prices = self::zongji();
     $uid = session('home_usersinfo')->id;
     $goods_data = Shopcart::where('uid',$uid)->get();
+    //判断购物车是否为空
+    if($goods_data->isEmpty()){
+    	echo  "<script>alert('购物车为空,请先购物');location.href='/home/index'</script>";
+    }
 
     //统计购物车数量
     $num  =  self::num();
    	return  view('home.shopcart.index',['num'=>$num , 'prices'=>$prices,'goods_data'=>$goods_data,'links'=>IndexController::getLinksData()]);
    }
-    //购物车加好计算
+    //购物车加号计算
    public  function add(Request  $request)
    { 
      $num  = $request->input('num' ,0); //2

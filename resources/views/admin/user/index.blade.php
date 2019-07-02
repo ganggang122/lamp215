@@ -71,7 +71,7 @@
 	            </tbody>
 	        </table>
 	        <div id='page_page'>
-	        	{{ $users->appends($parmas)->links() }}	        	
+	        	{{ $users->appends($parmas)->links() }}
 	        </div>
 
 	    </div>

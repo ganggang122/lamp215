@@ -64,15 +64,25 @@ class GoodsController extends Controller
         foreach($user_gids as $v){
             $collects[] = $v->gid;
         }
+        
+        //获取当前商品的评论
+        $comment = new CommentController();
+        $comment_conent = $comment->index($id);
+        
+          //统计购物车数量
+        $num  =  ShopcartController::num();
+        
         //判断当前商品是否被收藏
         $collect = in_array($gid,$collects);        
         return view('home.goods.index', [
+        	'num'=>$num,
             'good'=>$good,
             'shopPrice' => $shopPrice,
             'specName1'  => $sepcName1,
             'specName2'  => $sepcName2,
             'specValue1' => $specValue1,
             'specValue2' => $specValue2,
+            'data' => $comment_conent,
             'collect'    => $collect,
         ]);
     }

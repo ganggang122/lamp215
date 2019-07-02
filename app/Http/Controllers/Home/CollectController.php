@@ -13,7 +13,7 @@ class CollectController extends Controller
     public function index()
     {
     	//获取用户id
-        $uid = 12;
+        $uid = session('home_usersinfo')->id;
         //获取用户信息
         $user = Users::where('id',$uid)->first();
         // dd($user);
@@ -35,7 +35,7 @@ class CollectController extends Controller
     	//获取用户id
     	// $user = session('home_usersinfo');
     	// $uid = $user->id;
-    	$uid = 18;
+    	$uid = session('home_usersinfo')->id;
     	//接收商品id
     	$gid =  $request->input('id');
     	//从 collect表中删除数据
@@ -55,7 +55,7 @@ class CollectController extends Controller
     	//接收商品id
     	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
-    	$uid = 12;
+    	$uid = session('home_usersinfo')->id;
     	//获取该用户所有收藏商品的id
     	$user = Users::where('id',$uid)->first();
     	$user_gids = $user->userCollect;
@@ -73,20 +73,14 @@ class CollectController extends Controller
     		$store->gid = $gid;
     		$store->save();
     		echo json_encode('ok');
-<<<<<<< HEAD
-    		die;
-=======
-    		exit;
->>>>>>> origin/lx
+
+            
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
     			echo json_encode('del');
-<<<<<<< HEAD
-    			die;
-=======
-    			exit;
->>>>>>> origin/lx
+
+    			
     		}
     	}
     }

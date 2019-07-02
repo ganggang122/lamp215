@@ -270,6 +270,15 @@
                     </ul>
                 </li>
                 </ul>
+                  <ul>
+                <li>
+                    <a href="#"><i class="icon-align-justify"></i>订单管理</a>
+                    <ul>
+                        <li><a href="/admin/order/index">订单列表</a></li>
+
+                    </ul>
+                </li>
+                </ul>
 
 
             </div>

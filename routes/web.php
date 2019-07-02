@@ -32,6 +32,10 @@ Route::get('home/good/info/{gid}', 'Home\GoodsController@index');
 
 Route::get('home/list/index/{cid}/{id}' , 'Home\ListController@index');
 
+// 前台商品评轮获取
+Route::get('home/comment/index/{id}', 'Home\CommentController@index');
+// 前台商品评论添加|
+Route::post('home/comment/add', 'Home\CommentController@addComment');
 
 Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
    //前台个人中心
@@ -64,7 +68,7 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
 	Route::get('email/phone' , 'Home\EmailController@phone');
 	Route::post('email/storephone' , 'Home\EmailController@storephone');
 
-
+ 
 });
 
 
@@ -143,6 +147,9 @@ Route::resource('admin/brands', 'Admin\BrandsController');
 // 文件上传路由
 Route::post('admin/upload', 'Admin\BrandsController@upload');
 
+// 后台修改商品名称
+Route::post('admin/goods/ajaxname', 'Admin\GoodsController@ajaxname');
+
 // 后台商品路由
 Route::resource('admin/goods','Admin\GoodsController');
 
@@ -150,6 +157,8 @@ Route::resource('admin/goods','Admin\GoodsController');
 Route::resource('admin/specific' , 'Admin\SpecificController');
 //后台添加商品规格
 Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+//后台订单
+Route::get('admin/order/index' , 'Admin\OrderController@index');
 
 
 //前台 首页 路由

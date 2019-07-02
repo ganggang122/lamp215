@@ -18,6 +18,7 @@ class PayController extends Controller
     //结算页面
     public function index(Request $request)
     {
+
          //提交购物车ID
          //是个数组
        $sid = $request->input('shopid' , 0);
@@ -25,6 +26,7 @@ class PayController extends Controller
        $shopid = $request->input('shopid',0);
        
        $goodnum = $request->input('goodnum' , 0);
+
        $goodsprice = $request->input('goodsprice' , 0);
        $goodid = $request->input('goodid' , 0);
        $specName1 = $request->input('specName1' , 0);
@@ -38,7 +40,7 @@ class PayController extends Controller
          }
         
         
-
+   //压入订单数据
   	$order_data = [];
     foreach($shopid as  $k=>$v){
     	if(!in_array( $v, $goodid_data)){
@@ -52,9 +54,9 @@ class PayController extends Controller
        	'specname2' => $specName2[$k],
           ]);
          Orders::insert($order_data);
-
-    		
+	
         }
+        Shopcart::destroy($v);
 
        }  
        
@@ -62,17 +64,36 @@ class PayController extends Controller
 
        
         
+
        //统计总计价钱
-       $zongji = ShopcartController::zongji();
+       $zongji =self::zongji();
+     
+
+   	
 
        $uid = session('home_usersinfo')->id;
        $address_data = Address::where('uid',$uid)->get();
 
         //统计购物车数量
       $num  =  ShopcartController::num();
-      $shop = Orders::where('uid',$uid)->get();
+      $shop = Orders::where('uid',$uid)->where('status' ,1)->get();
+       if($shop->isEmpty()){
+    	echo  "<script>alert('订单为空,请先购物');location.href='/home/index'</script>";
+    }
 
       return  view('home.pay.index' , ['num'=>$num,'address_data' => $address_data,'shop'=>$shop,'zongji'=>$zongji]);
     }
-    
+
+    public  static function  zongji()
+    {
+      $uid = session('home_usersinfo')->id;
+   	  $goods_data = Orders::where('uid',$uid)->get();
+      $num = 0;
+   	  foreach($goods_data  as  $k=>$v){
+         $num +=$v->goodnum * $v->goodsprice;
+   	  }
+   	    return $num;
+    }
+  
+
 }

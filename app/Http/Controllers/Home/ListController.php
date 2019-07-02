@@ -56,10 +56,12 @@ class ListController extends Controller
    		    
        	
    			 
-
-       return view('home.list.index',['goods'=>$goods,'brands'=>self::getBrands($cid),'cid'=>$cid,'links'=>$links]);
+      //统计购物车数量
+         $num  =  ShopcartController::num();
+       return view('home.list.index',['num'=>$num,'goods'=>$goods,'brands'=>self::getBrands($cid),'cid'=>$cid,'links'=>$links]);
 
        return view('home.list.index',[
+            'num'=>$num ,
            'goods'=>$goods,
            'brands'=>self::getBrands($cid),
            'cid'=>$cid,
