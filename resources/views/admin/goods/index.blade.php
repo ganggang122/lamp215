@@ -35,11 +35,13 @@
                         <td>{{$v->goodsbrand['bname']}}</td>
                         <td>{{$v->marketPrice}}</td>
                         <td>{{$v->shopPrice}}</td>
-                        <td>@if( $v->status == 0 )
-                                <span class="btn btn-warning  btn-small">审核中</span>
+                        <td ondblclick="status({{$v->goodsStatus}},{{$v->id}})">
+                            @if( $v->status == 1 )
+                                <span class="btn btn-warning  btn-small">上架</span>
                             @else
-                                <span class="btn btn-primary btn-small">审核通过</span>
-                            @endif</td>
+                                <span class="btn btn-primary btn-small">下架</span>
+                            @endif
+                        </td>
                         <td>{{$v->created_at}}</td>
                         <td>
                             <a href="/admin/brands/{{$v->id}}/edit" class="btn btn-success">修改</a>
@@ -64,6 +66,16 @@
                 </tbody>
             </table>
             <script>
+
+                function status(status,id) {
+
+                    // 发送ajax
+                    $.get('/admin/goods/show',{id}, function (res) {
+
+
+
+                    });
+                }
                 function delGoods(id,obj) {
 
                     //询问框
