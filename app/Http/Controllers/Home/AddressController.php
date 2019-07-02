@@ -15,10 +15,12 @@ class AddressController extends Controller
     	if(!session('home_usersinfo')){
     		return redirect('home/login/index');
     	}
+    	 //统计购物车数量
+        $num  =  ShopcartController::num();
          $uid = session('home_usersinfo')->id;
     	 $users_address = Address::where('uid' ,$uid)->get();
 
-    	  return  view('home.address.index' , ['users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
+    	  return  view('home.address.index' , ['num'=>$num,'users_address' =>$users_address,'links'=>IndexController::getLinksData()]);
 
    
     }

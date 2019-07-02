@@ -87,7 +87,11 @@ Route::get('home/shopcart/add' , 'Home\ShopcartController@add');
 //前台购物车小计减法
 Route::get('home/shopcart/minus' , 'Home\ShopcartController@minus');
 //前台结算页面
-Route::post('home/pay/index/{id}' , 'Home\PayController@index');
+Route::get('home/pay/index' , 'Home\PayController@index');
+//前台删除购物车
+Route::get('home/shopcart/destory/{id}' ,'Home\ShopcartController@destory');
+//前台支付成功
+Route::get('home/success/index' , 'Home\SuccessController@index');
 
 
 

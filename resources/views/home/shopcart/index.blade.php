@@ -15,10 +15,10 @@
 		<script type="text/javascript" src="/h/js/jquery.js"></script>
 
 	</head>
-
+                                  
 	<body>
 @include('home.public.information.header')
-			
+			                       
 
 			<!--购物车 -->
 			<div class="concent">
@@ -27,7 +27,7 @@
 						<div class="wp">
 							<div class="th th-chk">
 								<div id="J_SelectAll1" class="select-all J_SelectAll">
-
+                                   
 								</div>
 							</div>
 							<div class="th th-item">
@@ -48,7 +48,13 @@
 						</div>
 					</div>
 					<div class="clear"></div>
+
+					<form  action="/home/pay/index"  method="get">
+
+						{{ csrf_field() }}
                     @foreach($goods_data  as  $k=>$v)
+                    <input  type="hidden"  name="goodid[]"  value="{{$v->gid}}">
+                    <input  type="hidden"  name="shopid[]" value="{{$v->id}}">
 					<tr class="item-list">
 						<div class="bundle  bundle-last ">
 							<div class="bundle-hd">
@@ -80,8 +86,11 @@
 									</li>
 									<li class="td td-info">
 										<div class="item-props item-props-can">
-											<span class="sku-line">{{$v->specName1}}：{{$v->specValue1}}</span>
-											<span class="sku-line">{{$v-> specName2}}：{{$v->specValue2}}</span>
+											<span class="sku-line"><input  type="hidden"  name="specName1[]"  value="{{$v->specName1}}：{{$v->specValue1}}" >
+
+												{{$v->specName1}}：{{$v->specValue1}}</span>
+											<span class="sku-line">
+												<input  type="hidden"  type="hidden"  name="specName2[]"  value="{{$v-> specName2}}：{{$v->specValue2}}">{{$v->specName2}}：{{$v->specValue2}}</span>
 							
 										</div>
 									</li>
@@ -92,7 +101,8 @@
 													<em class="price-original">{{$v->shopPrice}}</em>
 												</div>
 												<div class="price-line">
-													<em class="J_Price price-now" tabindex="0">{{ $v->shopPrice }}</em>
+													<em class="J_Price price-now" tabindex="0">
+														<input type="hidden"  name="goodsprice[]" value="{{$v->shopPrice}}">{{ $v->shopPrice }}</em>
 												</div>
 											</div>
 										</div>
@@ -102,7 +112,8 @@
 											<div class="item-amount ">
 												<div class="sl">
 													<input class="min am-btn" name="" type="button" value="-" onclick="minus(this,{{$v->gid}},{{$v->id}})"/>
-													<input class="text_box" name="" type="text" value="1" style="width:30px;" />
+													<input class="text_box" name="goodnum[]" type="text" value="{{$v->num}}" style="width:30px;" />
+
 													<input class="add am-btn" name="" type="button" value="+" onclick="add(this,{{$v->gid}},{{$v->id}})"  />
 												</div>
 											</div>
@@ -110,14 +121,15 @@
 									</li>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" id="abc" class="J_ItemSum number" value="{{$v->shopprice->shopPrice}}">{{$v->shopPrice}}</em>
+											<em tabindex="0" id="abc" class="J_ItemSum number" name="goodsprice[]" value="{{$v->shopPrice}}">
+												<input type="hidden"  name="" value="">{{$v->shopPrice}}</em>
 										</div>
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
 											<a title="移入收藏夹" class="btn-fav" href="#">
                   移入收藏夹</a>
-											<a href="javascript:;" data-point-url="#" class="delete">
+											<a href="/home/shopcart/destory/{{$v->id}}" data-point-url="#" class="delete">
                   删除</a>
 										</div>
 									</li>
@@ -148,7 +160,7 @@
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="#" hidefocus="true" class="deleteAll">删除</a>
+						<a href="" hidefocus="true" class="deleteAll">删除</a>
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
 					</div>
 					<div class="float-bar-right">
@@ -162,11 +174,11 @@
 						</div>
 						<div class="price-sum">
 							<span class="txt">合计:</span>
-							<strong class="price">¥<em id="J_Total">{{$prices}}</em></strong>
+							<strong class="price">¥<em id="J_Total"><input type="hidden"  name="zongji" value="{{$prices}}">{{$prices}}</em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="/home/pay/index" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
-								<span>结&nbsp;算</span></a>
+							<a href="javascript:;"  id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+								<span><input  type="submit"   value="结&nbsp;算"></span></a>
 						</div>
 					</div>
 					  <div class="footer ">
@@ -174,6 +186,7 @@
 						
 					</div>
 			   </div>
+			</form>
 			   <script  type="text/javascript">
 			   	    
 			   	    function  add(obj,gid,id){
@@ -195,25 +208,34 @@
                     
                     
                 }
-                 function  minus(obj,id){
+                 function  minus(obj,gid,id){
                     let  num = parseInt($(obj).next().val());
-                    if(num == 0){
+                    if(num == 1){
+
                     	alert('商品不能为0');
+
                     	return false
                     }
                     
-                    let  gid  = id
+                    let  goodid  = gid
                    //当前合计
                     let  pricesold = $('#J_Total').text()
                     console.log(pricesold);
                     							//1      //当前合计
-                    $.get('/home/shopcart/minus' ,{num,gid,pricesold},function(res){
+                    $.get('/home/shopcart/minus' ,{num,goodid,pricesold,id},function(res){
                     	   let  resold = res.split('-')
                             $(obj).parent().parent().parent().parent().next().find('#abc').text(resold[0]);
                             $('#J_Total').text(resold[1])
                     },'html')
                    
                 }
+
+                function   settle(){
+
+                	 $.post('/home/pay/index')
+                }
+
+               
 		             
                
 			   </script>

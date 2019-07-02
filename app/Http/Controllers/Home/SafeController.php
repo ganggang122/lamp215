@@ -14,7 +14,9 @@ class SafeController extends Controller
     	if(!session('home_usersinfo')){
     		return redirect('home/login/index');
     	}
-    	return  view('home.safe.index', ['links'=>IndexController::getLinksData()]);
+    	 //统计购物车数量
+        $num  =  ShopcartController::num();
+    	return  view('home.safe.index', ['num'=>$num,'links'=>IndexController::getLinksData()]);
     }
 
     public  function  update(Request  $request)

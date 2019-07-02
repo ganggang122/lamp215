@@ -14,6 +14,7 @@ class ShopcartController extends Controller
        $gid = $request->input('id',0);
        $shopPrice = $request->input('shopPrice', 0);
        $num = $request->input('num', 0);
+
        $specName1 = $request->input('specName1' , '');
        $specValue1 = $request->input('specValue1' , '');
        $specName2 = $request->input('specName2' , '');
@@ -49,8 +50,9 @@ class ShopcartController extends Controller
     $uid = session('home_usersinfo')->id;
     $goods_data = Shopcart::where('uid',$uid)->get();
 
-    
-   	return  view('home.shopcart.index',['prices'=>$prices,'goods_data'=>$goods_data,'links'=>IndexController::getLinksData()]);
+    //统计购物车数量
+    $num  =  self::num();
+   	return  view('home.shopcart.index',['num'=>$num , 'prices'=>$prices,'goods_data'=>$goods_data,'links'=>IndexController::getLinksData()]);
    }
     //购物车加好计算
    public  function add(Request  $request)
@@ -58,21 +60,19 @@ class ShopcartController extends Controller
      $num  = $request->input('num' ,0); //2
      $gid  = $request->input('gid' , 0);
      $id   = $request->input('id' ,0);
+     $goodnum = $num+1;
+     Shopcart::where('id' , $id)->update(['num'=>$goodnum]);
      $pricesold = $request->input('pricesold' , 0);
 
-     session(['pricesold'=>$pricesold]);
+    
      $goods_data = Shopcart::find($id);
   
      
-      if( session('pricesold') !=0 ){
-      	$prices = session('pricesold') + $goods_data->shopPrice;
-      }else{
-      	 //总计 显示的是2个单品价格
-    	   	
-      }
+     $prices = self::zongji();
      //小计
-     $price = $num * $goods_data->shopPrice;
-     $price = $price +$goods_data->shopPrice;
+     $price = $goods_data->num * $goods_data->shopPrice;
+    
+  
 
      
     
@@ -83,21 +83,24 @@ class ShopcartController extends Controller
    { 
      $num  = $request->input('num' ,0); //2
      $gid  = $request->input('gid' , 0);
+     $id   = $request->input('id' ,0);
+     $goodnum = $num-1;
+     Shopcart::where('id' , $id)->update(['num'=>$goodnum]);
      $pricesold = $request->input('pricesold' , 0);
-     session(['pricesold'=>$pricesold]);
-     $goods_data = Goods::find($gid);
+    
+     $goods_data =  Shopcart::find($id);
   
      
-      if( session('pricesold') !=0 ){
-        $prices = session('pricesold') - $goods_data->shopPrice;
-      }else{
+    
+     $prices = self::zongji();
+
          //总计 显示的是2个单品价格
           
-      }
+  
      //小计
-     $price = $num * $goods_data->shopPrice;
-     $price = $price - $goods_data->shopPrice;
-
+     $price = $goods_data->num * $goods_data->shopPrice;
+     
+  
      
     
      echo $price.'-'.$prices; 
@@ -109,10 +112,36 @@ class ShopcartController extends Controller
    	  $goods_data = Shopcart::where('uid',$uid)->get();
       $num = 0;
    	  foreach($goods_data  as  $k=>$v){
-         $num +=$v->shopPrice;
+         $num +=$v->num * $v->shopPrice;
    	  }
 
    	  return $num;
+   }
+
+   public  static  function  num()
+   {
+       $uid = session('home_usersinfo')->id;
+      $goods_data = Shopcart::where('uid',$uid)->get();
+      $goodnum = 0;
+      foreach($goods_data  as  $k=>$v){
+         $goodnum +=$v->num ;
+      }
+
+      return  $goodnum;
+
+   }
+
+   //删除购物车
+   public  function  destory($id)
+   {
+      $res  =  Shopcart::destroy($id);
+      if($res){
+      	return back()->with('success' , '删除成功');
+      	exit;
+      }else{
+      	return back()->with('error' , '删除失败');
+      	exit;
+      }
    }
 
 

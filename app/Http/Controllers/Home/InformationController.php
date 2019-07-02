@@ -13,11 +13,13 @@ class InformationController extends Controller
     {    
         if(!session('home_usersinfo')){
              return redirect('home/login/index');
-        }  
+        }
+        //统计购物车数量
+        $num  =  ShopcartController::num();  
         $id  =  session('home_usersinfo')->id;   
         $users_data = Users::select('email' , 'phone' , 'uname')->find($id);
         
-    	return view('home.information.index',['users_data'=>$users_data]);
+    	return view('home.information.index',['num'=> $num,'users_data'=>$users_data]);
     }
 
 
