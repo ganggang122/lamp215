@@ -70,8 +70,9 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
  
 	//前台订单页
     Route::get('orders/index', 'Home\OrdersController@index');
+    // 前台订单评论页
+    Route::get('comment/show', 'Home\CommentController@show');
     
- 
 });
 
 
