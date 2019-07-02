@@ -31,7 +31,7 @@
         					<select name="pid" class="small">
         						<option value="0">--请选择--</option>
         						@foreach($cates as $k=>$v)
-        						<option value="{{$v->id}}" {{ substr_count($v->path,',') >= 2 ? 'disabled' : ''}}>{{$v->cname}}</option>
+        						<option value="{{$v->id}}" {{ substr_count($v->path,',') >= 2 ? 'disabled' : ''}} {{$v->id==$id ? 'selected' : ''}} >{{$v->cname}}</option>
         						@endforeach
         					</select>
         				</div>
