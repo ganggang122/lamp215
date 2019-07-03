@@ -64,14 +64,9 @@ class IndexController extends Controller
 
          //获取秒杀
          $seckills = DB::table('seckill')->where('status','2')->orderBy('top','desc')->orderBy('updated_at','desc')->get();
-        // return view('home.index.index',['recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);
 
          $id = self::getGoodsData();
-            //dd($id);
-         return view('home.index.index',['id'=>$id,'seckills'=>$seckills,'recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);
-
-        
-
+         return view('home.index.index',['id'=>$id,'seckills'=>$seckills,'recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);        
     }
 
     /**
