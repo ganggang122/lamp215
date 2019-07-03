@@ -249,7 +249,7 @@
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								{{--<img src="/uploads/{{ $seckills[0]->profile }} "></img>--}}
+								<img src="/uploads/{{ $seckills[0]->profile }} "></img>
 							</div>
 							<div class="info ">
 								<h3>{{ $seckills[0]->seckill }}</h3>
@@ -282,10 +282,10 @@
 							<div class="icon-sale "></div>
 							<h4>秒杀</h4>
 							<div class="activityMain ">
-								{{--<img src="/uploads/{{ $seckills[3]->profile }} " />--}}
+								<img src="/uploads/{{ $seckills[3]->profile }} " />
 							</div>
 							<div class="info ">
-								{{--<h3>{{ $seckills[3]->seckill }}</h3>--}}
+								<h3>{{ $seckills[3]->seckill }}</h3>
 							</div>													
 						</div>
 

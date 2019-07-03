@@ -70,9 +70,23 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
  
 	//前台订单页
     Route::get('orders/index', 'Home\OrdersController@index');
-
+    // 前台订单页一键支付
+    Route::get('orders/pay/{id}', 'Home\OrdersController@pay');
+    // 前台订单提醒发货
+    Route::get('orders/message/{id}', 'Home\OrdersController@message');
+    // 前台订单管理确认收货
+    Route::get('orders/givegoods/{id}', 'Home\OrdersController@givegoods');
+    // 前台订单管理评论商品引入页面
+    Route::get('orders/comment/{id}', 'Home\OrdersController@comment');
+    // 前台订单管理添加评论
+    Route::post('orders/commentsotre', 'Home\OrdersController@commentsotre');
+    // 前台删除订单
+    Route::get('orders/destroy/{id}', 'Home\OrdersController@destroy');
+    // 前台查看物流
+    Route::get('orders/logistics/{id}', 'Home\OrdersController@logistics');
     //前台购物车
     Route::get('shopcart/index' , 'Home\ShopcartController@index');
+    
 
     // 前台订单评论页
     Route::get('comment/show', 'Home\CommentController@show');
@@ -95,7 +109,7 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
 	Route::get('collect/collect','Home\CollectController@collect');
 
 	// 前台立即购买提交订单页
-	Route::post('pay/create/{id}' , 'Home\PayController@create');
+	Route::get  ('pay/create/{id}' , 'Home\PayController@create');
 	//前台删除购物车
 	Route::get('shopcart/destory/{id}' ,'Home\ShopcartController@destory');
 	//前台支付成功

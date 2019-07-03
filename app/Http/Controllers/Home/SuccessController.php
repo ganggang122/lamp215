@@ -21,8 +21,11 @@ class SuccessController extends Controller
 
     	$id = session('home_usersinfo')->id;
     	$address = Address::where('uid',$id)->where('status',1)->first();
-    	
-
-    	return  view('home.success.index' ,['zongji'=>$zongji,'num'=>$num,'address'=>$address]);
+    
+        header('refresh:3;url=/home/index');
+    
+    
+        return  view('home.success.index' ,['zongji'=>$zongji,'num'=>$num,'address'=>$address]);
+    
     }
 }

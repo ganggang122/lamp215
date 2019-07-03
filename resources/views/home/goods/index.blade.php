@@ -228,7 +228,7 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form action="/home/pay/create/{{$good->id}}" method="post" enctype="multipart/form-data">
+											<form action="/home/pay/create/{{$good->id}}" method="get" enctype="multipart/form-data" >
 													{{csrf_field()}}
                                                 <input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
                                                 <div class="theme-signin-left">
@@ -317,10 +317,9 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									{{--<a id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
-                                    <button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>
-                                    {{--<button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>--}}
+                                    <button style="width:98px;height:30px;border: 1px solid #F03726;background-color:#FFEDED;color: #F03726;" id="LikBuy" title="点此按钮到下一步确认购买信息" onclick="pay()">立即购买</button>
                                 </div>
+
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
@@ -337,6 +336,31 @@
 				</div>
 
                     <script>
+
+
+						// 立即购买 判断属性值是否选择
+                        function pay() {
+                            //判断商品规格值1是否存在
+                            if ($('#specValue1').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格1', {icon:5, time:8000});
+                                $("form").submit( function () {
+                                    return false;
+                                });
+                                var t=setTimeout("location.href = location.href;",1000);
+                                return  false
+                            }
+                            //判断商品规格值2是否存在
+                            if ($('#specValue2').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格2', {icon:5, time:3000});
+                                $("form").submit( function () {
+                                    return false;
+                                });
+                                var t=setTimeout("location.href = location.href;",1000);
+                                return  false
+                            }
+
+
+                        }
 //                        点击规格值1
                         function specValue1(specValue1) {
 
@@ -395,7 +419,7 @@
                             let specName1 = $('#specName1').html();
                             //判断规格值
                             if ($('#specValue1').find('.selected').html() == undefined) {
-                            	alert('商品属性1不能为空')
+                            	alert('商品属性1不能为空');
                             	return false;
                             }
                             
