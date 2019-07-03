@@ -2,7 +2,7 @@ function getYear(){
   			var yearNode = document.getElementById("year");
   			//创建年，从1900年到现在
   			var minYear = 1950;
-  			var maxYear = new Date().getFullYear()+50;
+  			var maxYear = new Date().getFullYear();
 			
   			for(var i=minYear;i<=maxYear;i++){
   				//创建Option

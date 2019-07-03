@@ -249,7 +249,7 @@
 							<div class="icon-sale one "></div>	
 								<h4>秒杀</h4>							
 							<div class="activityMain ">
-								{{--<img src="/uploads/{{ $seckills[0]->profile }} "></img>--}}
+								<img src="/uploads/{{ $seckills[0]->profile }} "></img>
 							</div>
 							<div class="info ">
 								<h3>{{ $seckills[0]->seckill }}</h3>
