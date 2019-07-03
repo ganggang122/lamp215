@@ -29,18 +29,15 @@ class ShopcartController extends Controller
       $shop_data->specValue1 = $specValue1;
       $shop_data->specName2 =  $specName2;
       $shop_data->specValue2 =  $specValue2;
+      	
       $res = $shop_data->save();
       
       if($res){
           echo  json_encode(['msg'=>'success' , 'info'=>'加入购物车成功']);
           exit;
-       /* $data['error'] = 0;
-        $data['msg']   = '加入购物车成功';*/
       }else{
           echo  json_encode(['msg'=>'error' , 'info'=>'加入购物车失败']);
           exit;
-         /* $data['error'] = 1;
-          $data['msg']   = '加入购物车失败';*/
       }
    }
    //购物车页面
@@ -49,12 +46,16 @@ class ShopcartController extends Controller
     $prices = self::zongji();
     $uid = session('home_usersinfo')->id;
     $goods_data = Shopcart::where('uid',$uid)->get();
+    //判断购物车是否为空
+    if($goods_data->isEmpty()){
+    	echo  "<script>alert('购物车为空,请先购物');location.href='/home/index'</script>";
+    }
 
     //统计购物车数量
     $num  =  self::num();
    	return  view('home.shopcart.index',['num'=>$num , 'prices'=>$prices,'goods_data'=>$goods_data,'links'=>IndexController::getLinksData()]);
    }
-    //购物车加好计算
+    //购物车加号计算
    public  function add(Request  $request)
    { 
      $num  = $request->input('num' ,0); //2
@@ -120,7 +121,12 @@ class ShopcartController extends Controller
 
    public  static  function  num()
    {
-       $uid = session('home_usersinfo')->id;
+      if(!session('home_usersinfo')){
+      
+      	return false; 
+      }
+      $uid = session('home_usersinfo')->id;
+
       $goods_data = Shopcart::where('uid',$uid)->get();
       $goodnum = 0;
       foreach($goods_data  as  $k=>$v){

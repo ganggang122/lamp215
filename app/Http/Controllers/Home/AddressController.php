@@ -82,13 +82,16 @@ class AddressController extends Controller
 
     public  function  edit($id)
     {    
+
+         //统计购物车数量
+        $num  =  ShopcartController::num();
         if(!session('home_usersinfo')){
     		return redirect('home/login/index');
     	} 
     	$uid = session('home_usersinfo')->id;
     	$users_address = Address::where('uid',$uid)->get();
     	$users_addre = Address::find($id);
-        return view('home.address.edit' , ['users_address' =>$users_address,'users_addre'=>$users_addre,'links'=>IndexController::getLinksData()]);
+        return view('home.address.edit' , ['num'=>$num,'users_address' =>$users_address,'users_addre'=>$users_addre,'links'=>IndexController::getLinksData()]);
     }
 
     public  function  show(Request $request,$id)

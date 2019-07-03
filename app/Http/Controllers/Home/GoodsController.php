@@ -76,15 +76,24 @@ class GoodsController extends Controller
         } else {
             $collect = false;
         }
-
-    
+     
+        //获取当前商品的评论
+        $comment = new CommentController();
+        $comment_conent = $comment->index($id);
+        
+          //统计购物车数量
+        $num  =  ShopcartController::num();
+        
+      
         return view('home.goods.index', [
+        	'num'=>$num,
             'good'=>$good,
             'shopPrice' => $shopPrice,
             'specName1'  => $sepcName1,
             'specName2'  => $sepcName2,
             'specValue1' => $specValue1,
             'specValue2' => $specValue2,
+            'data' => $comment_conent,
             'collect'    => $collect,
         ]);
     }

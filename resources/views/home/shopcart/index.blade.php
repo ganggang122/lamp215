@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -69,8 +70,7 @@
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" id="J_CheckBox_170037950254" name="items[]" value="170037950254" type="checkbox">
-											<label for="J_CheckBox_170037950254"></label>
+											
 										</div>
 									</li>
 									<li class="td td-item">
@@ -127,8 +127,8 @@
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
-											<a title="移入收藏夹" class="btn-fav" href="#">
-                  移入收藏夹</a>
+											<a title="移入收藏夹" id="gid"  class="btn-fav"   onclick='collect(this,{{$v->gid}})'>
+                  移入收藏</a>
 											<a href="/home/shopcart/destory/{{$v->id}}" data-point-url="#" class="delete">
                   删除</a>
 										</div>
@@ -150,6 +150,20 @@
 				
 				</div>
 				<div class="clear"></div>
+				<script>
+		function collect(obj,$gid)
+		{
+	
+			$.get('/home/collect/collect',{'gid':$gid},function(res){
+				if( res == 'ok') {
+					$(obj).text('取消收藏')
+				} 
+				if ( res == 'del') {
+					$(obj).text('移入收藏')
+				}
+			},'json')
+		}
+	</script>
 
 				<div class="float-bar-wrapper">
 					<div id="J_SelectAll2" class="select-all J_SelectAll">

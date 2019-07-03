@@ -181,8 +181,8 @@
 														<span class="phone-title">购买数量</span>
 														<div class="sl">
 														
-															<input class="text_box" name="" type="text" value="{{$v->goodnum}}" style="width:30px;" />
-															
+															<span class="text_box"  style="width:30px;" >{{$v->goodnum}}</span>
+
 														</div>
 													</div>
 												</div>

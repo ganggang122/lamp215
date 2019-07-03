@@ -30,8 +30,9 @@ class CollectController extends Controller
         foreach($goods as $k=>$v){
             $goods[$k]->shopPrice= explode(',',$v->shopPrice)[0] ;
         }
-
-		return view('home.collect.index',['goods'=>$goods]);
+        //统计购物车数量
+        $num  =  ShopcartController::num();  
+		return view('home.collect.index',['goods'=>$goods,'num'=>$num]);
     }
 
     //删除收藏

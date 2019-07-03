@@ -52,10 +52,12 @@
 				<div class="main-wrap">
 
 					<div class="user-info">
-						<!--标题 -->
-						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
-						</div>
+						 @if(session('error'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('error') }}')
+									   </script>
+									@endif
+							
 						<hr/>
 
 						<!--头像 -->
@@ -101,7 +103,7 @@
 								    <div class="alert alert-danger">
 								        <ul>
 								            @foreach ($errors->all() as $error)
-								                <li style="color:red;margin:auto">*{{ $error }}</li>
+								               <script>alert('{{ $error }}')</script>
 								            @endforeach
 								        </ul>
 								    </div>
@@ -187,7 +189,7 @@
 									</div>
 								</div>
 								<img  src="/h/images/youxiang.jpg">
-								<a href="/home/email/email" style="position:absolute;margin-left:100px;font-size:15px;margin-top:30px">绑定邮箱</a>
+								<a href="/home/email/index" style="position:absolute;margin-left:100px;font-size:15px;margin-top:30px">绑定邮箱</a>
 								@endif
 								<div class="am-form-group"  style="margin-top:100px">
 									<label for="user-email" class="am-form-label">头像</label>

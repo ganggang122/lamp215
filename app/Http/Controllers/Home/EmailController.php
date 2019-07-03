@@ -10,8 +10,10 @@ use App\Models\Users;
 class EmailController extends Controller
 {
     public  function  index()
-    {
-    	 return  view('home.resgister.email',['links'=>IndexController::getLinksData()]);
+    {     
+    	//统计购物车数量
+         $num  =  ShopcartController::num();
+    	 return  view('home.resgister.email',['num'=>$num,'links'=>IndexController::getLinksData()]);
     }
 
     public  function  storemail(Request  $request)
@@ -43,8 +45,10 @@ class EmailController extends Controller
          
     }
     public  function  phone()
-    {
-    	return  view('home.resgister.phone',['links'=>IndexController::getLinksData()]);
+    {   
+    	 //统计购物车数量
+         $num  =  ShopcartController::num();
+    	return  view('home.resgister.phone',['num'=>$num,'links'=>IndexController::getLinksData()]);
     }
 
     public  function storephone(Request $request)

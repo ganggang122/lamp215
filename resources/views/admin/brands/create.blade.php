@@ -11,12 +11,8 @@
         </div>
     @endif
 
-    <div class="mws-panel grid_8">
-
+    <div class="mws-panel grid_8" style="margin-left: -27px;">
         <div class="mws-panel-header"  style="height:50px">
-
-        
-
             <span>品牌添加</span>
         </div>
         <div class="mws-panel-body no-padding">

@@ -1,6 +1,7 @@
 @include('home.public.header')
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="_token" content="{{ csrf_token() }}"/>
+<script type="text/javascript" src="/h/comment/js/comment.js" ></script>
 <script type="text/javascript" src="/h/basic/js/quick_links.js"></script>
 <script type="text/javascript" src="/h/js/list.js"></script>
 <script type="text/javascript" src="/h/js/jquery.imagezoom.min.js"></script>
@@ -95,7 +96,6 @@
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
-										<a href="#"><img src="/h/images/01_small.jpg" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 										<a href="#"><img src="{{$good->goodsinfo['goodsPhotoinfo1']}}" mid="images/01_mid.jpg" big="images/01.jpg"></a>
 									</div>
 								</li>
@@ -121,7 +121,6 @@
 						<!--名称-->
 						<div class="tb-detail-hd">
 							<h1>{{$good->goodsName}}</h1>
-							<input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
 							<button onclick='collect(this)'>{{ $collect ? ' 已收藏 ': '点击收藏' }}</button>
 						</div>
 
@@ -139,7 +138,7 @@
 									if ( res == 'del') {
 										$(obj).html('点击收藏');
 									}
-									console.log(res)
+									// console.log(res)
 								},'json')
 							}
 						</script>
@@ -229,40 +228,42 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form  action="" method="post">
+											<form action="/home/pay/create/{{$good->id}}" method="post" enctype="multipart/form-data">
 													{{csrf_field()}}
-												<div class="theme-signin-left">
-
+                                                <input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
+                                                <div class="theme-signin-left">
+                                                    <input type="hidden" name="shopPrice" value="{{$good->shopPrice}}" >
 													<div class="theme-options">
 														<div class="cart-title" id="specName1">{{$specName1}}</div>
-														<ul>
+                                                        <input type="hidden" name="specName1" value="{{$specName1}}">
+														<ul id="specValue1">
 															@foreach($specValue1 as $k=>$v)
-
-															<li class="sku-line ">{{$v}}<i></i></li>
-
-															<li class="sku-line">{{$v}}<i></i></li>
-
+															<li class="sku-line" onclick="specValue1('{{$v}}')">{{$v}}<i></i></li>
 															@endforeach
 														</ul>
-													</div>
+                                                        <input type="hidden" name="specValue1" value="">
+                                                    </div>
 													<div class="theme-options">
 														<div class="cart-title" id="specName2">{{$specName2}}</div>
-														<ul>
+                                                        <input type="hidden" name="specName2" value="{{$specName2}}">
+                                                        <ul id="specValue2">
 
 															@foreach($specValue2 as $k=>$v)
-																<li class="sku-line-li" id="specValue2" onclick="specValue2('{{$v}}','{{$good->shopPrice}}')">{{$v}}<i></i></li>
-															@endforeach
-														</ul>
+																<li class="sku-line"  onclick="specValue2('{{$v}}','{{$good->shopPrice}}')">{{$v}}<i></i></li>
+                                                            @endforeach
+                                                                <input type="hidden" name="specValue2" value="{{$v}}">
+
+                                                        </ul>
 													</div>
 													<div class="theme-options">
 														<div class="cart-title number">数量</div>
+                                                        <input type="hidden" name="num" value="1">
 														<dd>
 															<input id="min" class="am-btn am-btn-default" name="" onclick="minus()" type="button" value="-" />
 															<input id="text_box" name="" type="text" value="1"  style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" onclick='update()' type="button" value="+" />
 															<span id="Stock" class="tb-hidden">库存<span class="stock">{{$good->goodsStock}}</span>件</span>
 														</dd>
-
 													</div>
 													<div class="clear"></div>
 
@@ -280,7 +281,6 @@
 														<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
 													</div>
 												</div>
-
 										</div>
 									</div>
 
@@ -317,9 +317,9 @@
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
-									{{--<a type="submit" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
-                                    {{--<button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>--}}
-                                    <button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>
+									{{--<a id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</a>--}}
+                                    <button style="width:98px;height:30px;background-color:#F03726;color: #FFF;" id="LikBuy" title="点此按钮到下一步确认购买信息" >立即购买</button>
+                                    {{--<button id="LikBuy" title="点此按钮到下一步确认购买信息">立即购买</button>--}}
                                 </div>
 							</li>
 							<li>
@@ -336,82 +336,92 @@
 
 				</div>
 
-                {{--动态获取价格js--}}
                     <script>
-                        function specValue2(val, shopPrice) {
+//                        点击规格值1
+                        function specValue1(specValue1) {
 
+                             $('input[name=specValue1]').val(specValue1);
+                        }
+                        {{--动态获取价格js--}}
+                        function specValue2(val, shopPrice) {
                             let str1 = shopPrice.split(',');
                             if (val == '6+128' || val == '128' ) {
                                  $('.sys_item_price').html(str1[0]);
+                                 $('input[name=shopPrice]').val(str1[0]);
+                                 $('input[name=specValue2]').val(val);
                             }else if (val == '8+128' ||  val == '256' ) {
                                  $('.sys_item_price').html(str1[1]);
+                                $('input[name=shopPrice]').val(str1[1]);
+                                $('input[name=specValue2]').val(val);
                             }else if (val == '8+256' || val == '512' ){
                                  $('.sys_item_price').html(str1[2]);
+                                $('input[name=shopPrice]').val(str1[2]);
+                                $('input[name=specValue2]').val(val);
                             }
                         }
 
-
                         // 加
                         function update(obj) {
-                            var num = parseInt($('#text_box').eq(0).val())+1  ;
+                            var num = parseInt($('#text_box').eq(0).val())+1;
+                            $('input[name=num]').val(num);
                         }
 
                         // 减
                         function minus() {
                             num = $('#text_box').eq(0).val()-1;
+                            $('input[name=num]').val(num);
 
                         }
-
                         // 加入购物车
                         function goodCart(id) {
                             $.ajaxSetup({
                                 headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                                 }
                             });
+                            //判断商品规格值1是否存在
+                            if ($('#specValue1').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格1', {icon:5, time:3000});
+                                return false;
+                            }
+                            if ($('#specValue2').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格2', {icon:5, time:3000});
+                                return false;
+                            }
 
                             let num =$('#text_box').eq(0).val();
-                           /* let goodsPhotoinfo1 = $('#jqzoom').src;
-                            // console.log(goodsPhotoinfo1); 没值*/
                             // 规格名称1
                             let specName1 = $('#specName1').html();
+                            //判断规格值
+                            if ($('#specValue1').find('.selected').html() == undefined) {
+                            	alert('商品属性1不能为空')
+                            	return false;
+                            }
+                            
                             // 获取规格值1
-                            let specValue1 = $('.sku-line.selected').html().replace('<i></i>', '');
+                            let specValue1 = $('#specValue1').find('.selected').html().replace('<i></i>', '');
+
+
                             // 规格名称2
                             let specName2 = $('#specName2').html();
                             // 规格值2
-                            let specValue2 = $('.sku-line-li.selected').html().replace('<i></i>', '');
-
+                            if ($('#specValue2').find('.selected').html() == undefined) {
+                            	alert('商品属性2不能为空')
+                            	return false;
+                            }
+                            let specValue2 = $('#specValue2').find('.selected').html().replace('<i></i>', '');
                             // 店铺价格
                             let  shopPrice = $('#shopPrice').html();
-
-
                             $.post('/home/shopcart/store', {id,specName1,specValue1,specName2,specValue2,shopPrice,num},function (res) {
-                               /* if(data.error == 0){
-                                    layer.msg(data.msg, {icon: 6});
-                                }else (data.error == 1){
-                                    layer.msg(data.msg, {icon: 5});
-                                }*/
                                 if(res.msg = 'error'){
                                     layer.msg(res.info,{icon:6})
                                 }else{
                                     alert(res.info)
                                 }
-
                             },'json');
 
                         }
-
-
-                        /*let specName2 =  $('#specName2').val();
-                        console.log(specName2);*/
-                        /*let  specName1 =  $('#specName1').val();
-                        console.log(specName1);
-                        let
-
-                        console.log(specName2);*/
-
-
                     </script>
 				<!--优惠套装-->
 				<div class="match">
@@ -519,7 +529,7 @@
 								<li>
 									<a href="#">
 
-										<span class="index-needs-dt-txt">全部评价</span></a>
+										<span class="index-needs-dt-txt" >全部评价</span></a>
 
 								</li>
 
@@ -535,44 +545,7 @@
 								<div class="am-tab-panel am-fade am-in am-active">
 									{!!  $good->goodsinfo['goodsContent'] !!}
 								</div>
-								{{--<div class="am-tab-panel am-fade am-in am-active">
-									<div class="J_Brand">
 
-										<div class="attr-list-hd tm-clear">
-											<h4>产品参数：</h4></div>
-										<div class="clear"></div>
-										<ul id="J_AttrUL">
-											<li title="">产品类型:&nbsp;烘炒类</li>
-											<li title="">原料产地:&nbsp;巴基斯坦</li>
-											<li title="">产地:&nbsp;湖北省武汉市</li>
-											<li title="">配料表:&nbsp;进口松子、食用盐</li>
-											<li title="">产品规格:&nbsp;210g</li>
-											<li title="">保质期:&nbsp;180天</li>
-											<li title="">产品标准号:&nbsp;GB/T 22165</li>
-											<li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
-											<li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存 </li>
-											<li title="">食用方法：&nbsp;开袋去壳即食</li>
-										</ul>
-										<div class="clear"></div>
-									</div>
-
-									<div class="details">
-										<div class="attr-list-hd after-market-hd">
-											<h4>商品细节</h4>
-										</div>
-										<div class="twlistNews">
-											<img src="/h/images/tw1.jpg" />
-											<img src="/h/images/tw2.jpg" />
-											<img src="/h/images/tw3.jpg" />
-											<img src="/h/images/tw4.jpg" />
-											<img src="/h/images/tw5.jpg" />
-											<img src="/h/images/tw6.jpg" />
-											<img src="/h/images/tw7.jpg" />
-										</div>
-									</div>
-									<div class="clear"></div>
-
-								</div>--}}
 
 								<div class="am-tab-panel am-fade">
 									
@@ -583,15 +556,15 @@
                                         <dl>                    
                                             <dt>买家印象</dt>                    
                                             <dd class="p-bfc">
-                                            			<q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
-                                            			<q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
-                                            			<q class="comm-tags"><span>口感好</span><em>(1823)</em></q>
-                                            			<q class="comm-tags"><span>商品不错</span><em>(1689)</em></q>
-                                            			<q class="comm-tags"><span>香脆可口</span><em>(1488)</em></q>
-                                            			<q class="comm-tags"><span>个个开口</span><em>(1392)</em></q>
-                                            			<q class="comm-tags"><span>价格便宜</span><em>(1119)</em></q>
-                                            			<q class="comm-tags"><span>特价买的</span><em>(865)</em></q>
-                                            			<q class="comm-tags"><span>皮很薄</span><em>(831)</em></q> 
+                                                <q class="comm-tags"><span>味道不错</span><em>(2177)</em></q>
+                                                <q class="comm-tags"><span>颗粒饱满</span><em>(1860)</em></q>
+                                                <q class="comm-tags"><span>口感好</span><em>(1823)</em></q>
+                                                <q class="comm-tags"><span>商品不错</span><em>(1689)</em></q>
+                                                <q class="comm-tags"><span>香脆可口</span><em>(1488)</em></q>
+                                                <q class="comm-tags"><span>个个开口</span><em>(1392)</em></q>
+                                                <q class="comm-tags"><span>价格便宜</span><em>(1119)</em></q>
+                                                <q class="comm-tags"><span>特价买的</span><em>(865)</em></q>
+                                                <q class="comm-tags"><span>皮很薄</span><em>(831)</em></q>
                                             </dd>                                           
                                          </dl> 
                                     </div>	
@@ -629,7 +602,29 @@
 									</div>
 									<div class="clear"></div>
 
-									<ul class="am-comments-list am-comments-list-flip">
+									<script>
+
+
+
+                                        $(function(){
+                                            let id = $('input[name=gid]').val();
+                                            $.get('/home/comment/index/'+id, function (data) {
+                                                $.each(data,function (idx,obj) {
+                                                    console.log(obj.content);
+                                               });
+                                            },'json');
+
+                                            {{--$.ajax({--}}
+                                                {{--url:"{{ url('/home/comment/index/') }}",--}}
+                                                {{--type:'get',--}}
+                                                {{--data:{id:id},--}}
+                                                {{--success:function (data) {--}}
+                                                    {{--console.log(data);--}}
+                                                {{--}--}}
+                                            {{--});--}}
+                                        });
+                                    </script>
+				        			<ul class="am-comments-list am-comments-list-flip">
 										<li class="am-comment">
 											<!-- 评论容器 -->
 											<a href="">
@@ -664,380 +659,130 @@
 												<!-- 评论内容 -->
 											</div>
 										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
+                                    </ul>
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">l***4 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年10月28日 11:33</time>
-													</div>
-												</header>
 
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255095758792">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															没有色差，很暖和……美美的
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：蓝调灰&nbsp;&nbsp;尺码：2XL
-														</div>
-													</div>
+                                {{--<div class="">--}}
+                                            <!--发表评论区begin-->
 
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
+                                            <!--发表评论区end-->
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
-													</div>
-												</header>
+                                            <!--评论列表显示区begin-->
+                                            <!-- {$commentlist} -->
+                                            {{--<div class="" >--}}
 
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255776406962">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
-														</div>
-													</div>
+                                                <br>
+                                                {{--<div class="comment-list" >--}}
+                                                    <!--一级评论列表begin-->
+                                                    <ul class="comment-ul am-comments-list am-comments-list-flip">
+                                                        @if(isset($data))
+                                                            @foreach($data as $v1)
+                                                                <li comment_id="{{$v1->id}}" class="am-comment">
+                                                                    <div class="am-comment-main">
+                                                                        <div>
+                                                                            <img class="head-pic"  src="{{$v1->head_pic}}" alt="">
+                                                                        </div>
+                                                                        <div class="cm">
+                                                                            <div class="am-comment-hd">
+                                                                                <div class="cm-header am-comment-meta">
+                                                                                    <span>{{$v1->nickname}}</span>
+                                                                                    <span>{{$v1->created_at}}</span>
+                                                                                    <input type="hidden" name="id" value="{{ $good->id }}">
+                                                                                </div>
+                                                                            </div>
 
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
+                                                                            <div class="cm-content ">
+                                                                                <br>
+                                                                                <p class="J_TbcRate_ReviewContent">
+                                                                                    {!! $v1->content !!}
+                                                                                </p>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="cm-footer tb-r-act-bar">
+                                                                                <a class="comment-reply" comment_id="{{$v1->id}}" href="javascript:void(0);">回复</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">h***n (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月25日 12:48</time>
-													</div>
-												</header>
+                                                                    <!--二级评论begin-->
+                                                                    <ul class="children">
+                                                                        @if(isset($v1->children))
+                                                                            @foreach($v1->children as $v2)
 
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="258040417670">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															式样不错，初冬穿
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：L
-														</div>
-													</div>
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
+                                                                                <li comment_id="{{$v2->id}}" class="am-comment">
+                                                                                    <div class="am-comment-main">
+                                                                                        <div>
+                                                                                            <img class="head-pic"  src="{{$v2->head_pic}}" alt="">
+                                                                                        </div>
 
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
+                                                                                        <div class="children-cm">
+                                                                                            <div class="am-comment-hd">
+                                                                                                <div class="cm-header am-comment-meta">
+                                                                                                    <span>{{$v2->nickname}}</span>
+                                                                                                    <span>{{$v2->created_at}}</span>
+                                                                                                </div>
+                                                                                            </div>
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
-													</div>
-												</header>
+                                                                                            <div class="cm-content">
+                                                                                                <br>
+                                                                                                <p class="J_TbcRate_ReviewContent">
+                                                                                                    {!! $v2->content !!}
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <div class="cm-footer tb-r-act-bar">
+                                                                                                <a class="comment-reply" replyswitch="off" comment_id="{{$v2->id}}"  href="javascript:void(0);">回复</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
 
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255776406962">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
-														</div>
-													</div>
+                                                                                    <!--三级评论begin-->
+                                                                                    <ul class="children">
+                                                                                        @if(isset($v2->children))
+                                                                                            @foreach($v2->children as $v3)
+                                                                                                <li comment_id="{{$v3->id}}">
+                                                                                                    <div >
+                                                                                                        <div>
+                                                                                                            <img class="head-pic"  src="{{$v3->head_pic}}" alt="">
+                                                                                                        </div>
+                                                                                                        <div class="children-cm">
+                                                                                                            <div  class="cm-header">
+                                                                                                                <span>{{$v3->nickname}}</span>
+                                                                                                                <span>{{$v3->created_at}}</span>
+                                                                                                            </div>
+                                                                                                            <div class="cm-content">
+                                                                                                                <p>
+                                                                                                                    {!! $v3->content !!}
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <div class="cm-footer">
+                                                                                                                <!-- <a class="comment-reply" comment_id="1"  href="javascript:void(0);">回复</a> -->
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                    </ul>
+                                                                                    <!--三级评论end-->
+                                                                                </li>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </ul>
+                                                                    <!--二级评论end-->
 
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                    <!--一级评论列表end-->
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            <!--评论列表显示区end-->
+                                        {{--</div>--}}
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">l***4 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年10月28日 11:33</time>
-													</div>
-												</header>
 
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255095758792">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															没有色差，很暖和……美美的
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：蓝调灰&nbsp;&nbsp;尺码：2XL
-														</div>
-													</div>
 
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
 
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255776406962">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
-														</div>
-													</div>
-
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
-
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">h***n (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月25日 12:48</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="258040417670">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															式样不错，初冬穿
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：L
-														</div>
-													</div>
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
-
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255776406962">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
-														</div>
-													</div>
-
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
-
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">l***4 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年10月28日 11:33</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255095758792">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															没有色差，很暖和……美美的
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：蓝调灰&nbsp;&nbsp;尺码：2XL
-														</div>
-													</div>
-
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
-
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">b***1 (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月02日 17:46</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="255776406962">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															摸起来丝滑柔软，不厚，没色差，颜色好看！买这个衣服还接到诈骗电话，我很好奇他们是怎么知道我买了这件衣服，并且还知道我的电话的！
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
-														</div>
-													</div>
-
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-										<li class="am-comment">
-											<!-- 评论容器 -->
-											<a href="">
-												<img class="am-comment-avatar" src="/h/images/hwbn40x40.jpg" />
-												<!-- 评论者头像 -->
-											</a>
-
-											<div class="am-comment-main">
-												<!-- 评论内容容器 -->
-												<header class="am-comment-hd">
-													<!--<h3 class="am-comment-title">评论标题</h3>-->
-													<div class="am-comment-meta">
-														<!-- 评论元数据 -->
-														<a href="#link-to-user" class="am-comment-author">h***n (匿名)</a>
-														<!-- 评论者 -->
-														评论于
-														<time datetime="">2015年11月25日 12:48</time>
-													</div>
-												</header>
-
-												<div class="am-comment-bd">
-													<div class="tb-rev-item " data-id="258040417670">
-														<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
-															式样不错，初冬穿
-														</div>
-														<div class="tb-r-act-bar">
-															颜色分类：柠檬黄&nbsp;&nbsp;尺码：L
-														</div>
-													</div>
-												</div>
-												<!-- 评论内容 -->
-											</div>
-										</li>
-
-									</ul>
 
 									<div class="clear"></div>
 

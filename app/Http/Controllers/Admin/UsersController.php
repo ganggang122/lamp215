@@ -64,6 +64,7 @@ class UsersController extends Controller
         $user->upass = Hash::make($data['upass']);
         $user->email = $data['email'];
         $user->phone = $data['phone'];
+        $user->status = 1;
         //存储到user表
         $res1 = $user->save();
         //将头像信息存储到user_info表
