@@ -33,6 +33,11 @@
 							<td >{{$v->specname1}}</td>
 							<td >{{$v->specname2}}</td>
 							<td >{{$v->goodsprice}}</td>
+							@if($v->status == 1)
+							<td  >未付款</td>
+							<td >不能修改</td>
+							@endif
+
 							@if($v->status == 2)
 							<td  >已付款</td>
 							<td ><a  href="/admin/order/add/{{$v->id}}">代发货</a></td>
@@ -43,6 +48,10 @@
 							@endif
 							@if($v->status == 4)
 							<td style="color:red">待评价</td>
+							<td>不能修改</td>
+							@endif
+							@if($v->status == 5)
+							<td style="color:green">完美</td>
 							<td>不能修改</td>
 							@endif
 							

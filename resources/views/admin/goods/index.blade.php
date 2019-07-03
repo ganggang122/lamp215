@@ -80,13 +80,13 @@
 
                     <tr>
                         <td class="ids">{{$v->id}}</td>
-                        <td>{{$v->goodsNum}}</td>
+                        <td  title="{{$v->goodsNum}}" >{{$v->goodsNum}}</td>
                         <td>
                             <img src="{{$v->goodsinfo['goodsPhotoinfo1']}}" alt="" id="img1" onclick="edit">
 
                         </td>
                         <td >
-                            <p title="{{$v->goodsName}}" class="name" ondblclick="editName({{$v->id}},this)" style="" >{{$v->goodsName}}</p>
+                            <p title="{{$v->goodsName}}" class="name" ondblclick="editName({{$v->id}},this)" style="width:120px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis" >{{$v->goodsName}}</p>
                         </td>
                         <td>{{$v->goodscate['cname']}}</td>
                         <td>{{$v->goodsbrand['bname']}}</td>
@@ -99,7 +99,7 @@
                                 <span class="btn btn-primary btn-small">下架</span>
                             @endif
                         </td>
-                        <td>{{$v->created_at}}</td>
+                        <td  >{{$v->created_at}}</td>
                         <td>
                             <a href="/admin/goods/{{$v->id}}/edit" class="btn btn-success">修改</a>
                             <a href="javascript:;" onclick="delGoods({{$v->id}}, this)" class="btn btn-danger">删除</a>
