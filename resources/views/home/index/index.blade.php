@@ -4,6 +4,7 @@
 			<div class="banner">
                       <!--轮播 -->
 
+
 						<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
 
 
@@ -18,10 +19,20 @@
 							</ul>
 						</div>
 						<div class="clear"></div>	
+
+						<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
+                        
+                        <ul class="am-slides">
+                            @foreach($banners as $k=>$v)
+                            <li class="banner1"><a href="/home/list/index/{{$v->cid}}/n"><img src="/uploads/{{ $v->url }}" /></a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="clear"></div>  
+
 			</div>
 			<div class="shopNav">
 				<div class="slideall">
-					
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
@@ -36,7 +47,7 @@
 						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
 						    </div>
 						</div>					
-		        				
+		        		
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
 							<div class="area clearfix">

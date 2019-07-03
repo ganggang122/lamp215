@@ -103,17 +103,12 @@ class CollectController extends Controller
     		$store->save();
     		echo json_encode('ok');
 
-
-            
-
-    	
     		exit;
 
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
     			echo json_encode('del');
-
 
     			exit;
 

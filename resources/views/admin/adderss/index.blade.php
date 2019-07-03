@@ -51,12 +51,12 @@
 							<td style="width:100px">{{$v->phone}}</td>
 							<td ><span  style="width:100px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="{{$v->address}}">{{$v->address}}</span></td>
 							<td style="width:100px">
-								@if(empty($v->getUserAddress->uname) &&empty($v->getUserAddress->phone))
-								<span>{{$v->getUserAddress->email}}</span>
-								@elseif(empty($v->getUserAddress->email) &&empty($v->getUserAddress->phone))
-								<span>{{$v->getUserAddress->uname}}</span>
-								@elseif(empty($v->getUserAddress->email) &&empty($v->getUserAddress->uname))
-								<span>{{$v->getUserAddress->phone}}</span>
+								@if(empty($v->getUserAddress['uname']) && empty($v->getUserAddress['phone']))
+								<span>{{$v->getUserAddress['email']}}</span>
+								@elseif(empty($v->getUserAddress['email']) &&empty($v->getUserAddress['phone']))
+								<span>{{$v->getUserAddress['uname']}}</span>
+								@elseif(empty($v->getUserAddress['email']) && empty($v->getUserAddress['uname']))
+								<span>{{$v->getUserAddress['phone']}}</span>
 								@endif
 								<!-- {{$v->getUserAddress}} -->
 							</td>

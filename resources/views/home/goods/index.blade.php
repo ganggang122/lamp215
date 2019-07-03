@@ -228,7 +228,11 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
+
 											<form action="/home/pay/create/{{$good->id}}" method="post" enctype="multipart/form-data">
+
+											<form  action="/home/pay/index" method="get">
+
 													{{csrf_field()}}
                                                 <input type='hidden' id='gid' name='gid' value='{{ $good->id }}'>
                                                 <div class="theme-signin-left">
