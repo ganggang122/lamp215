@@ -381,9 +381,13 @@
                                 }
                             });
                             //判断商品规格值1是否存在
-                            let selct = $('.selected').html();
-                            if (selct == '') {
-                                alert(111);
+                            if ($('#specValue1').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格1', {icon:5, time:3000});
+                                return false;
+                            }
+                            if ($('#specValue2').find('.selected').html() == undefined) {
+                                layer.msg('请选择商品规格2', {icon:5, time:3000});
+                                return false;
                             }
 
                             let num =$('#text_box').eq(0).val();

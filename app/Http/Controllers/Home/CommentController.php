@@ -8,6 +8,20 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
+    
+    public function show()
+    {
+        if(!session('home_usersinfo')){
+            return redirect('home/login/index');
+        }
+        //统计购物车数量
+        $num  =  ShopcartController::num();
+        // 显示订单评论页面
+        return view('home.comment.index',[
+            'num'=>$num,
+            'links'=>IndexController::getLinksData(),
+        ]);
+    }
     //获取评论列表加载到页面
     public function index($gid)
     {
