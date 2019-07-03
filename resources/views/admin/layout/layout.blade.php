@@ -65,7 +65,7 @@
             
                 <!-- User Photo -->
                 <div id="mws-user-photo">
-                    <img src="/d/example/profile.jpg " alt="User Photo">
+                    <img src="/uploads/{{ session('admin_user_info')->profile }} " alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->

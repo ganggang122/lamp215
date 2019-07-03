@@ -9,20 +9,23 @@ use App\Models\Address;
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示地址详情
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        //获取所有地址信息
         $address = Address::all();
        
         return view('admin.adderss.index',['address'=>$address]);
     }
     public function getAddress(Request $request)
     {
+        //获取id
 
         $id = $request->input('id',0);
+        //获取信息
         $address = Address::find($id);
         $address_data = $address->address;
         echo $address_data;
@@ -34,6 +37,7 @@ class AddressController extends Controller
      */
     public function create()
     {
+
         return view('admin.adderss.create');
     }
 
