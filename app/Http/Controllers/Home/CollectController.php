@@ -50,12 +50,12 @@ class CollectController extends Controller
     public function del(Request $request)
     {
     	//获取用户id
-    	// $user = session('home_usersinfo');
-    	// $uid = $user->id;
+    	$user = session('home_usersinfo');
+    	$uid = $user->id;
 
-    	$uid = session('home_usersinfo')->id;
+    
 
-    	$uid = 2;
+    	
 
     	//接收商品id
     	$gid =  $request->input('id');
