@@ -229,7 +229,7 @@
 											<a href="javascript:;" title="关闭" class="close">×</a>
 										</div>
 										<div class="theme-popbod dform">
-											<form  action="" method="post">
+											<form  action="/home/pay/index" method="get">
 													{{csrf_field()}}
 												<div class="theme-signin-left">
 

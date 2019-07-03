@@ -16,6 +16,7 @@ class BannersController extends Controller
      */
     public function index()
     {
+        //获取轮播如数据
         $banner = Banners::all();
         return view('admin.banners.index',['banner'=>$banner]);
     }
@@ -27,6 +28,7 @@ class BannersController extends Controller
      */
     public function create()
     {
+        //获取分类
         $cate = CatesController::getCates();
         // echo '啊啊啊啊';
         return view('admin.banners.create',['cate'=>$cate]);
