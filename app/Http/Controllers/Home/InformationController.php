@@ -39,7 +39,7 @@ class InformationController extends Controller
             ],[ 
             	'nickname.required' =>'昵称必填',
             	'uname.required' => '用户名必填',
-                'uname.unique' => '用户名已存在',
+                'uname.unique' => '用户姓名已存在',
                 'year.required' => '所属年必填',
                 'moth.required' => '所属月必填',
                 'day.required' => '所属日必填',

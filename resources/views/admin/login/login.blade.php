@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <!-- Required Stylesheets -->
-<link rel="stylesheet" type="text/css" href="/admins/bootstrap/css/bootstrap.min.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admins/css/fonts/ptsans/stylesheet.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admins/css/fonts/icomoon/style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/fonts/ptsans/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/fonts/icomoon/style.css" media="screen">
 
-<link rel="stylesheet" type="text/css" href="/admins/css/login.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/login.css" media="screen">
 
-<link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 
 <title>MWS Admin - Login Page</title>
 

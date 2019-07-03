@@ -77,8 +77,33 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
     // 前台订单评论页
     Route::get('comment/show', 'Home\CommentController@show');
 
+	
+	//前台 收藏夹 主页
+	Route::get('collect/index','Home\CollectController@index');
+	//前台 收藏夹 删除收藏 按钮
+	Route::get('collect/del','Home\CollectController@del');
+		//加入购物车
+	Route::post('shopcart/store' , 'Home\ShopcartController@store');
+
+	//前台购物车小计加法
+	Route::get('shopcart/add' , 'Home\ShopcartController@add');
+	//前台购物车小计减法
+	Route::get('shopcart/minus' , 'Home\ShopcartController@minus');
+	//前台结算页面
+	Route::get('pay/index' , 'Home\PayController@index');
+	 //前台 收藏商品 点击收藏功能 路由
+	Route::get('collect/collect','Home\CollectController@collect');
+
+	// 前台立即购买提交订单页
+	Route::post('pay/create/{id}' , 'Home\PayController@create');
+	//前台删除购物车
+	Route::get('shopcart/destory/{id}' ,'Home\ShopcartController@destory');
+	//前台支付成功
+	Route::get('success/index' , 'Home\SuccessController@index');
+
     
 });
+    
 
 
 
@@ -91,22 +116,7 @@ Route::group(['prefix' => 'home' , 'middleware' => 'homelogin'] , function(){
 
 
 
-//加入购物车
-Route::post('home/shopcart/store' , 'Home\ShopcartController@store');
 
-//前台购物车小计加法
-Route::get('home/shopcart/add' , 'Home\ShopcartController@add');
-//前台购物车小计减法
-Route::get('home/shopcart/minus' , 'Home\ShopcartController@minus');
-//前台结算页面
-Route::get('home/pay/index' , 'Home\PayController@index');
-
-// 前台立即购买提交订单页
-Route::post('home/pay/create/{id}' , 'Home\PayController@create');
-//前台删除购物车
-Route::get('home/shopcart/destory/{id}' ,'Home\ShopcartController@destory');
-//前台支付成功
-Route::get('home/success/index' , 'Home\SuccessController@index');
 
 
 
@@ -340,12 +350,6 @@ Route::get('admin/rbac',function(){
 
 // =========================================
 
- //前台 收藏商品 点击收藏功能 路由
-Route::get('home/collect/collect','Home\CollectController@collect');
-//前台 收藏夹 主页
-Route::get('home/collect/index','Home\CollectController@index');
-//前台 收藏夹 删除收藏 按钮
-Route::get('home/collect/del','Home\CollectController@del');
 //前台 头条 详情页
 Route::get('home/blog/{id}','Home\BlogController@index');
 // ============================================

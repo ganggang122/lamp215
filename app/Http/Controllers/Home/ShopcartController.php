@@ -29,6 +29,7 @@ class ShopcartController extends Controller
       $shop_data->specValue1 = $specValue1;
       $shop_data->specName2 =  $specName2;
       $shop_data->specValue2 =  $specValue2;
+      	
       $res = $shop_data->save();
       
       if($res){

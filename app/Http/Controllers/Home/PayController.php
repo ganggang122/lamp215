@@ -49,6 +49,7 @@ class PayController extends Controller
         'sid' => $shopid[$k],
        	'goodnum' => $goodnum[$k],
        	'goodsprice' => $goodsprice[$k],
+       	'status' => 1,
        	'gid' => $goodid[$k],
        	'specname1' => $specName1[$k],
        	'specname2' => $specName2[$k],

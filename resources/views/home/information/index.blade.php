@@ -52,10 +52,12 @@
 				<div class="main-wrap">
 
 					<div class="user-info">
-						<!--标题 -->
-						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
-						</div>
+						 @if(session('error'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('error') }}')
+									   </script>
+									@endif
+							
 						<hr/>
 
 						<!--头像 -->
