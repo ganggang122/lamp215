@@ -12,7 +12,7 @@ class CollectController extends Controller
     //收藏夹首页
     public function index()
     {
-    	//获取用户id
+
 
         $uid = session('home_usersinfo')->id;
 
@@ -21,6 +21,10 @@ class CollectController extends Controller
         } else {
             $uid = 2;            
         }
+
+
+        //获取用户id
+        $uid = session('home_usersinfo')->id;
 
         //获取用户信息
         $user = Users::where('id',$uid)->first();
@@ -73,9 +77,13 @@ class CollectController extends Controller
     	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
 
+
     	$uid = session('home_usersinfo')->id;
 
     	$uid = 2;
+
+
+    	$uid = session('home_usersinfo')->id;
 
     	//获取该用户所有收藏商品的id
     	$user = Users::where('id',$uid)->first();

@@ -176,7 +176,7 @@
 							</div>
 							<div class="login_btnbox">
 								<a href="#" class="login_order">我的订单</a>
-								<a href="#" class="login_favorite">我的收藏</a>
+								<a href="/home/collect/index" class="login_favorite">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white"></i>
 						</div>
@@ -202,7 +202,7 @@
 					</div>
 
 					<div id="foot" class="item">
-						<a href="#">
+						<a href="/home/collect/index">
 							<span class="zuji"></span>
 						</a>
 						<div class="mp_tooltip">

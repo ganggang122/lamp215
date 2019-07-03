@@ -60,16 +60,23 @@ class GoodsController extends Controller
        
         //获取商品id
         $gid = $good->id;
-        //获取用户信息
-        $user = Users::where('id',$uid)->first();
-        //获取该用户收藏的所有商品id
-        $user_gids = $user->userCollect;
-        //将该用户的收藏商品id 存到同一数组
-        $collects = [];
-        foreach($user_gids as $v){
-            $collects[] = $v->gid;
+        //判断用户是否登录
+        if ( session('home_usersinfo') ) {
+            //获取用户信息
+            $user = Users::where('id',$uid)->first();  
+            //获取该用户收藏的所有商品id
+            $user_gids = $user->userCollect;   
+            //将该用户的收藏商品id 存到同一数组
+            $collects = [];
+            foreach($user_gids as $v){
+                $collects[] = $v->gid;
+            }
+            //判断当前商品是否被收藏
+            $collect = in_array($gid,$collects);                                 
+        } else {
+            $collect = false;
         }
-        
+     
         //获取当前商品的评论
         $comment = new CommentController();
         $comment_conent = $comment->index($id);
@@ -77,8 +84,7 @@ class GoodsController extends Controller
           //统计购物车数量
         $num  =  ShopcartController::num();
         
-        //判断当前商品是否被收藏
-        $collect = in_array($gid,$collects);        
+      
         return view('home.goods.index', [
         	'num'=>$num,
             'good'=>$good,
