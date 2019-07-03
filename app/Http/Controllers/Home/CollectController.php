@@ -38,9 +38,8 @@ class CollectController extends Controller
     public function del(Request $request)
     {
     	//获取用户id
-    	// $user = session('home_usersinfo');
-    	// $uid = $user->id;
-    	$uid = 2;
+    	$user = session('home_usersinfo');
+    	$uid = $user->id;
     	//接收商品id
     	$gid =  $request->input('id');
     	//从 collect表中删除数据
@@ -56,7 +55,6 @@ class CollectController extends Controller
     //商品详情页 点击添加 收藏 功能
      public function collect(Request $request)
     {
-    	//先判断是否登录
     	//接收商品id
     	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
@@ -78,13 +76,11 @@ class CollectController extends Controller
     		$store->gid = $gid;
     		$store->save();
     		echo json_encode('ok');
-    		die;
     		exit;
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
     			echo json_encode('del');
-    			die;
     			exit;
     		}
     	}
