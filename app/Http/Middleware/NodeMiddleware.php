@@ -14,6 +14,9 @@ class NodeMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if ( session('admin_user_info')->uname == 'admin' ){
+            return $next($request);
+        }
         //获取当前登录用户的权限
         $admin_user_nodes = session('admin_user_nodes');
         $aduser_nodes = [];
