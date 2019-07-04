@@ -15,6 +15,16 @@
 
     <script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
     <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+    <link rel="stylesheet" href="/layui-v2.4.5/layui/css/layui.css">
+    <script src="/layui-v2.4.5/layui/layui.js"></script>
+    <script>
+        //一般直接写在一个js文件中
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+
+
+        });
+    </script>
 
 </head>
 
@@ -147,11 +157,11 @@
                                                         <div class="item-status">
                                                             <p class="Mystatus">交易成功</p>
                                                             <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
-                                                            <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                                            <p class="order-info"><a href="/home/orders/logistics/{{$v->id}}">查看物流</a></p>
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
+                                                        <div class="am-btn am-btn-danger anniu" onclick="orderdel('{{$v->id}}',this)">
                                                             删除订单</div>
                                                     </li>
                                                 </div>
@@ -159,7 +169,27 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                    <script>
+                                        function orderdel(id,obj) {
+                                            layer.confirm('您确认删除订单吗？', {
+                                                btn: ['确认','取消'] //按钮
+                                            }, function(){
+                                                $.get('/home/orders/destroy/'+id,function(data) {
+                                                    if(data.error == 0){
+                                                        layer.msg(data.msg, {icon: 6});
+                                                        $(obj).parent().parent().parent().parent().parent().remove();
+                                                    }else {
+                                                        layer.msg(data.msg, {icon: 5});
 
+                                                        var t=setTimeout("location.href = location.href;",2000);
+                                                    }
+
+                                                });
+                                            }, function(){
+
+                                            });
+                                        }
+                                    </script>
 
                                     <!--交易失败-->
                                     @foreach($orders1 as $k=>$v)
@@ -221,7 +251,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
+                                                        <div class="am-btn am-btn-danger anniu" onclick="orderdel('{{$v->id}}',this)">
                                                             删除订单</div>
                                                     </li>
                                                 </div>
@@ -290,7 +320,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
+                                                        <div class="am-btn am-btn-danger anniu" onclick="message('{{$v->id}}')">
                                                             提醒发货</div>
                                                     </li>
                                                 </div>
@@ -356,13 +386,13 @@
                                                         <div class="item-status">
                                                             <p class="Mystatus">卖家已发货</p>
                                                             <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
-                                                            <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                                            <p class="order-info"><a href="/home/orders/logistics/{{$v->id}}">查看物流</a></p>
                                                             <p class="order-info"><a href="#">延长收货</a></p>
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
-                                                            确认收货</div>
+                                                        <a href="/home/orders/givegoods/{{$v->id}}" class="am-btn am-btn-danger anniu">
+                                                            确认收货</a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -465,7 +495,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <a href="pay.html">
+                                                        <a href="/home/orders/pay/{{$v->id}}">
                                                             <div class="am-btn am-btn-danger anniu">
                                                                 一键支付</div></a>
                                                     </li>
@@ -566,7 +596,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
+                                                        <div class="am-btn am-btn-danger anniu" onclick="message('{{$v->id}}')">
                                                             提醒发货</div>
                                                     </li>
                                                 </div>
@@ -577,6 +607,19 @@
                             </div>
                                 @endforeach
                         </div>
+                        <script>
+                            function message(id) {
+                                $.get('/home/orders/message/'+id,function(res) {
+                                    if(res.msg = 'error'){
+                                        layer.msg(res.info,{icon:6});
+                                    }else{
+                                        alert(res.info)
+                                    }
+
+                                }, 'json');
+
+                            }
+                        </script>
                         <div class="am-tab-panel am-fade" id="tab4">
                             <div class="order-top">
                                 <div class="th th-item">
@@ -668,8 +711,8 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <div class="am-btn am-btn-danger anniu">
-                                                            确认收货</div>
+                                                        <a href="/home/orders/givegoods/{{$v->id}}" class="am-btn am-btn-danger anniu">
+                                                            确认收货</a>
                                                     </li>
                                                 </div>
                                             </div>
@@ -768,7 +811,7 @@
                                                         </div>
                                                     </li>
                                                     <li class="td td-change">
-                                                        <a href="/home/comment/show">
+                                                        <a href="/home/orders/comment/{{$v->id}}">
                                                             <div class="am-btn am-btn-danger anniu">
                                                                 评价商品</div>
                                                         </a>

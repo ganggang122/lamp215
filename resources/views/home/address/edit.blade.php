@@ -121,6 +121,16 @@
 								        </ul>
 								    </div>
 								   @endif	
+								   @if(session('error'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('error') }}')
+									   </script>
+									@endif
+									@if(session('success'))
+									   <script  type="text/javascript">   
+									    alert('{{ session('success') }}')
+									   </script>
+									@endif
 								    
 									<form class="am-form am-form-horizontal"  action="/home/address/show/{{$users_addre->id}}"  method="post">
 										{{ csrf_field()  }}

@@ -11,6 +11,7 @@ class ShopcartController extends Controller
 {  
    public  function  store(Request  $request)
    {
+	   
        $gid = $request->input('id',0);
        $shopPrice = $request->input('shopPrice', 0);
        $num = $request->input('num', 0);

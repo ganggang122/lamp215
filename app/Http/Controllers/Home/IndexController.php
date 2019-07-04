@@ -71,12 +71,7 @@ class IndexController extends Controller
          $num  =  ShopcartController::num();
          $id = self::getGoodsData();
             //dd($id);
-         return view('home.index.index',['num' =>$num,'id'=>$id,'seckills'=>$seckills,'recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);
-
-
-
-         $id = self::getGoodsData();
-         return view('home.index.index',['id'=>$id,'seckills'=>$seckills,'recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);        
+         return view('home.index.index',['num' =>$num,'id'=>$id,'seckills'=>$seckills,'recommends'=>$recommends,'data'=>$data,'banners'=>$banners,'links'=>$links,'headline1'=>$headline1,'headline2'=>$headline2]);   
 
     }
 
