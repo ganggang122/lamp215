@@ -24,7 +24,7 @@
 					<li class="person">
 						<a href="#">我的小窝</a>
 						<ul>
-							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="/home/collect/index">收藏</a></li>
 							
 							<li> <a href="comment.html">评价</a></li>
 							<li> <a href="/home/news">消息</a></li>

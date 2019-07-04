@@ -52,9 +52,24 @@
 				<div class="main-wrap">
 
 					<div class="user-info">
-						 @if(session('error'))
+						           @if (count($errors) > 0)
+								    <div class="alert alert-danger">
+								        <ul>
+								            @foreach ($errors->all() as $error)
+								                <li style="color:red;margin:auto">*{{ $error }}</li>
+								            @endforeach
+								        </ul>
+								    </div>
+								    @endif
+
+						            @if(session('error'))
 									   <script  type="text/javascript">   
-									    alert('{{ session('error') }}')
+									    alert("{{ session('error') }}")
+									   </script>
+									@endif
+									 @if(session('success'))
+									   <script  type="text/javascript">   
+									    alert("{{ session('success') }}")
 									   </script>
 									@endif
 							
@@ -124,7 +139,7 @@
 								</div>
 
 								<div class="am-form-group">
-									<label for="user-name" class="am-form-label">姓名</label>
+									<label for="user-name" class="am-form-label">登录名</label>
 									<div class="am-form-content">
 										<input type="text" id="user-name2" placeholder="请使用拼音"  value="{{$users_data->uname}}" name="uname" >
 

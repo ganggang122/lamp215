@@ -112,7 +112,7 @@
 
 								<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
 									<script type="text/javascript" src="/area.js"></script>
-										@if (count($errors) > 0)
+									@if (count($errors) > 0)
 								    <div class="alert alert-danger">
 								        <ul>
 								            @foreach ($errors->all() as $error)

@@ -35,18 +35,17 @@ class PayController extends Controller
        //sid代表购物车id
        $good_id =  Orders::select('sid')->get();
        $goodid_data = [];
-        foreach($good_id as  $k=>$v){
-         	$goodid_data[] =  (string)$v->sid;
-         }
-        
-        
-   //压入订单数据
+    foreach($good_id as  $k=>$v){
+     	$goodid_data[] =  (string)$v->sid;
+     }
+      
+          //压入订单数据
   	$order_data = [];
     foreach($shopid as  $k=>$v){
-    	if(!in_array( $v, $goodid_data)){
+    	if(!in_array($v, $goodid_data)){
     	 array_push($order_data,[
        	'uid' => session('home_usersinfo')->id,
-        'sid' => $shopid[$k],
+        'sid' => $v,
        	'goodnum' => $goodnum[$k],
        	'goodsprice' => $goodsprice[$k],
        	'status' => 1,
@@ -54,20 +53,13 @@ class PayController extends Controller
        	'specname1' => $specName1[$k],
        	'specname2' => $specName2[$k],
           ]);
-         Orders::insert($order_data);
-
-
         }
+         
         Shopcart::destroy($v);
 
        }  
-       
-       
-
-       
-        
-
-
+       Orders::insert($order_data);
+ 
        //统计总计价钱
        $zongji =self::zongji();
      

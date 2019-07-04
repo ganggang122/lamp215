@@ -12,20 +12,8 @@ class CollectController extends Controller
     //收藏夹首页
     public function index()
     {
-
-
-        $uid = session('home_usersinfo')->id;
-
-        if ( session('home_usersinfo') ) {
-            $uid = session('home_usersinfo')->id;
-        } else {
-            $uid = 2;            
-        }
-
-
         //获取用户id
         $uid = session('home_usersinfo')->id;
-
         //获取用户信息
         $user = Users::where('id',$uid)->first();
         // dd($user);
@@ -42,8 +30,9 @@ class CollectController extends Controller
         foreach($goods as $k=>$v){
             $goods[$k]->shopPrice= explode(',',$v->shopPrice)[0] ;
         }
-
-		return view('home.collect.index',['goods'=>$goods]);
+        //统计购物车数量
+        $num  =  ShopcartController::num();  
+		return view('home.collect.index',['goods'=>$goods,'num'=>$num]);
     }
 
     //删除收藏
@@ -52,11 +41,6 @@ class CollectController extends Controller
     	//获取用户id
     	$user = session('home_usersinfo');
     	$uid = $user->id;
-
-    
-
-    	
-
     	//接收商品id
     	$gid =  $request->input('id');
     	//从 collect表中删除数据
@@ -72,19 +56,10 @@ class CollectController extends Controller
     //商品详情页 点击添加 收藏 功能
      public function collect(Request $request)
     {
-    	//先判断是否登录
     	//接收商品id
     	$gid = $request->input('gid');
     	//获取用户id  应该从session的用户信息中获取
-
-
     	$uid = session('home_usersinfo')->id;
-
-    	$uid = 2;
-
-
-    	$uid = session('home_usersinfo')->id;
-
     	//获取该用户所有收藏商品的id
     	$user = Users::where('id',$uid)->first();
     	$user_gids = $user->userCollect;
@@ -104,14 +79,11 @@ class CollectController extends Controller
     		echo json_encode('ok');
 
     		exit;
-
     	} else {
     		$res = Collect::where(['uid'=>$uid,'gid'=>$gid])->forceDelete();
     		if ($res) {
     			echo json_encode('del');
-
     			exit;
-
     		}
     	}
     }

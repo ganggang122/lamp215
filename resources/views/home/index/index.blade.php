@@ -5,20 +5,6 @@
                       <!--轮播 -->
 
 
-						<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
-
-
-							<ul class="am-slides">
-
-
-								@foreach($banners as $k=>$v)
-									<li class="banner1"><a href="javascript:;"><img src="/uploads/{{$v->url}}"  /></a></li>
-									
-								@endforeach
-
-							</ul>
-						</div>
-						<div class="clear"></div>	
 
 						<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
                         
@@ -293,10 +279,10 @@
 							<div class="icon-sale "></div>
 							<h4>秒杀</h4>
 							<div class="activityMain ">
-								{{--<img src="/uploads/{{ $seckills[3]->profile }} " />--}}
+								<img src="/uploads/{{ $seckills[3]->profile }} " />
 							</div>
 							<div class="info ">
-								{{--<h3>{{ $seckills[3]->seckill }}</h3>--}}
+								<h3>{{ $seckills[3]->seckill }}</h3>
 							</div>													
 						</div>
 

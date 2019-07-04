@@ -89,8 +89,10 @@ class InformationController extends Controller
 
            if($res1){
            	return back()->with('success' , '保存成功');
+           	exit;
            }else{
            	return back()->with('error' , '保存失败');
+           	exit;
            }
 
  
