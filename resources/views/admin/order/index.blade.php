@@ -30,17 +30,17 @@
 							<td>{{$v->uid}}</td>
 							<td  title="{{$v->goods->goodsName}}" style="width:120px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{$v->goods->goodsName}}</td>
 							<td>{{$v->goodnum}}</td>
-							<td >{{$v->specname1}}</td>
-							<td >{{$v->specname2}}</td>
-							<td >{{$v->goodsprice}}</td>
+							<td>{{$v->specname1}}</td>
+							<td>{{$v->specname2}}</td>
+							<td>{{$v->goodsprice}}</td>
 							@if($v->status == 1)
-							<td  >未付款</td>
-							<td >不能修改</td>
+							<td>未付款</td>
+							<td>不能修改</td>
 							@endif
 
 							@if($v->status == 2)
 							<td  >已付款</td>
-							<td ><a  href="/admin/order/add/{{$v->id}}">代发货</a></td>
+							<td ><a  href="/admin/order/add/{{$v->id}}/{{$v->gid}}">代发货</a></td>
 							@endif
 							@if($v->status == 3)
 							<td style="color:red">待收货</td>

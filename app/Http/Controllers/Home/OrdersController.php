@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\Comment;
+use App\Models\Courier;
 use App\Models\Orders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -95,7 +96,6 @@ class OrdersController extends Controller
         $num  =  ShopcartController::num();
         // 查询商品评论订单
         //获取用户id
-        $uid = session('home_usersinfo')->id;
         $orders4 = Orders::where('id',$id)->where('status',4 )->get();
 
         return view('home.comment.create',[
@@ -146,16 +146,46 @@ class OrdersController extends Controller
     }
     
     // 查看物流
-    public function logistics($id)
+    public function logistics($oid)
     {
-        echo $id;
+        // 获取快递公司
+        $courier_name = $courier = Courier::where('oid',$oid)->first();
+        $courier_name = $courier_name->name;
+    
+        // 获取快递单号
+        $courier_num = $courier = Courier::where('oid',$oid)->first();
+        $courier_num = $courier_num->num;
+    
+        $ch = curl_init();
+        $url = "http://apis.baidu.com/kuaidicom/express_api/express_api?com=zhongtong&nu=75159357599311&muti=0&order=desc";
+//        $url = "http://apis.baidu.com/kuaidicom/express_api/express_api?com=$courier_name&nu=$courier_num&muti=0&order=desc";
+        $header = array(
+            'apikey: cd911ab882ec6ec71803a581a0eaf077',
+        );
+// 添加apikey到header
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 执行HTTP请求
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $res = curl_exec($ch);
+    
+        $courier_data = json_decode($res, true);
         //统计购物车数量
         $num  =  ShopcartController::num();
-        
-        
         return view('home.logistics.index', [
             'num'=>$num,
             'links'=>IndexController::getLinksData(),
+            // 快递公司
+            'courier_company' => $courier_data['company'],
+            // 快递电话
+            'courier_phone' => $courier_data['phone'],
+            // 快递单号
+             'courier_num' => $courier_data['nu'],
+            // 快递logo
+            'courier_img' => $courier_data['ico'],
+            //快递物流信息
+            'courier_data'=>$courier_data['data'],
+            
         ]);
     }
 }

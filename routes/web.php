@@ -193,7 +193,7 @@ Route::post('admin/goods/add' , 'Admin\GoodsController@add');
 //后台订单
 Route::get('admin/order/index' , 'Admin\OrderController@index');
 //修改订单状态
-Route::get('admin/order/add/{id}' ,  'Admin\OrderController@add');
+Route::get('admin/order/add/{id}/{gid}' ,  'Admin\OrderController@add');
 
 
 
@@ -292,6 +292,18 @@ Route::get('admin/rbac',function(){
 
 	//后台添加商品规格
 	Route::post('admin/goods/add' , 'Admin\GoodsController@add');
+	
+	// 添加快递信息
+     Route::post('admin/order/courier','Admin\OrderController@courier');
+     
+     // 后台评论管理 评论列表
+     Route::get('admin/comment/index', 'Admin\CommentController@index');
+     // 后台评论管理 评论删除
+     Route::get('admin/comment/destroy/{id}', 'Admin\CommentController@destroy');
+     
+     // 后台快递管理 快递列表
+     Route::get('admin/courier/index', 'Admin\CourierController@index');
+     
 });
 
 

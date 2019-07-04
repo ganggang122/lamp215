@@ -53,6 +53,7 @@ class PayController extends Controller
        	'gid' => $goodid[$k],
        	'specname1' => $specName1[$k],
        	'specname2' => $specName2[$k],
+        // 'ordernum' => date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT),
           ]);
        
 
@@ -152,7 +153,7 @@ class PayController extends Controller
         $zongji =  $goodsprice * $num;
         
         $shop = Orders::where('uid',$uid)->where('status' ,1)->get();
-        dump($shop);
+     
         if($shop->isEmpty()){
             echo  "<script>alert('订单为空,请先购物');location.href='/home/index'</script>";
         }
