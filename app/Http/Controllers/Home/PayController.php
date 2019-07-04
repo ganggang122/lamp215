@@ -38,6 +38,7 @@ class PayController extends Controller
 	     	$goodid_data[] =  (string)$v->sid;
 	     }
         
+
 	    //压入订单数据
 	  	$order_data = [];
 	    foreach($shopid as  $k=>$v){
@@ -61,6 +62,35 @@ class PayController extends Controller
 	    //添加到订单表里面
        Orders::insert($order_data);
 	        
+
+   //压入订单数据
+  	$order_data = [];
+    foreach($shopid as  $k=>$v){
+    	if(!in_array( $v, $goodid_data)){
+    	 array_push($order_data,[
+       	'uid' => session('home_usersinfo')->id,
+        'sid' => $shopid[$k],
+       	'goodnum' => $goodnum[$k],
+       	'goodsprice' => $goodsprice[$k],
+       	'status' => 1,
+       	'gid' => $goodid[$k],
+       	'specname1' => $specName1[$k],
+       	'specname2' => $specName2[$k],
+        // 'ordernum' => date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT),
+          ]);
+        }
+        Shopcart::destroy($v);
+
+       }
+      Orders::insert($order_data);
+       
+       
+
+       
+        
+
+
+
        //统计总计价钱
        $zongji =self::zongji();
      
@@ -144,7 +174,7 @@ class PayController extends Controller
         $zongji =  $goodsprice * $num;
         
         $shop = Orders::where('uid',$uid)->where('status' ,1)->get();
-        dump($shop);
+     
         if($shop->isEmpty()){
             echo  "<script>alert('订单为空,请先购物');location.href='/home/index'</script>";
         }

@@ -706,7 +706,7 @@
                                                         <div class="item-status">
                                                             <p class="Mystatus">卖家已发货</p>
                                                             <p class="order-info"><a href="orderinfo.html">订单详情</a></p>
-                                                            <p class="order-info"><a href="logistics.html">查看物流</a></p>
+                                                            <p class="order-info"><a href="/home/orders/logistics/{{$v->id}}">查看物流</a></p>
                                                             <p class="order-info"><a href="#">延长收货</a></p>
                                                         </div>
                                                     </li>

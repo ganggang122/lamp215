@@ -280,6 +280,26 @@
                 </li>
                 </ul>
 
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i>评论管理</a>
+                        <ul>
+                            <li><a href="/admin/comment/index">评论列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-align-justify"></i>快递管理</a>
+                        <ul>
+                            <li><a href="/admin/courier/index">快递列表</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
 
             </div>
         </div>
